@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+/* Tag Customize */
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+html {
+  scroll-behavior: smooth;
+  --lh: 1.4rem;
+  line-height: var(--lh);
+  min-height: 100vh;
+}
+nav {
+  opacity: 100%;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+.footer {
+  width: 100%;
+  height: 50px;
+  bottom: 0px;
+}
+
+.truncate-overflow {
+  --max-lines: 3;
+  position: relative;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+  padding-right: 1rem; /* space for ellipsis */
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate-overflow::before {
+  position: absolute;
+  inset-block-end: 0; /* "bottom" */
+  inset-inline-end: 0; /* "right" */
+}
+.truncate-overflow::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 0; /* "right" */
+  background: white;
+}
+
+.slideImg {
+  transition: 1s;
+}
+
+.custom-shape-divider-bottom-1668885778 {
+  position: absolute;
+  top: 388px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1668885778 svg {
+  position: relative;
+  display: block;
+  width: calc(122% + 1.3px);
+  height: 109px;
+}
+
+.custom-shape-divider-bottom-1668885778 .shape-fill {
+  fill: #ffff;
+}
+
+.custom-shape-divider-top-1668893330 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1668893330 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 221px;
+}
+
+.custom-shape-divider-top-1668893330 .shape-fill {
+  fill: #01a29d;
+}
