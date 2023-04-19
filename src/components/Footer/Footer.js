@@ -3,7 +3,7 @@ import LogoMandeh from "../../image/logo-mandeh.png";
 
 function Footer() {
   return (
-    <div className="footer mt-[50px]">
+    <div className="footer">
       <div className="h-[250px] bg-bgSec bottom-0  w-full flex items-center justify-center gap-3 md:gap-10">
         <div className="w-[100px]  md:w-[150px]">
           <img src={LogoMandeh} />

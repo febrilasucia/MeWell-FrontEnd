@@ -75,13 +75,13 @@ function Header() {
               <Link to={"/blog"} className=" hover:font-bold">
                 Blog
               </Link>
-              <Link to={"/"} className=" hover:font-bold">
+              <Link to={"/video"} className=" hover:font-bold">
                 Video
               </Link>
-              <Link to={"/"} className=" hover:font-bold">
+              <Link to={"/kuis"} className=" hover:font-bold">
                 Kuis
               </Link>
-              <Link to={"/"} className=" hover:font-bold">
+              <Link to={"/konsultasi"} className=" hover:font-bold">
                 Konsultasi
               </Link>
             </div>

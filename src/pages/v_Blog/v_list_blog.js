@@ -1,8 +1,11 @@
 import React from 'react'
+import ListBlog from '../../components/Blog/ListBlog'
 
 function v_list_blog() {
   return (
-    <div>v_list_blog</div>
+    <div>
+      <ListBlog/>
+    </div>
   )
 }
 
