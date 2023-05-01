@@ -15,6 +15,7 @@ module.exports = {
         bgFunc: "#B8343A",
         bgFunc2: "#B8131A",
         bgFunc3: "#941F3A",
+        bgFunc4: "#CF2C57",
       },
       fontSize: {
         sizePri: 28.5,
