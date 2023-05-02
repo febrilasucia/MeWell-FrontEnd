@@ -1,11 +1,12 @@
-import React from "react";
-import Header from "./components/Header/Header";
-import { Route, Router, Routes } from "react-router-dom";
-import Home from "./pages/v_Home/v_home";
-import Footer from "./components/Footer/Footer";
-import ListBlog from "./pages/v_Blog/v_list_blog";
-import ListVideo from "./pages/v_Video/v_list_video";
-import Konsultasi from "./components/Konsultasi/Konsultasi";
+import React from 'react';
+import Header from './components/Header/Header';
+import { Route, Router, Routes } from 'react-router-dom';
+import Home from './pages/v_Home/v_home';
+import Footer from './components/Footer/Footer';
+import ListBlog from './pages/v_Blog/v_list_blog';
+import ListVideo from './pages/v_Video/v_list_video';
+import Konsultasi from './components/Konsultasi/Konsultasi';
+import Kepribadian from './pages/v_Kepribadian/v_kepribadian';
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
         {/* <Route path="/register" element={<Register />}></Route> */}
         <Route path="/konsultasi" element={<Konsultasi />}></Route>
         {/* <Route path="/profile" element={<Profile />}></Route> */}
+        <Route
+          path="/kepribadian"
+          element={<Kepribadian/>}
+        ></Route>
       </Routes>
       {/* Body */}
 
