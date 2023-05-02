@@ -78,8 +78,8 @@ function Header() {
               <Link to={"/video"} className=" hover:font-bold">
                 Video
               </Link>
-              <Link to={"/kuis"} className=" hover:font-bold">
-                Kuis
+              <Link to={"/tes"} className=" hover:font-bold">
+                Tes Psikologi
               </Link>
               <Link to={"/konsultasi"} className=" hover:font-bold">
                 Konsultasi
@@ -95,13 +95,13 @@ function Header() {
               </Link> */}
               <div className="mr-8 my-3 flex gap-3 flex-col items-baseline lg:flex-row">
                 <Link
-                  className="px-9 py-1 bg-bgFunc hover:bg-bgFunc3 text-white rounded-2xl"
+                  className="px-9 py-1 bg-bgOpt2 hover:bg-bgOpt text-white rounded-2xl"
                   to={"/login"}
                 >
                   Masuk
                 </Link>
                 <Link
-                  className="px-9 py-1 bg-bgOpt2 hover:bg-bgOpt text-white  rounded-2xl"
+                  className="px-9 py-1  bg-bgFunc hover:bg-bgFunc3 text-white  rounded-2xl"
                   to={"/register"}
                 >
                   Daftar
