@@ -32,10 +32,10 @@ function App() {
         <Route path="/konsultasi" element={<Konsultasi />}></Route>
         <Route path="/tes" element={<ListTes />}></Route>
         {/* <Route path="/profile" element={<Profile />}></Route> */}
-        <Route
+        {/* <Route
           path="/kepribadian"
           element={<Kepribadian/>}
-        ></Route>
+        ></Route> */}
       </Routes>
       {/* Body */}
 
