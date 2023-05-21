@@ -10,34 +10,40 @@ import axios from 'axios';
 function Register() {
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
-    nama: '',
+    name: '',
     email: '',
-    tanggalLahir: '',
     password: '',
-    jenisKelamin: '',
-    pekerjaan: '',
-    umur: '',
-    hobi: '',
+    confPassword: '',
+    dateOfBirth: '',
+    gender: '',
+    age: '',
+    work: '',
+    hobbies: '',
   });
+  const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
     try {
       await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/auth/register`,
+        `${process.env.REACT_APP_BASE_URL}/auth/register`,
         formData
       );
-      navigate('/');
     } catch (error) {
       setMessage(error.response.data.message);
     }
+    setShowAlert(true);
+  };
+  
+  const handleAlertClose = () => {
+    setShowAlert(false);
+    // Navigate to home
+    navigate('/');
   };
 
   return (
@@ -45,12 +51,16 @@ function Register() {
       <div>
         {/* image logo */}
         <div className="absolute opacity-25">
-          <img src={LogoMandehLogin} className="h-screen" />
+          <img src={LogoMandehLogin} className="h-screen" alt="Logo Mandeh" />
         </div>
         {/* image logo */}
         {/* image logo lengkap */}
         <div className="relative">
-          <img src={LogoMandeh} className="w-[250px] absolute right-0 mt-5" />
+          <img
+            src={LogoMandeh}
+            className="w-[250px] absolute right-0 mt-5"
+            alt="Logo Mandeh"
+          />
         </div>
         {/* image logo lengkap */}
         {/* card */}
@@ -70,28 +80,28 @@ function Register() {
                   <div>
                     <input
                       type="text"
-                      name="nama"
+                      name="name"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                       placeholder="Nama"
                       required
-                      value={formData.nama}
+                      value={formData.name}
                       onChange={handleChange}
                     />
                   </div>
                   <div>
                     <input
                       type="date"
-                      name="tanggalLahir"
+                      name="dateOfBirth"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5"
-                      value={formData.tanggalLahir}
+                      value={formData.dateOfBirth}
                       onChange={handleChange}
                     />
                   </div>
                   <div>
                     <select
-                      name="jenisKelamin"
+                      name="gender"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                      value={formData.jenisKelamin}
+                      value={formData.gender}
                       onChange={handleChange}
                     >
                       <option value="">Pilih Jenis Kelamin</option>
@@ -102,11 +112,11 @@ function Register() {
                   <div>
                     <input
                       type="number"
-                      name="umur"
+                      name="age"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                       placeholder="Umur"
                       required
-                      value={formData.umur}
+                      value={formData.age}
                       onChange={handleChange}
                     />
                   </div>
@@ -138,23 +148,35 @@ function Register() {
                   </div>
                   <div>
                     <input
-                      type="text"
-                      name="pekerjaan"
+                      type="password"
+                      name="confPassword"
+                      id="confPassword"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                      placeholder="Pekerjaan"
+                      placeholder="Konfirmasi Password"
                       required
-                      value={formData.pekerjaan}
+                      value={formData.confPassword}
                       onChange={handleChange}
                     />
                   </div>
                   <div>
                     <input
                       type="text"
-                      name="hobi"
+                      name="work"
+                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
+                      placeholder="Pekerjaan"
+                      required
+                      value={formData.work}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="hobbies"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                       placeholder="Hobi"
                       required
-                      value={formData.hobi}
+                      value={formData.hobbies}
                       onChange={handleChange}
                     />
                   </div>
@@ -171,7 +193,7 @@ function Register() {
               </button>
               <div className="text-sm font-medium text-gray-500 text-center ">
                 Sudah mempunyai akun? masuk{' '}
-                <a href={'/login'} className="text-bgFunc3 hover:underline ">
+                <a href="/login" className="text-bgFunc3 hover:underline ">
                   disini
                 </a>
               </div>
@@ -183,17 +205,36 @@ function Register() {
         {/* tombol back */}
         <div className="flex items-center float-right mr-10 -mt-8 text-bgFunc hover:text-bgFunc2 font-medium ">
           <div>
-            <Link to={'/home'} className="">
+            <Link to="/home" className="">
               Kembali{' '}
             </Link>
           </div>
           <div>
-            <Link to={'/home'}>
+            <Link to="/home">
               <FaAngleDoubleRight className="" />{' '}
             </Link>
           </div>
         </div>
         {/* tombol back */}
+
+        {showAlert && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white border border-gray-300 rounded-lg p-4 shadow-md">
+              <p className="text-green-600 font-semibold text-lg">
+                Registrasi berhasil!
+              </p>
+              <p className="text-gray-500 mt-2">
+                Selamat, Anda telah berhasil melakukan registrasi.
+              </p>
+              <button
+                className="text-sm text-white bg-blue-500 hover:bg-blue-600 font-medium rounded-lg px-4 py-2 mt-4"
+                onClick={handleAlertClose}
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
