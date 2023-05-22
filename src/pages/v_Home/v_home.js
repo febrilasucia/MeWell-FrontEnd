@@ -7,7 +7,7 @@ import StarYellow from "../../image/star-yellow.png";
 import Principal from "../../image/7(1).png";
 import Child from "../../image2/25.png";
 import Train from "../../image2/24.png";
-function v_home() {
+function Home() {
   return (
     <div>
       <div className="flex-none sm:flex-none md:flex">
@@ -180,4 +180,4 @@ function v_home() {
   );
 }
 
-export default v_home;
+export default Home;

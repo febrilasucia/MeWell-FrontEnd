@@ -7,7 +7,7 @@ import ListBlog from "./pages/v_Blog/v_list_blog";
 import DetailBlog from "./pages/v_Blog/v_detail_blog";
 import ListVideo from "./pages/v_Video/v_list_video";
 import DetailVideo from "./pages/v_Video/v_detail_video";
-import Konsultasi from "./components/Konsultasi/Konsultasi";
+import Konsultasi from "./components/Konsultasi/KonsultasiComponent";
 import ListTes from "./pages/v_Tes-Psikologi/v_list_tes";
 import Login from "./pages/Login";
 import Register from "./pages/Register";

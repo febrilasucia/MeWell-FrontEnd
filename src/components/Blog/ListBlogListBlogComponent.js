@@ -5,7 +5,7 @@ import ListBlog1 from "../../image2/26.png";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 
-function ListBlog() {
+function ListBlogComponent() {
   const [searching, setSearching] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
@@ -101,7 +101,6 @@ function ListBlog() {
             </p>
           </div>
         </div>
-        
       </div>
 
       {/* <div className="flex flex-wrap justify-center">
@@ -180,4 +179,4 @@ function ListBlog() {
   );
 }
 
-export default ListBlog;
+export default ListBlogComponent;

@@ -1,12 +1,12 @@
 import React from 'react'
-import ListBlog from '../../components/Blog/ListBlog'
+import ListBlogComponent from '../../components/Blog/ListBlogListBlogComponent'
 
-function v_list_blog() {
+function ListBlog() {
   return (
     <div>
-      <ListBlog/>
+      <ListBlogComponent />
     </div>
-  )
+  );
 }
 
-export default v_list_blog
+export default ListBlog;
