@@ -205,12 +205,12 @@ function Register() {
         {/* tombol back */}
         <div className="flex items-center float-right mr-10 -mt-8 text-bgFunc hover:text-bgFunc2 font-medium ">
           <div>
-            <Link to="/home" className="">
+            <Link to="/" className="">
               Kembali{' '}
             </Link>
           </div>
           <div>
-            <Link to="/home">
+            <Link to="/">
               <FaAngleDoubleRight className="" />{' '}
             </Link>
           </div>

@@ -1,12 +1,12 @@
 import React from 'react'
-import ListVideo from '../../components/Video/ListVideo'
+import ListVideoComponent from '../../components/Video/ListVideoComponent'
 
-function v_list_video() {
+function ListVideo() {
   return (
     <div>
-        <ListVideo />
+        <ListVideoComponent />
     </div>
   )
 }
 
-export default v_list_video
+export default ListVideo

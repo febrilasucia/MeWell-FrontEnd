@@ -1,5 +1,5 @@
 import React from "react";
-import LogoMandeh from "../../image/logo-mandeh.png";
+import LogoMandeh from "../image/logo-mandeh.png";
 
 function Footer() {
   return (

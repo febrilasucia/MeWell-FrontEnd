@@ -5,7 +5,7 @@ import HeaderVideo from '../../image/list-video.png'
 import HeaderVideo2 from '../../image/list-video2.png'
 import ListVideo1 from "../../image2/27.png";
 
-function ListVideo() {
+function ListVideoComponent() {
   const [searching, setSearching] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setVideos] = useState([]);
@@ -135,4 +135,4 @@ function ListVideo() {
   );
 }
 
-export default ListVideo;
+export default ListVideoComponent;

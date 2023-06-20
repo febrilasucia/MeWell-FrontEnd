@@ -1,10 +1,10 @@
 import React from 'react'
-import Konsultasi from '../../components/Konsultasi/Konsultasi'
+import Konsultasi from '../../components/Konsultasi/KonsultasiComponent'
 
-function v_Konsultasi() {
+function Konsultasi() {
   return (
     <div><Konsultasi/></div>
   )
 }
 
-export default v_Konsultasi
+export default Konsultasi

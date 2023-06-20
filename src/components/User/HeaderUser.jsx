@@ -5,7 +5,7 @@ import LogoHori from "../../image/logo-hori.png";
 import LogoMandeh from "../../image/logo-mandeh.png";
 import LogoTulisanMandeh from "../../image/logo-tulisan-lentera2.png";
 
-function Header() {
+function HeaderUser() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <nav className="bg-bgSec shadow-xl">
@@ -168,4 +168,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderUser;
