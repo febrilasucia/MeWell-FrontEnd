@@ -1,16 +1,8 @@
-<<<<<<< HEAD:src/pages/TesPsikologiPage/TesIE/TesIE.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HasilPage from '../../../components/Tes-Psikologi/Tes-IE/Hasil';
 import PertanyaanPage from '../../../components/Tes-Psikologi/Tes-IE/Pertanyaan';
-import MulaiPage from './Detail';
+import MulaiPage from './DetailIEPage';
 import { questions } from './data';
-=======
-import React, { useEffect, useState } from "react";
-import HasilPage from "../../../components/Tes-Psikologi/Tes-IE/Hasil";
-import PertanyaanPage from "../../../components/Tes-Psikologi/Tes-IE/Pertanyaan";
-import MulaiPage from "./DetailIEPage";
-import { questions } from "./data";
->>>>>>> 96252b67e66550f6b90bff128e19506c38b22c42:src/pages/TesPsikologiPage/TesIEPage/TesIE.jsx
 
 function TesIE() {
   const [currentPage, setCurrentPage] = useState('start');
@@ -39,7 +31,6 @@ function TesIE() {
     }
   };
 
-<<<<<<< HEAD:src/pages/TesPsikologiPage/TesIE/TesIE.jsx
   const handleBefore = () => {
     const questionIndex = parseInt(currentPage.replace('question', ''), 10);
     if (questionIndex > 1) {
@@ -62,11 +53,10 @@ function TesIE() {
   const getCurrentQuestionIndex = () => {
     return parseInt(currentPage.replace('question', ''), 10) - 1;
   };
-=======
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
->>>>>>> 96252b67e66550f6b90bff128e19506c38b22c42:src/pages/TesPsikologiPage/TesIEPage/TesIE.jsx
 
   return (
     <div>

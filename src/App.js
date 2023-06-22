@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
 // video
-import ListVideo from "./pages/UserPage/VideoPage/ListVideoPage";
-import DetailVideoPage from "./pages/UserPage/VideoPage/DetailVideoPage";
+import ListVideo from './pages/UserPage/VideoPage/ListVideoPage';
+import DetailVideoPage from './pages/UserPage/VideoPage/DetailVideoPage';
 // blog
-import ListBlogPage from "./pages/UserPage/BlogPage/ListBlogPage";
-import DetailBlogPage from "./pages/UserPage/BlogPage/DetailBlogPage";
+import ListBlogPage from './pages/UserPage/BlogPage/ListBlogPage';
+import DetailBlogPage from './pages/UserPage/BlogPage/DetailBlogPage';
 // tes
-import ListTes from "./pages/TesPsikologiPage/ListTesPsikologi";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import DashboardAdminPage from "./pages/Admin/DashboardAdminPage";
+import ListTes from './pages/TesPsikologiPage/ListTesPsikologi';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import DashboardAdminPage from './pages/Admin/DashboardAdminPage';
 // user
-import DashboardUserPage from "./pages/UserPage/DashboardUserPage";
+import DashboardUserPage from './pages/UserPage/DashboardUserPage';
 //konsul
-import DetailKonsultasiPage from "./pages/KonsultasiPage/DetailKonsultasiPage";
+import DetailKonsultasiPage from './pages/KonsultasiPage/DetailKonsultasiPage';
 // import DetailTesIE from "./pages/v_Tes-Psikologi/TesIE/Detail";
-import DetailTesIE from "./pages/TesPsikologiPage/TesIEPage/TesIE";
+import DetailTesIE from './pages/TesPsikologiPage/TesIEPage/TesIE';
+import CreateBlogPage from './components/Admin/CreateBlogPage';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -54,6 +55,7 @@ function App() {
 
           {/* admin */}
           <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
+          <Route path="/admin/create-blog" element={<CreateBlogPage />} />
         </Routes>
       )}
     </div>
