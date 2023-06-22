@@ -6,16 +6,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaAngleDoubleRight } from 'react-icons/fa';
 import axios from 'axios';
-import { setToken } from '../features/authSlice';
+import { fetchUser, setToken } from '../features/authSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = JSON.stringify({
@@ -33,19 +34,35 @@ const Login = () => {
       data: data,
     };
 
-    axios
-      .request(config)
-      .then((response) => {
-        const { message, token } = response.data;
-        alert(message);
-        // Lakukan navigasi ke halaman berikutnya dengan token jika login berhasil
-        dispatch(setToken(token));
-        navigate('/home', { token });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert('Login failed');
-      });
+    try {
+      const response = await axios.request(config);
+      const token = response.data.token;
+
+      dispatch(setToken(token));
+
+      const actionResult = await dispatch(fetchUser(token));
+      const role = actionResult.payload.role;
+      redirectToRolePage(role);
+    } catch (error) {
+      setError(error.response.data.message);
+      if (error.response.data.error) {
+        setError(error.response.data.error);
+      }
+      console.log(error);
+    }
+  };
+
+  const redirectToRolePage = (role) => {
+    switch (role) {
+      case 'admin':
+        navigate('/admin/dashboard');
+        break;
+      case 'user':
+        navigate('/dashboard');
+        break;
+      default:
+        break;
+    }
   };
 
   return (

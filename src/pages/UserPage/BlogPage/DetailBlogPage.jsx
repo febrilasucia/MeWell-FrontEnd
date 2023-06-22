@@ -1,32 +1,32 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { splitDate } from "../../util/Helper";
+import { splitDate } from '../../../util/Helper';
 
-function DetailBlog() {
-    const { id } = useParams();
-    const [isLoading, setisLoading] = useState(true);
-    const [blogs, setBlogs] = useState([]);
-    const [dateCreated, setDateCreated] = useState("");
-    const [name, setName] = useState("");
+function DetailBlogPage() {
+  const { id } = useParams();
+  const [isLoading, setisLoading] = useState(true);
+  const [blogs, setBlogs] = useState([]);
+  const [dateCreated, setDateCreated] = useState('');
+  const [name, setName] = useState('');
 
-    useEffect(() => {
-      getBlogsById(id);
-      // getContent(id);
-      setisLoading(false);
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    getBlogsById(id);
+    // getContent(id);
+    setisLoading(false);
+    window.scrollTo(0, 0);
+  }, []);
 
-    const getBlogsById = async (id) => {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/blog/${id}`
-      );
-      setDateCreated(splitDate(response.data.data.dateCreated));
-      setBlogs(response.data.data);
-      setName(response.data.data.createdBy.name);
-    };
+  const getBlogsById = async (id) => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/blog/${id}`
+    );
+    setDateCreated(splitDate(response.data.data.dateCreated));
+    setBlogs(response.data.data);
+    setName(response.data.data.createdBy.name);
+  };
 
-    console.log(blogs);
+  console.log(blogs);
   return (
     <div>
       <div className="mx-20 sm:mx-60 px-5 pt-5 text-2xl sm:text-4xl font-bold text-textPrimary text-center">
@@ -56,4 +56,4 @@ function DetailBlog() {
   );
 }
 
-export default DetailBlog
+export default DetailBlogPage;

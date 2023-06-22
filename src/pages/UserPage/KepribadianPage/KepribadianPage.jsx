@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import questions from './Question';
 
-export default function V_kepribadian() {
+export default function KepribadianPage() {
   const [answers, setAnswers] = useState([]);
 
   function handleAnswer(questionIndex, optionValue) {
@@ -32,3 +32,5 @@ export default function V_kepribadian() {
     </div>
   );
 }
+
+

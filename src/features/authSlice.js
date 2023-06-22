@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 const initialState = {
   value: 0,
@@ -14,13 +15,8 @@ export const fetchUser = createAsyncThunk(
   'auth/fetchUser',
   async (token, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/auth/me`,
-        {
-          token,
-        }
-      );
-      return response.data;
+      const decodedToken = jwt_decode(token);
+      return decodedToken;
     } catch (error) {
       // Menggunakan rejectWithValue untuk mengirim error ke action payload
       return thunkAPI.rejectWithValue(error.message);

@@ -5,7 +5,7 @@ import ListBlog1 from "../../image2/26.png";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 
-function ListBlogComponent() {
+function ListBlog() {
   const [searching, setSearching] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
@@ -179,4 +179,4 @@ function ListBlogComponent() {
   );
 }
 
-export default ListBlogComponent;
+export default ListBlog;

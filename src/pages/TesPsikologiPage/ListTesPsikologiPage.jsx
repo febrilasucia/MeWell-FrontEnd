@@ -1,10 +1,10 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import HeaderTes from "../../image/list-psikologi-test.png";
-import HeaderTes2 from "../../image/list-psikologi-test2.png";
-import ListBlog1 from "../../image2/26.png";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import HeaderTes from '../../image/list-psikologi-test.png';
+import HeaderTes2 from '../../image/list-psikologi-test2.png';
+import ListBlog1 from '../../image2/26.png';
 
-function ListTes() {
+function ListTestPsikologiPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
 
@@ -15,7 +15,7 @@ function ListTes() {
   const getBlogs = async () => {
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
     setBlogs(response.data);
@@ -63,9 +63,7 @@ function ListTes() {
                 so far, in reverse chronological order.
               </p>
             </div>
-            <div>
-                
-            </div>
+            <div></div>
           </div>
         </div>
 
@@ -146,4 +144,4 @@ function ListTes() {
   );
 }
 
-export default ListTes;
+export default ListTestPsikologiPage;

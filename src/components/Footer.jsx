@@ -1,12 +1,12 @@
-import React from "react";
-import LogoMandeh from "../image/logo-mandeh.png";
+import React from 'react';
+import LogoMandeh from '../image/logo-mandeh.png';
 
 function Footer() {
   return (
     <div className="footer">
       <div className="h-[250px] bg-bgSec bottom-0  w-full flex items-center justify-center gap-3 md:gap-10">
         <div className="w-[100px]  md:w-[150px]">
-          <img src={LogoMandeh} />
+          <img src={LogoMandeh} alt="LogoMandeh" />
         </div>
         <div className="text-textSec">
           <div className="my-[10px]">
