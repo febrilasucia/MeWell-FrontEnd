@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { splitDate } from "../../util/Helper";
 
-function DetailVideo() {
+function DetailVideoPage() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [videos, setVideos] = useState([]);
@@ -65,4 +65,4 @@ function DetailVideo() {
   );
 }
 
-export default DetailVideo;
+export default DetailVideoPage;
