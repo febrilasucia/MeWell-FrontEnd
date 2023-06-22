@@ -1,18 +1,18 @@
-import React from 'react';
-import { useState } from 'react';
-import LogoMandehLogin from '../image/logo-mandeh-login.png';
-import LogoMandeh from '../image/logo-hori.png';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { FaAngleDoubleRight } from 'react-icons/fa';
-import axios from 'axios';
-import { fetchUser, setToken } from '../features/authSlice';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import LogoMandehLogin from "../image/logo-mandeh-login.png";
+import LogoMandeh from "../image/logo-hori.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FaAngleDoubleRight } from "react-icons/fa";
+import axios from "axios";
+import { fetchUser, setToken } from "../features/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,11 +25,11 @@ const Login = () => {
     });
 
     const config = {
-      method: 'post',
+      method: "post",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/auth/login`,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       data: data,
     };
@@ -54,17 +54,19 @@ const Login = () => {
 
   const redirectToRolePage = (role) => {
     switch (role) {
-      case 'admin':
-        navigate('/admin/dashboard');
+      case "admin":
+        navigate("/admin/dashboard");
         break;
-      case 'user':
-        navigate('/dashboard');
+      case "user":
+        navigate("/dashboard");
         break;
       default:
         break;
     }
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       {/* image logo */}
@@ -118,8 +120,8 @@ const Login = () => {
               Masuk
             </button>
             <div className="text-sm font-medium text-gray-500 text-center ">
-              Belum mempunyai akun? daftar{' '}
-              <a href={'/register'} className="text-bgOpt2 hover:underline ">
+              Belum mempunyai akun? daftar{" "}
+              <a href={"/register"} className="text-bgOpt2 hover:underline ">
                 disini
               </a>
             </div>
@@ -131,13 +133,13 @@ const Login = () => {
       {/* tombol back */}
       <div className="flex items-center float-right mr-10 -mt-8 text-bgFunc hover:text-bgFunc2 font-medium ">
         <div>
-          <Link to={'/'} className="">
-            Kembali{' '}
+          <Link to={"/"} className="">
+            Kembali{" "}
           </Link>
         </div>
         <div>
-          <Link to={'/'}>
-            <FaAngleDoubleRight className="" />{' '}
+          <Link to={"/"}>
+            <FaAngleDoubleRight className="" />{" "}
           </Link>
         </div>
       </div>

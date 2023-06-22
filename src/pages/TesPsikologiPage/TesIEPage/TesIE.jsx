@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HasilPage from "../../../components/Tes-Psikologi/Tes-IE/Hasil";
 import PertanyaanPage from "../../../components/Tes-Psikologi/Tes-IE/Pertanyaan";
-import MulaiPage from "./Detail";
+import MulaiPage from "./DetailIEPage";
 import { questions } from "./data";
 
 function TesIE() {
@@ -29,6 +29,11 @@ function TesIE() {
       setCurrentPage("result");
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       {currentPage === "start" && <MulaiPage onStart={handleStart} />}

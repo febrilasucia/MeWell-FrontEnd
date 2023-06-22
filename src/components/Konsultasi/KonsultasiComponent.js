@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -10,6 +10,9 @@ import Online from "../../image2/33.png";
 import { Link } from "react-router-dom";
 
 function KonsultasiComponent() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <div className=" md:flex">
