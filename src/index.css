@@ -101,3 +101,23 @@ nav {
 .custom-shape-divider-top-1668893330 .shape-fill {
   fill: #01a29d;
 }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  border-top-color: transparent;
+  animation: spin 1s infinite;
+}
+
+button.opsi:focus,
+button.opsi:focus-visible {
+  background-color: #ffb803;
+  color: #ffff;
+}

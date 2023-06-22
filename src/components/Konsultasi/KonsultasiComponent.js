@@ -7,8 +7,9 @@ import {
 } from "react-icons/fa";
 import Konsultan from "../../image2/32.png";
 import Online from "../../image2/33.png";
+import { Link } from "react-router-dom";
 
-function Konsultasi() {
+function KonsultasiComponent() {
   return (
     <div>
       <div className=" md:flex">
@@ -26,12 +27,13 @@ function Konsultasi() {
             <p className="text-sizeParagraph leading-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
             </p>
-            <a
+            {/* ingat untuk konsultasi harus mempunyai akun, jikalau tidak maka di alihkan ke halaman login dan dengan alert anda harus login terlebih dahulu */}
+            <Link
               href="#"
               className="inline-block mt-5 mb-10 bg-bgOpt2 hover:bg-bgOpt font-bold py-2 px-4 rounded-xl"
             >
               Konsultasi Sekarang
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -83,4 +85,4 @@ function Konsultasi() {
   );
 }
 
-export default Konsultasi;
+export default KonsultasiComponent;
