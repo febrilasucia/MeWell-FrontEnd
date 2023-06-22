@@ -1,21 +1,24 @@
-import React from 'react';
-import Foto7 from '../image2/7.png';
-import CloudDown from '../image/cloud-red-down.png';
-import CloudUp from '../image/cloud-red-up.png';
-import Chairs from '../image/8.png';
-import StarYellow from '../image/star-yellow.png';
-import Principal from '../image/7(1).png';
-import Child from '../image2/25.png';
-import Train from '../image2/24.png';
+import React, { useEffect } from "react";
+import Foto7 from "../image2/7.png";
+import CloudDown from "../image/cloud-red-down.png";
+import CloudUp from "../image/cloud-red-up.png";
+import Chairs from "../image/8.png";
+import StarYellow from "../image/star-yellow.png";
+import Principal from "../image/7(1).png";
+import Child from "../image2/25.png";
+import Train from "../image2/24.png";
 
-import { useSelector } from 'react-redux';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { useSelector } from "react-redux";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function Home() {
   const token = useSelector((state) => state.auth.token);
-  console.log('ini token di halaman home', token);
+  console.log("ini token di halaman home", token);
   // Gunakan token dalam komponen
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />
@@ -158,7 +161,7 @@ function Home() {
                 <p className="text-sizePri font-bold ">Our Principle</p> <br />
                 <p className="text-[16px] font-bold text-bgOpt">
                   Evantruda Mailyza, M.Psi Psikologi
-                </p>{' '}
+                </p>{" "}
                 <br />
                 <p className="text-sizeParagraph mx-[60px] leading-[14px]">
                   Our leader is someone who is able to inspire many people with
@@ -176,7 +179,7 @@ function Home() {
               <div className="absolute md:w-[460px] mx-[60px] text-textOpt mt-[50px]">
                 <span className="text-[36px] font-bold leading-10">
                   Last Summer <br /> Class
-                </span>{' '}
+                </span>{" "}
                 <br />
                 <br />
                 <p className="font-bold text-sizeParagraph text-bgOpt">
