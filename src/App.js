@@ -15,10 +15,10 @@ import Register from './pages/Register';
 import DashboardAdminPage from './pages/Admin/DashboardAdminPage';
 // user
 import DashboardUserPage from './pages/UserPage/DashboardUserPage';
-import KepribadianPage from './pages/UserPage/KepribadianPage/KepribadianPage';
-import Konsultasi from './pages/v_Konsultasi/Detail';
+import DetailKonsultasiPage from './pages/KonsultasiPage/DetailKonsultasiPage';
 // import DetailTesIE from "./pages/v_Tes-Psikologi/TesIE/Detail";
-import DetailTesIE from './pages/v_Tes-Psikologi/TesIE/TesIE';
+import DetailTesIE from './pages/TesPsikologiPage/TesIE/TesIE';
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -48,10 +48,9 @@ function App() {
           <Route path="/blog/:id" element={<DetailBlogPage />} />
           <Route path="/video" element={<ListVideo />} />
           <Route path="/video/:id" element={<DetailVideoPage />} />
-          <Route path="/konsultasi" element={<Konsultasi />} />
+          <Route path="/konsultasi" element={<DetailKonsultasiPage />} />
           <Route path="/tes" element={<ListTes />} />
           <Route path="/tes/detail-ie" element={<DetailTesIE />} />
-          <Route path="/Kepribadian" element={<KepribadianPage />} />
           {/* user */}
 
           {/* admin */}
