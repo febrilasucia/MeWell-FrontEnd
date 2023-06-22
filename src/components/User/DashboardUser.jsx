@@ -8,7 +8,6 @@ const DashboardUser = () => {
 console.log(authState);
   return (
     <>
-      <Header />
       <div className="bg-gray-200 min-h-screen">
         <div className="container mx-auto py-8">
           <h1 className="text-3xl font-bold mb-4">
@@ -28,7 +27,6 @@ console.log(authState);
           {/* Tambahkan komponen-komponen lain sesuai dengan kebutuhan */}
         </div>
       </div>
-      <Footer />
     </>
   );
 };

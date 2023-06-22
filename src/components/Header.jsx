@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 // import { FaUserCircle } from 'react-icons/fa';
-import LogoHori from "../image/logo-hori.png";
-import LogoMandeh from "../image/logo-mandeh.png";
-import LogoTulisanMandeh from "../image/logo-tulisan-lentera2.png";
+import LogoHori from '../image/logo-hori.png';
+import LogoMandeh from '../image/logo-mandeh.png';
+import LogoTulisanMandeh from '../image/logo-tulisan-lentera2.png';
+import { useSelector } from 'react-redux';
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { token, user, isLoading, error, isLogin } = useSelector(
+    (state) => state.auth
+  );
+
   return (
     <nav className="bg-bgSec shadow-xl">
       <div>
@@ -20,7 +25,7 @@ function Header() {
                 <div className="">
                   <div className="w-[470px] p-2 flex flex-wrap items-center justify-around">
                     <div className="">
-                      <Link to={"/"}>
+                      <Link to={'/'}>
                         <div>
                           <img
                             className="h-[30px]"
@@ -31,7 +36,7 @@ function Header() {
                       </Link>
                     </div>
                     <div className="">
-                      <Link to={"/"}>
+                      <Link to={'/'}>
                         <div>
                           <img
                             className="h-[30px]"
@@ -52,13 +57,13 @@ function Header() {
                         color="#FFB803"
                       >
                         <path
-                          className={!isOpen ? "block" : "hidden"}
+                          className={!isOpen ? 'block' : 'hidden'}
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                         />
                         <path
-                          className={isOpen ? "block" : "hidden"}
+                          className={isOpen ? 'block' : 'hidden'}
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           d="M6 18L18 6M6 6l12 12"
@@ -73,27 +78,27 @@ function Header() {
 
           <div
             className={`${
-              isOpen ? "block" : "hidden"
+              isOpen ? 'block' : 'hidden'
             } lg:flex flex-col lg:flex-row justify-between items-center w-full text-textSec`}
           >
             <div className="ml-3 flex flex-col lg:flex-row gap-4">
-              <Link to={"/"} className=" hover:font-bold ">
+              <Link to={'/'} className=" hover:font-bold ">
                 Home
               </Link>
-              <Link to={"/blog"} className=" hover:font-bold">
+              <Link to={'/blog'} className=" hover:font-bold">
                 Blog
               </Link>
-              <Link to={"/video"} className=" hover:font-bold">
+              <Link to={'/video'} className=" hover:font-bold">
                 Video
               </Link>
-              <Link to={"/tes"} className=" hover:font-bold">
+              <Link to={'/tes'} className=" hover:font-bold">
                 Tes Psikologi
               </Link>
-              <Link to={"/konsultasi"} className=" hover:font-bold">
+              <Link to={'/konsultasi'} className=" hover:font-bold">
                 Konsultasi
               </Link>
             </div>
-            <div className={!isOpen ? "block" : "hidden"}>
+            <div className={!isOpen ? 'block' : 'hidden'}>
               <img className="h-[30px]" src={LogoHori} alt="LogoHori" />
             </div>
             <div className="my-3 flex items-center lg:flex-row">
@@ -101,20 +106,34 @@ function Header() {
               <Link to={"/profile"} className="-ml-[85px] sm:mx-5 ">
                 <FaUserCircle className="text-3xl hover:text-textPrimary" />
               </Link> */}
-              <div className="mr-8 my-3 flex gap-3 flex-col items-baseline lg:flex-row">
-                <Link
-                  className="px-9 py-1 bg-bgOpt2 hover:bg-bgOpt text-white rounded-2xl"
-                  to={"/login"}
-                >
-                  Masuk
-                </Link>
-                <Link
-                  className="px-9 py-1  bg-bgFunc hover:bg-bgFunc3 text-white  rounded-2xl"
-                  to={"/register"}
-                >
-                  Daftar
-                </Link>
-              </div>
+              {isLogin ? (
+                <div className="mr-8 my-3 flex gap-3 flex-col items-baseline lg:flex-row">
+                  <span className="px-9 py-1 text-white rounded-2xl">
+                    {user.name}
+                  </span>
+                  {/* <Link
+                    to={"/profile"}
+                    className="-ml-[85px] sm:mx-5"
+                  >
+                    <FaUserCircle className="text-3xl hover:text-textPrimary" />
+                  </Link> */}
+                </div>
+              ) : (
+                <div className="mr-8 my-3 flex gap-3 flex-col items-baseline lg:flex-row">
+                  <Link
+                    className="px-9 py-1 bg-bgOpt2 hover:bg-bgOpt text-white rounded-2xl"
+                    to={'/login'}
+                  >
+                    Masuk
+                  </Link>
+                  <Link
+                    className="px-9 py-1 bg-bgFunc hover:bg-bgFunc3 text-white rounded-2xl"
+                    to={'/register'}
+                  >
+                    Daftar
+                  </Link>
+                </div>
+              )}
             </div>
 
             {/* Auth */}

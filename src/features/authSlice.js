@@ -8,6 +8,7 @@ const initialState = {
   user: null,
   isLoading: false,
   error: null,
+  isLogin: false,
 };
 
 // Membuat thunk untuk mengambil user
@@ -50,6 +51,7 @@ export const authSlice = createSlice({
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
+        state.isLogin = true;
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.isLoading = false;

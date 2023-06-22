@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 /* Tag Customize */
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -51,7 +51,7 @@ nav {
   inset-inline-end: 0; /* "right" */
 }
 .truncate-overflow::after {
-  content: "";
+  content: '';
   position: absolute;
   inset-inline-end: 0; /* "right" */
   background: white;
@@ -114,10 +114,4 @@ nav {
 .loader {
   border-top-color: transparent;
   animation: spin 1s infinite;
-}
-
-button.opsi:focus,
-button.opsi:focus-visible {
-  background-color: #ffb803;
-  color: #ffff;
 }
