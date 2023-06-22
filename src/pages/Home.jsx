@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Foto7 from '../image2/7.png';
 import CloudDown from '../image/cloud-red-down.png';
 import CloudUp from '../image/cloud-red-up.png';
@@ -13,6 +13,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const token = useSelector((state) => state.auth.token);
   console.log('ini token di halaman home', token);
   // Gunakan token dalam komponen

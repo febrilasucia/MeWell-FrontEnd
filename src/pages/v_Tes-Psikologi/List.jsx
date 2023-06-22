@@ -15,6 +15,7 @@ function ListTes() {
     window.scrollTo(0, 0);
     getBlogs();
   }, []);
+  
   const getBlogs = async () => {
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`, {
       headers: {

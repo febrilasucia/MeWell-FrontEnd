@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HasilPage from "../../../components/Tes-Psikologi/Tes-IE/Hasil";
 import PertanyaanPage from "../../../components/Tes-Psikologi/Tes-IE/Pertanyaan";
 import MulaiPage from "./Detail";
@@ -9,6 +9,10 @@ function TesIE() {
   const [answers, setAnswers] = useState([]);
   const [introvertCount, setIntrovertCount] = useState(0);
   const [extrovertCount, setExtrovertCount] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleStart = () => {
     setCurrentPage("question1");

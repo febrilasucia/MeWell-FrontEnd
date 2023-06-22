@@ -12,7 +12,6 @@ function DetailBlog() {
 
     useEffect(() => {
       getBlogsById(id);
-      // getContent(id);
       setisLoading(false);
       window.scrollTo(0, 0);
     }, []);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import LogoMandehLogin from '../image/logo-mandeh-login.png';
 import LogoMandeh from '../image/logo-hori.png';
@@ -15,6 +15,10 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
