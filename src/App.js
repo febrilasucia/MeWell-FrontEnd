@@ -12,13 +12,16 @@ import ListTes from './pages/TesPsikologiPage/ListTesPsikologi';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DashboardAdminPage from './pages/Admin/DashboardAdminPage';
-// user
+// ! user
 import DashboardUserPage from './pages/UserPage/DashboardUserPage';
 //konsul
 import DetailKonsultasiPage from './pages/KonsultasiPage/DetailKonsultasiPage';
 // import DetailTesIE from "./pages/v_Tes-Psikologi/TesIE/Detail";
 import DetailTesIE from './pages/TesPsikologiPage/TesIEPage/TesIE';
-import CreateBlogPage from './components/Admin/CreateBlogPage';
+import CreateBlogAdminPage from './pages/Admin/blogAdminPage/CreateBlogAdminPage';
+import BlogIcon from './components/Admin/assets/BlogIcon';
+
+// ! Admin
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -55,7 +58,9 @@ function App() {
 
           {/* admin */}
           <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
-          <Route path="/admin/create-blog" element={<CreateBlogPage />} />
+          <Route path="/admin/create-blog" element={<CreateBlogAdminPage />} />
+
+          <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
       )}
     </div>
