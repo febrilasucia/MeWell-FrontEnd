@@ -18,10 +18,11 @@ import DashboardUserPage from './pages/UserPage/DashboardUserPage';
 import DetailKonsultasiPage from './pages/KonsultasiPage/DetailKonsultasiPage';
 // import DetailTesIE from "./pages/v_Tes-Psikologi/TesIE/Detail";
 import DetailTesIE from './pages/TesPsikologiPage/TesIEPage/TesIE';
-import CreateBlogAdminPage from './pages/Admin/blogAdminPage/CreateBlogAdminPage';
-import BlogIcon from './components/Admin/assets/BlogIcon';
 
 // ! Admin
+import CreateBlogAdminPage from "./pages/Admin/blogAdminPage/CreateBlogAdminPage";
+import BlogAdminPage from "./pages/Admin/blogAdminPage/ListBlogAdminPage";
+import BlogIcon from "./components/Admin/assets/BlogIcon";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -59,7 +60,7 @@ function App() {
           {/* admin */}
           <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
           <Route path="/admin/create-blog" element={<CreateBlogAdminPage />} />
-
+          <Route path="/admin/list-blog" element={<CreateBlogAdminPage />} />
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
       )}

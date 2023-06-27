@@ -1,27 +1,27 @@
-import React from 'react';
-import Sidebar from './Sidebar';
+import React from "react";
+import Sidebar from "./Sidebar";
 
 const DashboardAdmin = () => {
   return (
     <>
       <div className="flex">
         <Sidebar />
-        <div className="h-screen flex-1">
-          <div className=" min-h-screen">
-            <div className="container mx-auto py-8">
-              <h1 className="text-3xl font-bold mb-4">
-                Selamat Datang di Dashboard Psikologi
-              </h1>
-
-              <div className="bg-white shadow rounded-lg p-6">
-                <h2 className="text-xl font-bold mb-4">Informasi Pengguna</h2>
-                {/* Tampilkan informasi pengguna seperti nama, alamat, email, dll. */}
-              </div>
-
-              {/* Tambahkan komponen-komponen lain sesuai dengan kebutuhan */}
-            </div>
+        {/* Content */}
+        <div className="w-[1000px] mx-auto mt-10 justify-center">
+          {/* judul */}
+          <div>
+            <h1 className="text-sizeTri text-textSec font-bold">Dashboard</h1>
+            <p className="my-1 text-textSec">Dashboard</p>
           </div>
+          {/* judul */}
+          {/* content */}
+          <div className="w-[1000px] h-[1000px]  bg-bgTri mx-auto mt-5 justify-center rounded-md shadow-sm shadow-textFunc">
+            <div className="mx-5">Ini dashboard admin</div>
+          </div>
+          {/* content */}
         </div>
+
+        {/* Content */}
       </div>
     </>
   );
