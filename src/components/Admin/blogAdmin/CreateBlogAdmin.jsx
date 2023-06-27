@@ -8,7 +8,7 @@ const CreateBlogAdmin = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
-  const [activePage, setActivePage] = useState('create-blog');
+  const [activePage, setActivePage] = useState('Blog');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ const CreateBlogAdmin = () => {
 
   return (
     <div className="flex">
-      <Sidebar activePage={activePage} />
+      <Sidebar activePage={activePage} setActivePage={setActivePage} />
       <div className="h-screen flex-1">
         <div className="max-w-3xl mx-auto mt-3 mb-3">
           <h2 className="text-2xl font-bold mb-4">Create Blog</h2>
