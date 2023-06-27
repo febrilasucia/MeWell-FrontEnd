@@ -18,7 +18,6 @@ function Register() {
     gender: '',
     age: '',
     work: '',
-    hobbies: '',
   });
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
@@ -170,17 +169,6 @@ function Register() {
                       placeholder="Pekerjaan"
                       required
                       value={formData.work}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      name="hobbies"
-                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                      placeholder="Hobi"
-                      required
-                      value={formData.hobbies}
                       onChange={handleChange}
                     />
                   </div>
