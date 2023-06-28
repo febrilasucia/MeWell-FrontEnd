@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 function HeaderAdmin() {
   const [isOpen, setIsOpen] = useState(false);
-  const { token, user, isLoading, error, isLogin } = useSelector(
+  const { user, isLogin } = useSelector(
     (state) => state.auth
   );
 

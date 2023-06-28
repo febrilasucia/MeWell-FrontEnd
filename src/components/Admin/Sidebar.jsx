@@ -43,6 +43,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
     >
       <img
         src={control}
+        alt='control'
         className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
            border-2 rounded-full  ${!open && 'rotate-180'}`}
         onClick={() => setOpen(!open)}
@@ -50,6 +51,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
       <div className="flex gap-x-4 items-center">
         <img
           src={logo}
+          alt='logo'
           className={`cursor-pointer duration-500 ${open && 'rotate-[360deg]'}`}
         />
         <h1
@@ -67,11 +69,11 @@ const Sidebar = ({ activePage, setActivePage }) => {
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
               ${Menu.gap ? 'mt-9' : 'mt-2'}  ${
-                activePage == Menu.title && 'bg-light-white'
+                activePage === Menu.title && 'bg-light-white'
               } `}
               onClick={() => handleMenuClick(Menu.title)}
             >
-              <img src={Menu.src} style={{ width: '24px', height: '24px' }} />
+              <img src={Menu.src} alt={Menu.src} style={{ width: '24px', height: '24px' }} />
               <span className={`${!open && 'hidden'} origin-left duration-200`}>
                 {Menu.title}
               </span>
