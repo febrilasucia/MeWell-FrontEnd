@@ -3,11 +3,24 @@ import control from './assets/control.png';
 import logo from './assets/logo.png';
 import { Link } from 'react-router-dom';
 
-const Sidebar = ({activePage, setActivePage}) => {
+const Sidebar = ({ activePage, setActivePage }) => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: 'Dashboard', src: require('./assets/Chart_fill.png'), link:'/admin/dashboard' },
-    { title: 'Blog', src: require('./assets/Blog.png'), link: '/admin/create-blog' },
+    {
+      title: 'Dashboard',
+      src: require('./assets/Chart_fill.png'),
+      link: '/admin/dashboard',
+    },
+    {
+      title: 'Blog',
+      src: require('./assets/Blog.png'),
+      link: '/admin/create-blog',
+    },
+    {
+      title: 'List-Blog',
+      src: require('./assets/Blog.png'),
+      link: '/admin/list-blog',
+    },
     { title: 'Inbox', src: require('./assets/Chat.png') },
     { title: 'Accounts', src: require('./assets/User.png'), gap: true },
     { title: 'Schedule ', src: require('./assets/Calendar.png') },
@@ -53,7 +66,9 @@ const Sidebar = ({activePage, setActivePage}) => {
             <li
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-              ${Menu.gap ? 'mt-9' : 'mt-2'}  ${activePage == Menu.title && 'bg-light-white'} `}
+              ${Menu.gap ? 'mt-9' : 'mt-2'}  ${
+                activePage == Menu.title && 'bg-light-white'
+              } `}
               onClick={() => handleMenuClick(Menu.title)}
             >
               <img src={Menu.src} style={{ width: '24px', height: '24px' }} />
