@@ -20,6 +20,7 @@ import DetailKonsultasiPage from './pages/KonsultasiPage/DetailKonsultasiPage';
 import DetailTesIE from './pages/TesPsikologiPage/TesIEPage/TesIE';
 import CreateBlogAdminPage from './pages/Admin/blogAdminPage/CreateBlogAdminPage';
 import BlogIcon from './components/Admin/assets/BlogIcon';
+import ListBlogAdmin from './components/Admin/blogAdmin/ListBlogAdmin';
 
 // ! Admin
 
@@ -59,6 +60,7 @@ function App() {
           {/* admin */}
           <Route path="/admin/dashboard" element={<DashboardAdminPage />} />
           <Route path="/admin/create-blog" element={<CreateBlogAdminPage />} />
+          <Route path="/admin/list-blog" element={<ListBlogAdmin />} />
 
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
