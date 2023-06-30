@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import control from "./assets/control.png";
-import logo from "./assets/logo.png";
-import { Link } from "react-router-dom";
-import LogoHori from "../../image/logo-tulisan-lentera2.png";
-import LogoMandeh from "../../image/logo-mandeh.png";
+import React, { useState } from 'react';
+import control from './assets/control.png';
+import logo from './assets/logo.png';
+import { Link } from 'react-router-dom';
+import LogoHori from '../../image/logo-tulisan-lentera2.png';
+import LogoMandeh from '../../image/logo-mandeh.png';
 import {
   FaBookReader,
   FaHome,
   FaUserMd,
   FaUsers,
   FaVideo,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
 const Sidebar = ({ activePage, setActivePage }) => {
   const [open, setOpen] = useState(true);
   const Menus = [
     {
-      title: "Dashboard",
+      title: 'Dashboard',
       icon: <FaHome />,
-      link: "/admin/dashboard",
+      link: '/admin/dashboard',
     },
-    { title: "Blog", icon: <FaBookReader />, link: "/admin/blog" },
-    { title: "Video", icon: <FaVideo />, link: "/admin/video" },
+    { title: 'Blog', icon: <FaBookReader />, link: '/admin/blog' },
+    { title: 'Video', icon: <FaVideo />, link: '/admin/video' },
     {
-      title: "Konsultasi ",
+      title: 'Konsultasi ',
       icon: <FaUserMd />,
-      link: "/admin/video",
+      link: '#',
     },
-    { title: "User", icon: <FaUsers />, link: "/admin/video" },
+    { title: 'User', icon: <FaUsers />, link: '#' },
   ];
 
   const handleMenuClick = (title) => {
@@ -39,14 +39,14 @@ const Sidebar = ({ activePage, setActivePage }) => {
     <div className="">
       <div
         className={` ${
-          open ? "w-72" : "w-20 "
+          open ? 'w-72' : 'w-20 '
         } bg-bgTri h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src={control}
           alt="control"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-bgOpt2
-           border-2 rounded-full  ${!open && "rotate-180"}`}
+           border-2 rounded-full  ${!open && 'rotate-180'}`}
           onClick={() => setOpen(!open)}
         />
         <div className="flex items-center">
@@ -54,14 +54,14 @@ const Sidebar = ({ activePage, setActivePage }) => {
             src={LogoMandeh}
             alt="LogoMandeh"
             className={`cursor-pointer w-[40px] duration-500 ${
-              open && "rotate-[360deg]"
+              open && 'rotate-[360deg]'
             }`}
           />
           <img
             src={LogoHori}
             alt="LogoHori"
             className={`text-textSec origin-left w-[170px] duration-200 ${
-              !open && "scale-0"
+              !open && 'scale-0'
             }`}
           />
         </div>
@@ -70,16 +70,15 @@ const Sidebar = ({ activePage, setActivePage }) => {
             <Link to={Menu.link}>
               <li
                 key={index}
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgOpt focus:bg-bg hover:text-textOpt text-textSec text-md items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${
-                  index === 0 && "bg-light-white"
-                } `}
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-md items-center gap-x-4 
+              ${Menu.gap ? 'mt-9' : 'mt-2'}
+                } ${activePage === Menu.title ? 'bg-bgOpt text-textOpt': 'text-textSec'}`}
                 onClick={() => handleMenuClick(Menu.title)}
               >
                 <p>{Menu.icon} </p>
                 {/* <FaHome style={{ width: "24px", height: "24px" }} /> */}
                 <span
-                  className={`${!open && "hidden"} origin-left duration-200`}
+                  className={`${!open && 'hidden'} origin-left duration-200`}
                 >
                   {Menu.title}
                 </span>

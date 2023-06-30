@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Sidebar from "./Sidebar";
+import React, { useState } from 'react';
+import Sidebar from './Sidebar';
 
 const DashboardAdmin = () => {
-  const [activePage, setActivePage] = useState("Dashboard");
+  const [activePage, setActivePage] = useState('Dashboard');
   return (
     <>
       <div className="flex">
-        <Sidebar />
+        <Sidebar activePage={activePage} setActivePage={setActivePage} />
         {/* Content */}
         <div className="w-[1000px] mx-auto mt-10 justify-center">
           {/* judul */}

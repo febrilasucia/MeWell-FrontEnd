@@ -1,11 +1,12 @@
-import React from "react";
-import Sidebar from "../Sidebar";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import Sidebar from '../Sidebar';
+import { Link } from 'react-router-dom';
 
 function ListVideoAdmin() {
+  const [activePage, setActivePage] = useState('Video');
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar activePage={activePage} setActivePage={setActivePage} />
       {/* Content */}
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
@@ -23,7 +24,7 @@ function ListVideoAdmin() {
                 id="addVideo"
                 className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                 type="button"
-                to={"/admin/video/create-video"}
+                to={'/admin/video/create-video'}
               >
                 Tambah
               </Link>
@@ -90,7 +91,7 @@ function ListVideoAdmin() {
                       dolorem libero sit expedita corporis repudiandae!
                     </td>
                     <td className="px-6 py-4 flex gap-3">
-                      <Link to={"/admin/video/edit-video"}>Edit </Link>
+                      <Link to={'/admin/video/edit-video'}>Edit </Link>
                       <Link href=""> Delete</Link>
                     </td>
                   </tr>
