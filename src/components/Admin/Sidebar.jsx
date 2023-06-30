@@ -39,7 +39,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
     <div className="">
       <div
         className={` ${
-          open ? 'w-72' : 'w-20 '
+          open ? 'w-72' : 'w-20'
         } bg-bgTri h-screen p-5  pt-8 relative duration-300`}
       >
         <img
@@ -70,12 +70,16 @@ const Sidebar = ({ activePage, setActivePage }) => {
             <Link to={Menu.link}>
               <li
                 key={index}
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-md items-center gap-x-4 
+                className={`flex items-center rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-md gap-x-4 
               ${Menu.gap ? 'mt-9' : 'mt-2'}
-                } ${activePage === Menu.title ? 'bg-bgOpt text-textOpt': 'text-textSec'}`}
+                } ${
+                  activePage === Menu.title
+                    ? 'bg-bgOpt text-textOpt'
+                    : 'text-textSec'
+                }`}
                 onClick={() => handleMenuClick(Menu.title)}
               >
-                <p>{Menu.icon} </p>
+                <p className="flex">{Menu.icon} </p>
                 {/* <FaHome style={{ width: "24px", height: "24px" }} /> */}
                 <span
                   className={`${!open && 'hidden'} origin-left duration-200`}
