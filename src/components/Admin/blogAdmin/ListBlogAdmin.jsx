@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../Sidebar";
 import { Link } from "react-router-dom";
 
 function ListBlogAdmin() {
+const [activePage, setActivePage] = useState('Blog')
+
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar activePage={activePage} setActivePage={setActivePage}/>
       {/* Content */}
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}

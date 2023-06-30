@@ -39,7 +39,7 @@ const CreateBlogAdmin = () => {
 
   return (
     <div className="flex">
-      <Sidebar activePage={activePage} setActivePage={setActivePage} />
+      <Sidebar />
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>

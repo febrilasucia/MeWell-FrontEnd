@@ -44,6 +44,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
       >
         <img
           src={control}
+          alt="control"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-bgOpt2
            border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
@@ -51,12 +52,14 @@ const Sidebar = ({ activePage, setActivePage }) => {
         <div className="flex items-center">
           <img
             src={LogoMandeh}
+            alt="LogoMandeh"
             className={`cursor-pointer w-[40px] duration-500 ${
               open && "rotate-[360deg]"
             }`}
           />
           <img
             src={LogoHori}
+            alt="LogoHori"
             className={`text-textSec origin-left w-[170px] duration-200 ${
               !open && "scale-0"
             }`}
