@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 
 const DashboardAdmin = () => {
+  const [activePage, setActivePage] = useState("Dashboard");
   return (
     <>
       <div className="flex">

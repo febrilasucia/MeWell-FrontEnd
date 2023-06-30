@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import LogoHori from "../../image/logo-tulisan-lentera2.png";
 import LogoMandeh from "../../image/logo-mandeh.png";
 
-const Sidebar = (activePage, setActivePage) => {
+const Sidebar = ({activePage, setActivePage}) => {
   const [open, setOpen] = useState(true);
   const Menus = [
     {
@@ -38,6 +38,7 @@ const Sidebar = (activePage, setActivePage) => {
 
   const handleMenuClick = (title) => {
     setActivePage(title);
+    console.log(activePage);
   };
 
   return (
