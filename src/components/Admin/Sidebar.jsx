@@ -6,7 +6,6 @@ import LogoHori from "../../image/logo-tulisan-lentera2.png";
 import LogoMandeh from "../../image/logo-mandeh.png";
 
 const Sidebar = ({ activePage, setActivePage }) => {
-const Sidebar = ({ activePage, setActivePage }) => {
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: 'Dashboard', src: require('./assets/Chart_fill.png'), link:'/admin/dashboard' },
