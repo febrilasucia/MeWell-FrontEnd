@@ -4,19 +4,30 @@ import logo from "./assets/logo.png";
 import { Link } from "react-router-dom";
 import LogoHori from "../../image/logo-tulisan-lentera2.png";
 import LogoMandeh from "../../image/logo-mandeh.png";
+import {
+  FaBookReader,
+  FaHome,
+  FaUserMd,
+  FaUsers,
+  FaVideo,
+} from "react-icons/fa";
 
 const Sidebar = ({ activePage, setActivePage }) => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    { title: 'Dashboard', src: require('./assets/Chart_fill.png'), link:'/admin/dashboard' },
-    { title: 'Blog', src: require('./assets/Blog.png'), link: '/admin/create-blog' },
-    { title: 'Inbox', src: require('./assets/Chat.png') },
-    { title: 'Accounts', src: require('./assets/User.png'), gap: true },
-    { title: 'Schedule ', src: require('./assets/Calendar.png') },
-    { title: 'Search', src: require('./assets/Search.png') },
-    { title: 'Analytics', src: require('./assets/Chart.png') },
-    { title: 'Files ', src: require('./assets/Folder.png'), gap: true },
-    { title: 'Setting', src: require('./assets/Setting.png') },
+    {
+      title: "Dashboard",
+      icon: <FaHome />,
+      link: "/admin/dashboard",
+    },
+    { title: "Blog", icon: <FaBookReader />, link: "/admin/blog" },
+    { title: "Video", icon: <FaVideo />, link: "/admin/video" },
+    {
+      title: "Konsultasi ",
+      icon: <FaUserMd />,
+      link: "/admin/video",
+    },
+    { title: "User", icon: <FaUsers />, link: "/admin/video" },
   ];
 
   const handleMenuClick = (title) => {
@@ -56,13 +67,14 @@ const Sidebar = ({ activePage, setActivePage }) => {
             <Link to={Menu.link}>
               <li
                 key={index}
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgFunc3 hover:text-textOpt text-textSec text-sm items-center gap-x-4 
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgOpt focus:bg-bg hover:text-textOpt text-textSec text-md items-center gap-x-4 
               ${Menu.gap ? "mt-9" : "mt-2"} ${
                   index === 0 && "bg-light-white"
                 } `}
                 onClick={() => handleMenuClick(Menu.title)}
               >
-                <img src={Menu.src} style={{ width: "24px", height: "24px" }} />
+                <p>{Menu.icon} </p>
+                {/* <FaHome style={{ width: "24px", height: "24px" }} /> */}
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}
                 >

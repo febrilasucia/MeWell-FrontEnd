@@ -59,7 +59,7 @@ function ListBlogAdmin() {
           <div className="">
             <div className="relative overflow-x-auto p-5">
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className=" text-textOpt  bg-textSec text-center">
+                <thead className=" text-textOpt  bg-bgFunc3 text-center">
                   <tr>
                     <th scope="col" className="px-6 py-3">
                       No
