@@ -6,34 +6,18 @@ import LogoHori from "../../image/logo-tulisan-lentera2.png";
 import LogoMandeh from "../../image/logo-mandeh.png";
 
 const Sidebar = ({ activePage, setActivePage }) => {
+const Sidebar = ({ activePage, setActivePage }) => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    {
-      title: "Dashboard",
-      src: require("./assets/Chart_fill.png"),
-      link: "/admin/dashboard",
-    },
-    {
-      title: "Blog",
-      src: require("./assets/Blog.png"),
-      link: "/admin/blog",
-    },
-    {
-      title: "Video",
-      src: require("./assets/Chat.png"),
-      link: "/admin/video",
-    },
-    {
-      title: "Konsultasi",
-      src: require("./assets/User.png"),
-      link: "/admin/create-blog",
-    },
-    {
-      title: "User ",
-      src: require("./assets/Calendar.png"),
-      link: "/admin/create-blog",
-      gap: true,
-    },
+    { title: 'Dashboard', src: require('./assets/Chart_fill.png'), link:'/admin/dashboard' },
+    { title: 'Blog', src: require('./assets/Blog.png'), link: '/admin/create-blog' },
+    { title: 'Inbox', src: require('./assets/Chat.png') },
+    { title: 'Accounts', src: require('./assets/User.png'), gap: true },
+    { title: 'Schedule ', src: require('./assets/Calendar.png') },
+    { title: 'Search', src: require('./assets/Search.png') },
+    { title: 'Analytics', src: require('./assets/Chart.png') },
+    { title: 'Files ', src: require('./assets/Folder.png'), gap: true },
+    { title: 'Setting', src: require('./assets/Setting.png') },
   ];
 
   const handleMenuClick = (title) => {
