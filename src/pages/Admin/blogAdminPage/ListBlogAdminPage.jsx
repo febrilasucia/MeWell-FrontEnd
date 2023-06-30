@@ -1,5 +1,5 @@
 import React from 'react'
-import ListBlogAdmin from '../../../components/Admin/blogAdmin/ListBlogAdminComponent'
+import ListBlogAdmin from '../../../components/Admin/blogAdmin/ListBlogAdmin'
 
 function ListBlogAdminPage() {
   return (

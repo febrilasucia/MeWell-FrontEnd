@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import Sidebar from "../Sidebar";
 import { useNavigate } from "react-router-dom";
 
-const CreateBlogAdmin = () => {
+const EditBlogAdmin = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [desc, setDesc] = useState("");
@@ -31,7 +31,7 @@ const CreateBlogAdmin = () => {
 
     try {
       setTitle("");
-      setImage("")
+      setImage("");
       setContent("");
       setDesc("");
     } catch (error) {}
@@ -43,8 +43,8 @@ const CreateBlogAdmin = () => {
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>
-          <h1 className="text-sizeTri text-textSec font-bold">Tambah Blog</h1>
-          <p className="my-3 text-textFunc">Dashboard / Blog / Tambah</p>
+          <h1 className="text-sizeTri text-textSec font-bold">Edit Blog</h1>
+          <p className="my-3 text-textFunc">Dashboard / Blog / Edit</p>
         </div>
         {/* judul */}
         {/* content */}
@@ -191,4 +191,4 @@ const CreateBlogAdmin = () => {
   );
 };
 
-export default CreateBlogAdmin;
+export default EditBlogAdmin;
