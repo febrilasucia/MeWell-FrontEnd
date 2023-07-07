@@ -40,16 +40,16 @@ const Sidebar = ({ activePage, setActivePage }) => {
       <div
         className={` ${
           open ? 'w-72' : 'w-20'
-        } bg-bgTri h-screen p-5  pt-8 relative duration-300`}
+        } bg-bgTri h-screen p-5 pt-8 relative duration-300`}
       >
         <img
           src={control}
           alt="control"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-bgOpt2
-           border-2 rounded-full  ${!open && 'rotate-180'}`}
+          border-2 rounded-full  ${!open && 'rotate-180'}`}
           onClick={() => setOpen(!open)}
         />
-        <div className="flex items-center">
+        <div className="flex gap-x-4 items-center">
           <img
             src={LogoMandeh}
             alt="LogoMandeh"
@@ -67,10 +67,9 @@ const Sidebar = ({ activePage, setActivePage }) => {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <Link to={Menu.link}>
+            <Link to={Menu.link} key={index}>
               <li
-                key={index}
-                className={`flex items-center rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-md gap-x-4 
+                className={`flex items-center rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-sm gap-x-4 
               ${Menu.gap ? 'mt-9' : 'mt-2'}
                 } ${
                   activePage === Menu.title
@@ -79,7 +78,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
                 }`}
                 onClick={() => handleMenuClick(Menu.title)}
               >
-                <p className="flex">{Menu.icon} </p>
+                <p className="text-center">{Menu.icon}</p>
                 {/* <FaHome style={{ width: "24px", height: "24px" }} /> */}
                 <span
                   className={`${!open && 'hidden'} origin-left duration-200`}
