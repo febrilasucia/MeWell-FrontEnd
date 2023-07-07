@@ -32,7 +32,7 @@ function KonsultasiComponent() {
             </p>
             {/* ingat untuk konsultasi harus mempunyai akun, jikalau tidak maka di alihkan ke halaman login dan dengan alert anda harus login terlebih dahulu */}
             <Link
-              href="#"
+              to={"/konsultasi/form-konsultasi"}
               className="inline-block mt-5 mb-10 bg-bgOpt2 hover:bg-bgOpt font-bold py-2 px-4 rounded-xl"
             >
               Konsultasi Sekarang

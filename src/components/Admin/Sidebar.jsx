@@ -25,9 +25,9 @@ const Sidebar = ({ activePage, setActivePage }) => {
     {
       title: "Konsultasi ",
       icon: <FaUserMd />,
-      link: "/admin/video",
+      link: "/admin/konsul",
     },
-    { title: "User", icon: <FaUsers />, link: "/admin/video" },
+    { title: "User", icon: <FaUsers />, link: "/admin/users" },
   ];
 
   const handleMenuClick = (title) => {
@@ -67,7 +67,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
             <Link to={Menu.link}>
               <li
                 key={index}
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgOpt focus:bg-bg hover:text-textOpt text-textSec text-md items-center gap-x-4 
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-textSec text-md items-center gap-x-4 
               ${Menu.gap ? "mt-9" : "mt-2"} ${
                   index === 0 && "bg-light-white"
                 } `}
