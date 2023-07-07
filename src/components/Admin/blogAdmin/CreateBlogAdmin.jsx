@@ -1,40 +1,57 @@
-import React, { useState } from "react";
-import axios from "axios";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import Sidebar from "../Sidebar";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import Sidebar from '../Sidebar';
+import { useNavigate } from 'react-router-dom';
 
 const CreateBlogAdmin = () => {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [desc, setDesc] = useState("");
-  const [content, setContent] = useState("");
-  const [activePage, setActivePage] = useState("Blog");
+  const [activePage, setActivePage] = useState('Blog');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [author, setAuthor] = useState('');
+  const [content, setContent] = useState('');
   const navigate = useNavigate();
+
+  const token = localStorage.getItem('token');
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
+  console.log(title);
+  console.log(description);
+  console.log(author);
+  console.log(content);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let data = new FormData();
+    data.append('title', title);
+    data.append('description', description);
+    data.append('author', author);
+    data.append('content', content);
 
-    const newBlog = {
-      title,
-      image,
-      desc,
-      content,
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_BASE_URL}/blog`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
     };
 
-    console.log(title, image, content, desc);
+    async function makeRequest() {
+      try {
+        const response = await axios.request(config);
+        console.log(JSON.stringify(response.data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-    try {
-      setTitle("");
-      setImage("")
-      setContent("");
-      setDesc("");
-    } catch (error) {}
+    makeRequest();
   };
 
   return (
@@ -69,26 +86,7 @@ const CreateBlogAdmin = () => {
                           id="title"
                           value={title}
                           onChange={(e) => setTitle(e.target.value)}
-                          className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="author"
-                          className="block text-textSec mb-1"
-                        >
-                          Gambar
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="file"
-                          id="image"
-                          value={image}
-                          onChange={(e) => setImage(e.target.value)}
-                          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
@@ -101,13 +99,33 @@ const CreateBlogAdmin = () => {
                           Deskripsi Singkat
                         </label>
                       </td>
-                      <td className="">
+                      <td>
                         <input
                           type="text"
-                          id="desc"
-                          value={desc}
-                          onChange={(e) => setDesc(e.target.value)}
-                          className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          id="description"
+                          placeholder="max 50 words"
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3">
+                        <label
+                          htmlFor="description"
+                          className="block text-textSec mb-1"
+                        >
+                          Author
+                        </label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          id="author"
+                          value={author}
+                          onChange={(e) => setAuthor(e.target.value)}
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
@@ -127,31 +145,31 @@ const CreateBlogAdmin = () => {
                           modules={{
                             toolbar: [
                               [{ header: [1, 2, false] }],
-                              ["bold", "italic", "underline", "strike"],
-                              ["link", "image"],
-                              [{ list: "ordered" }, { list: "bullet" }],
-                              ["blockquote", "code-block"],
+                              ['bold', 'italic', 'underline', 'strike'],
+                              ['link', 'image'],
+                              [{ list: 'ordered' }, { list: 'bullet' }],
+                              ['blockquote', 'code-block'],
                               [{ align: [] }],
-                              [{ indent: "-1" }, { indent: "+1" }],
-                              [{ direction: "rtl" }],
-                              ["clean"],
+                              [{ indent: '-1' }, { indent: '+1' }],
+                              [{ direction: 'rtl' }],
+                              ['clean'],
                             ],
                           }}
                           formats={[
-                            "header",
-                            "bold",
-                            "italic",
-                            "underline",
-                            "strike",
-                            "link",
-                            "image",
-                            "list",
-                            "bullet",
-                            "blockquote",
-                            "code-block",
-                            "align",
-                            "indent",
-                            "direction",
+                            'header',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strike',
+                            'link',
+                            'image',
+                            'list',
+                            'bullet',
+                            'blockquote',
+                            'code-block',
+                            'align',
+                            'indent',
+                            'direction',
                           ]}
                           className="border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
@@ -160,9 +178,9 @@ const CreateBlogAdmin = () => {
                   </table>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      position: "relative",
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      position: 'relative',
                     }}
                     className="p-5 flex flex-wrap gap-2"
                   >

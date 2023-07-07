@@ -1,40 +1,84 @@
-import React, { useState } from "react";
-import axios from "axios";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import Sidebar from "../Sidebar";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import Sidebar from '../Sidebar';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EditBlogAdmin = () => {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [desc, setDesc] = useState("");
-  const [content, setContent] = useState("");
-  const [activePage, setActivePage] = useState("Blog");
+  const [activePage, setActivePage] = useState('Blog');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [author, setAuthor] = useState('');
+  const [content, setContent] = useState('');
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const token = localStorage.getItem('token');
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  const handleSubmit = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
+    let data = new FormData();
+    data.append('title', title);
+    data.append('description', description);
+    data.append('author', author);
+    data.append('content', content);
 
-    const newBlog = {
-      title,
-      image,
-      desc,
-      content,
+    let config = {
+      method: 'patch',
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_BASE_URL}/blog/${id}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
     };
 
-    console.log(title, image, content, desc);
-
     try {
-      setTitle("");
-      setImage("");
-      setContent("");
-      setDesc("");
-    } catch (error) {}
+      const response = await axios.request(config);
+      console.log(JSON.stringify(response.data));
+      // Navigasi ke halaman detail blog setelah berhasil update
+      navigate(`/blog/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch data blog yang akan diupdate
+    const fetchBlog = async () => {
+      console.log('fetch blog running');
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/blog/${id}`
+        );
+        const blogData = response.data.data;
+        setTitle(blogData.title);
+        setDescription(blogData.description);
+        setAuthor(blogData.author);
+        // setContent(blogData.content);
+        handleContentChange(blogData.content);
+        console.log(blogData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchBlog();
+  }, [id]);
+
+  const handleContentChange = (value) => {
+    // Ubah URL gambar dalam konten
+    const updatedContent = value.replace(
+      /src="\/images\/([a-zA-Z0-9_]+\.[a-zA-Z]{3,4})"/g,
+      'src="http://localhost:5000/images/$1"'
+    );
+
+    setContent(updatedContent);
   };
 
   return (
@@ -52,7 +96,7 @@ const EditBlogAdmin = () => {
           <div className="p-5">
             <div className="flex-1">
               <div className="w-full ">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleUpdate} className="space-y-4">
                   <table className="w-full">
                     <tr>
                       <td className="py-3">
@@ -76,19 +120,19 @@ const EditBlogAdmin = () => {
                     <tr>
                       <td className="py-3">
                         <label
-                          htmlFor="author"
+                          htmlFor="title"
                           className="block text-textSec mb-1"
                         >
-                          Gambar
+                          Judul Blog
                         </label>
                       </td>
                       <td className="">
                         <input
-                          type="file"
-                          id="image"
-                          value={image}
-                          onChange={(e) => setImage(e.target.value)}
-                          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          type="text"
+                          id="title"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
@@ -104,13 +148,33 @@ const EditBlogAdmin = () => {
                       <td className="">
                         <input
                           type="text"
-                          id="desc"
-                          value={desc}
-                          onChange={(e) => setDesc(e.target.value)}
+                          id="description"
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
                           className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
+                    <tr>
+                      <td className="py-3">
+                        <label
+                          htmlFor="description"
+                          className="block text-textSec mb-1"
+                        >
+                          Author
+                        </label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          id="author"
+                          value={author}
+                          onChange={(e) => setAuthor(e.target.value)}
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
+                    <tr></tr>
                     <tr>
                       <td className="py-3">
                         <label
@@ -123,35 +187,35 @@ const EditBlogAdmin = () => {
                       <td className="py-3">
                         <ReactQuill
                           value={content}
-                          onChange={setContent}
+                          onChange={handleContentChange}
                           modules={{
                             toolbar: [
                               [{ header: [1, 2, false] }],
-                              ["bold", "italic", "underline", "strike"],
-                              ["link", "image"],
-                              [{ list: "ordered" }, { list: "bullet" }],
-                              ["blockquote", "code-block"],
+                              ['bold', 'italic', 'underline', 'strike'],
+                              ['link', 'image'],
+                              [{ list: 'ordered' }, { list: 'bullet' }],
+                              ['blockquote', 'code-block'],
                               [{ align: [] }],
-                              [{ indent: "-1" }, { indent: "+1" }],
-                              [{ direction: "rtl" }],
-                              ["clean"],
+                              [{ indent: '-1' }, { indent: '+1' }],
+                              [{ direction: 'rtl' }],
+                              ['clean'],
                             ],
                           }}
                           formats={[
-                            "header",
-                            "bold",
-                            "italic",
-                            "underline",
-                            "strike",
-                            "link",
-                            "image",
-                            "list",
-                            "bullet",
-                            "blockquote",
-                            "code-block",
-                            "align",
-                            "indent",
-                            "direction",
+                            'header',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strike',
+                            'link',
+                            'image',
+                            'list',
+                            'bullet',
+                            'blockquote',
+                            'code-block',
+                            'align',
+                            'indent',
+                            'direction',
                           ]}
                           className="border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
@@ -160,9 +224,9 @@ const EditBlogAdmin = () => {
                   </table>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      position: "relative",
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      position: 'relative',
                     }}
                     className="p-5 flex flex-wrap gap-2"
                   >

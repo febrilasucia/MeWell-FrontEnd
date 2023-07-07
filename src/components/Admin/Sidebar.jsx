@@ -15,18 +15,10 @@ import {
 const Sidebar = ({ activePage, setActivePage }) => {
   const [open, setOpen] = useState(true);
   const Menus = [
-    {
-      title: "Dashboard",
-      icon: <FaHome />,
-      link: "/admin/dashboard",
-    },
+    { title: "Dashboard", icon: <FaHome />, link: "/admin/dashboard" },
     { title: "Blog", icon: <FaBookReader />, link: "/admin/blog" },
     { title: "Video", icon: <FaVideo />, link: "/admin/video" },
-    {
-      title: "Konsultasi ",
-      icon: <FaUserMd />,
-      link: "/admin/konsul",
-    },
+    { title: "Konsultasi ", icon: <FaUserMd />, link: "/admin/konsul" },
     { title: "User", icon: <FaUsers />, link: "/admin/users" },
   ];
 
@@ -39,24 +31,27 @@ const Sidebar = ({ activePage, setActivePage }) => {
     <div className="">
       <div
         className={` ${
-          open ? "w-72" : "w-20 "
-        } bg-bgTri h-screen p-5  pt-8 relative duration-300`}
+          open ? "w-72" : "w-20"
+        } bg-bgTri h-screen p-5 pt-8 relative duration-300`}
       >
         <img
           src={control}
+          alt="control"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-bgOpt2
-           border-2 rounded-full  ${!open && "rotate-180"}`}
+          border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
         />
-        <div className="flex items-center">
+        <div className="flex gap-x-4 items-center">
           <img
             src={LogoMandeh}
+            alt="LogoMandeh"
             className={`cursor-pointer w-[40px] duration-500 ${
               open && "rotate-[360deg]"
             }`}
           />
           <img
             src={LogoHori}
+            alt="LogoHori"
             className={`text-textSec origin-left w-[170px] duration-200 ${
               !open && "scale-0"
             }`}
@@ -64,16 +59,18 @@ const Sidebar = ({ activePage, setActivePage }) => {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <Link to={Menu.link}>
+            <Link to={Menu.link} key={index}>
               <li
-                key={index}
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-textSec text-md items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${
-                  index === 0 && "bg-light-white"
-                } `}
+                className={`flex rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-textSec text-md items-center gap-x-4 
+              ${Menu.gap ? "mt-9" : "mt-2"}
+                } ${
+                  activePage === Menu.title
+                    ? "bg-bgOpt text-textOpt"
+                    : "text-textSec"
+                }`}
                 onClick={() => handleMenuClick(Menu.title)}
               >
-                <p>{Menu.icon} </p>
+                <p className="text-center">{Menu.icon}</p>
                 {/* <FaHome style={{ width: "24px", height: "24px" }} /> */}
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}
