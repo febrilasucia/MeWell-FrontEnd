@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Konsultasi from "../../../components/Konsultasi/KonsultasiComponent";
+import Konsultasi from "../../components/Konsultasi/KonsultasiComponent";
 
 function KonsultasiPage() {
   useEffect(() => {
