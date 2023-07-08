@@ -65,7 +65,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
           {Menus.map((Menu, index) => (
             <Link to={Menu.link} key={index}>
               <li
-                className={`flex rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-textSec text-md items-center gap-x-4 
+                className={`flex rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt  text-md items-center gap-x-4
               ${Menu.gap ? 'mt-9' : 'mt-2'}
                 } ${
                   activePage === Menu.title
