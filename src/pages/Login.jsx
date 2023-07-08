@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import LogoMandehLogin from "../image/logo-mandeh-login.png";
-import LogoMandeh from "../image/logo-hori.png";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { FaAngleDoubleRight } from "react-icons/fa";
-import axios from "axios";
-import { fetchUser, setToken } from "../features/authSlice";
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import LogoMandehLogin from '../image/logo-mandeh-login.png';
+import LogoMandeh from '../image/logo-hori.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaAngleDoubleRight } from 'react-icons/fa';
+import axios from 'axios';
+import { fetchUser, setToken } from '../features/authSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -25,11 +25,11 @@ const Login = () => {
     });
 
     const config = {
-      method: "post",
+      method: 'post',
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/auth/login`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       data: data,
     };
@@ -44,21 +44,30 @@ const Login = () => {
       const role = actionResult.payload.role;
       redirectToRolePage(role);
     } catch (error) {
-      setError(error.response.data.message);
-      if (error.response.data.error) {
-        setError(error.response.data.error);
-      }
       console.log(error);
+      if (error.response) {
+        if (error.response.status === 401) {
+          // Handle 401 Unauthorized error
+          if (error.response.data.message === 'Email or password is invalid') {
+            setError(error.response.data.message);
+          } else {
+            setError(error.response.data.message);
+          }
+        } else {
+          // Handle other errors
+          setError(error.response.data.message);
+        }
+      }
     }
   };
 
   const redirectToRolePage = (role) => {
     switch (role) {
-      case "admin":
-        navigate("/admin/dashboard");
+      case 'admin':
+        navigate('/admin/dashboard');
         break;
-      case "user":
-        navigate("/");
+      case 'user':
+        navigate('/');
         break;
       default:
         break;
@@ -120,12 +129,19 @@ const Login = () => {
               Masuk
             </button>
             <div className="text-sm font-medium text-gray-500 text-center ">
-              Belum mempunyai akun? daftar{" "}
-              <a href={"/register"} className="text-bgOpt2 hover:underline ">
+              Belum mempunyai akun? daftar{' '}
+              <a href={'/register'} className="text-bgOpt2 hover:underline ">
                 disini
               </a>
             </div>
           </form>
+          {error && (
+            <div className="mt-4">
+              <div className="bg-red-100 border  border-red-400 text-red-700 px-4 py-2 rounded-md">
+                {error}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -133,13 +149,13 @@ const Login = () => {
       {/* tombol back */}
       <div className="flex items-center float-right mr-10 -mt-8 text-bgFunc hover:text-bgFunc2 font-medium ">
         <div>
-          <Link to={"/"} className="">
-            Kembali{" "}
+          <Link to={'/'} className="">
+            Kembali{' '}
           </Link>
         </div>
         <div>
-          <Link to={"/"}>
-            <FaAngleDoubleRight className="" />{" "}
+          <Link to={'/'}>
+            <FaAngleDoubleRight className="" />{' '}
           </Link>
         </div>
       </div>
