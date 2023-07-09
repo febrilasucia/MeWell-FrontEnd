@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-// video
-import ListVideo from './pages/UserPage/VideoPage/ListVideoPage';
-import DetailVideoPage from './pages/UserPage/VideoPage/DetailVideoPage';
+// ! user
 // blog
-import ListBlogPage from './pages/UserPage/BlogPage/ListBlogPage';
-import DetailBlogPage from './pages/UserPage/BlogPage/DetailBlogPage';
+import ListBlogPage from './pages/BlogPage/ListBlogPage';
+import DetailBlogPage from './pages/BlogPage/DetailBlogPage';
+// video
+import ListVideo from './pages/VideoPage/ListVideoPage';
+import DetailVideoPage from './pages/VideoPage/DetailVideoPage';
 // tes
 import ListTes from './pages/TesPsikologiPage/ListTesPsikologi';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DashboardAdminPage from './pages/Admin/DashboardAdminPage';
-// ! user
-import DashboardUserPage from './pages/UserPage/DashboardUserPage';
+import DashboardUserPage from './pages/DashboardUserPage';
 //konsul
 import DetailKonsultasiPage from "./pages/KonsultasiPage/DetailKonsultasiPage";
 import FormKonsultasiPage from "./components/Konsultasi/FormKonsultasi";

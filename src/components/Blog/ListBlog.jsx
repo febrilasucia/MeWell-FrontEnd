@@ -37,7 +37,8 @@ function ListBlog() {
   const navigate = useNavigate();
   const [searching, setSearching] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  // const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+
   // const searchBlog = (e) => {
   //   e.preventDefault();
   //   axios(`${import.meta.env.VITE_BASE_URL}/blog?title=${searching}`).then(
@@ -50,17 +51,20 @@ function ListBlog() {
     window.scrollTo(0, 0);
     getBlogs();
   }, []);
-  const getBlogs = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/blog`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-    // setBlogs(response.data);
-    setIsLoading(false);
-  };
 
-  const handleClick = ({ id }) => {
+  const getBlogs = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/blog`
+      );
+      setBlogs(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(blogs);
+
+  const handleClick = ( id ) => {
     navigate(`/blog/${id}`);
   };
   return (
@@ -123,23 +127,16 @@ function ListBlog() {
       <div className="flex flex-wrap justify-center my-10">
         {blogs.map((blog) => (
           <div
-            key={blog.id}
+            key={blog._id}
             className="max-w-sm m-5 bg-white hover:bg-[#f1f1f1] border border-gray-200 rounded-lg shadow cursor-pointer"
-            onClick={() => handleClick(blog.id)}
+            onClick={() => handleClick(blog._id)}
           >
             <img className="rounded-t-lg" src={ListBlog1} alt="" />
             <div className="bg-white rounded shadow p-6">
               <h1 className="text-2xl font-bold mb-4">{blog.title}</h1>
               <p className="text-gray-500 mb-2">By {blog.author}</p>
-              <p className="text-gray-500 mb-4">{blog.date}</p>
-              <div
-                className="prose"
-                dangerouslySetInnerHTML={{ __html: blog.content.replace(/(<([^>]+)>)/gi, '').substring(0, 5) + '...' }}
-                style={{ WebkitLineClamp: 5 }}
-              ></div>
-              <button className="absolute bottom-0 left-0 p-2 text-sm text-white bg-blue-500 rounded-bl">
-                Read More
-              </button>
+              <p className="text-gray-500 mb-4">{blog.UpdatedAt}</p>
+              <div>{blog.description}</div>
             </div>
           </div>
         ))}
