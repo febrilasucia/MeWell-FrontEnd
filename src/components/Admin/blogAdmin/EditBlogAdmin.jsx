@@ -98,25 +98,7 @@ const EditBlogAdmin = () => {
               <div className="w-full ">
                 <form onSubmit={handleUpdate} className="space-y-4">
                   <table className="w-full">
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="title"
-                          className="block text-textSec mb-1"
-                        >
-                          Judul Blog
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="text"
-                          id="title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
-                          className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
+                    
                     <tr>
                       <td className="py-3">
                         <label
@@ -151,7 +133,7 @@ const EditBlogAdmin = () => {
                           id="description"
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
-                          className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
