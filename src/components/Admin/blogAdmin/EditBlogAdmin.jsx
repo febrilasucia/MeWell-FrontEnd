@@ -98,112 +98,111 @@ const EditBlogAdmin = () => {
             <div className="flex-1">
               <div className="w-full">
                 <form onSubmit={handleUpdate} className="space-y-4">
-                  <table className="w-full">
-                    <tbody>
-                      <tr>
-                        <td className="py-3">
-                          <label
-                            htmlFor="title"
-                            className="block text-textSec mb-1"
-                          >
-                            Judul Blog
-                          </label>
-                        </td>
-                        <td className="">
-                          <input
-                            type="text"
-                            id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="py-3">
-                          <label
-                            htmlFor="description"
-                            className="block text-textSec mb-1"
-                          >
-                            Deskripsi Singkat
-                          </label>
-                        </td>
-                        <td className="">
-                          <input
-                            type="text"
-                            id="description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="py-3">
-                          <label
-                            htmlFor="author"
-                            className="block text-textSec mb-1"
-                          >
-                            Author
-                          </label>
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            id="author"
-                            value={author}
-                            onChange={(e) => setAuthor(e.target.value)}
-                            className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                          />
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="py-3">
-                          <label
-                            htmlFor="content"
-                            className="block text-textSec mb-1"
-                          >
-                            Konten
-                          </label>
-                        </td>
-                        <td className="py-3">
-                          <ReactQuill
-                            value={content}
-                            onChange={handleContentChange}
-                            modules={{
-                              toolbar: [
-                                [{ header: [1, 2, false] }],
-                                ['bold', 'italic', 'underline', 'strike'],
-                                ['link', 'image'],
-                                [{ list: 'ordered' }, { list: 'bullet' }],
-                                ['blockquote', 'code-block'],
-                                [{ align: [] }],
-                                [{ indent: '-1' }, { indent: '+1' }],
-                                [{ direction: 'rtl' }],
-                                ['clean'],
-                              ],
-                            }}
-                            formats={[
-                              'header',
-                              'bold',
-                              'italic',
-                              'underline',
-                              'strike',
-                              'link',
-                              'image',
-                              'list',
-                              'bullet',
-                              'blockquote',
-                              'code-block',
-                              'align',
-                              'indent',
-                              'direction',
-                            ]}
-                            className="border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
+                  <table className="w-full">        
+                    <tr>
+                      <td className="py-3">
+                        <label
+                          htmlFor="title"
+                          className="block text-textSec mb-1"
+                        >
+                          Judul Blog
+                        </label>
+                      </td>
+                      <td className="">
+                        <input
+                          type="text"
+                          id="title"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3">
+                        <label
+                          htmlFor="description"
+                          className="block text-textSec mb-1"
+                        >
+                          Deskripsi Singkat
+                        </label>
+                      </td>
+                      <td className="">
+                        <input
+                          type="text"
+                          id="description"
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3">
+                        <label
+                          htmlFor="description"
+                          className="block text-textSec mb-1"
+                        >
+                          Author
+                        </label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          id="author"
+                          value={author}
+                          onChange={(e) => setAuthor(e.target.value)}
+                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                      <td className="py-3">
+                        <label
+                          htmlFor="content"
+                          className="block text-textSec mb-1"
+                        >
+                          Konten
+                        </label>
+                      </td>
+                      <td className="py-3">
+                        <ReactQuill
+                          value={content}
+                          onChange={handleContentChange}
+                          modules={{
+                            toolbar: [
+                              [{ header: [1, 2, false] }],
+                              ['bold', 'italic', 'underline', 'strike'],
+                              ['link', 'image'],
+                              [{ list: 'ordered' }, { list: 'bullet' }],
+                              ['blockquote', 'code-block'],
+                              [{ align: [] }],
+                              [{ indent: '-1' }, { indent: '+1' }],
+                              [{ direction: 'rtl' }],
+                              ['clean'],
+                            ],
+                          }}
+                          formats={[
+                            'header',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strike',
+                            'link',
+                            'image',
+                            'list',
+                            'bullet',
+                            'blockquote',
+                            'code-block',
+                            'align',
+                            'indent',
+                            'direction',
+                          ]}
+                          className="border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
                   </table>
                   <div
                     style={{

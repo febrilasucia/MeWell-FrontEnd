@@ -1,41 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import HeaderBlog from '../../image/list-blog.png';
-import HeaderBlog2 from '../../image/list-blog2.png';
-import ListBlog1 from '../../image2/26.png';
-import axios from 'axios';
-import { FaSearch } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-
-const blogs = [
-  {
-    id: 1,
-    title: 'Tips Mengelola Stres',
-    author: 'John Doe',
-    date: '2022-10-15',
-    content:
-      '<h1>Tips Mengelola Stres</h1><p>Oleh: John Doe</p><p>Tanggal: 2022-10-15</p><p>Ini adalah konten mengenai tips mengelola stres. <strong>Jaga pola tidur yang baik</strong>, <em>lakukan olahraga secara teratur</em>, dan <u>hindari stres berlebihan</u>. Selalu ingat untuk mengatur waktu istirahat dan relaksasi secara rutin.</p>',
-  },
-  {
-    id: 2,
-    title: 'Strategi Mengatasi Kecemasan Sosial',
-    author: 'Jane Smith',
-    date: '2022-11-03',
-    content:
-      '<h1>Strategi Mengatasi Kecemasan Sosial</h1><p>Oleh: Jane Smith</p><p>Tanggal: 2022-11-03</p><p>Ini adalah konten mengenai strategi mengatasi kecemasan sosial. <strong>Berlatih bernapas dalam-dalam</strong> dan <em>terlibat dalam aktivitas sosial secara bertahap</em> dapat membantu mengurangi kecemasan sosial. Jangan ragu untuk mencari dukungan dari orang terdekat atau profesional jika diperlukan.</p>',
-  },
-  {
-    id: 3,
-    title: 'Cara Meningkatkan Kesehatan Mental',
-    author: 'David Johnson',
-    date: '2022-12-20',
-    content:
-      '<h1>Cara Meningkatkan Kesehatan Mental</h1><p>Oleh: David Johnson</p><p>Tanggal: 2022-12-20</p><p>Ini adalah konten mengenai cara meningkatkan kesehatan mental. <strong>Terlibat dalam aktivitas fisik secara teratur</strong>, <em>tingkatkan interaksi sosial yang positif</em>, dan <u>luangkan waktu untuk hobi dan relaksasi</u> dapat membantu menjaga kesehatan mental dengan baik.</p>',
-  },
-];
+import React, { useEffect, useState } from "react";
+import HeaderBlog from "../../image/list-blog.png";
+import HeaderBlog2 from "../../image/list-blog2.png";
+import ListBlog1 from "../../image2/26.png";
+import axios from "axios";
+import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import "dayjs/locale/id";
 
 function ListBlog() {
   const navigate = useNavigate();
-  const [searching, setSearching] = useState('');
+  const [searching, setSearching] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
 
@@ -47,6 +22,7 @@ function ListBlog() {
   //     }
   //   );
   // };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     getBlogs();
@@ -64,7 +40,7 @@ function ListBlog() {
   };
   console.log(blogs);
 
-  const handleClick = ( id ) => {
+  const handleClick = (id) => {
     navigate(`/blog/${id}`);
   };
   return (
@@ -128,92 +104,32 @@ function ListBlog() {
         {blogs.map((blog) => (
           <div
             key={blog._id}
-            className="max-w-sm m-5 bg-white hover:bg-[#f1f1f1] border border-gray-200 rounded-lg shadow cursor-pointer"
+            className="max-w-sm m-5 bg-white hover:border shadow-sm hover:border-gray-200 rounded-lg cursor-pointer"
             onClick={() => handleClick(blog._id)}
           >
             <img className="rounded-t-lg" src={ListBlog1} alt="" />
-            <div className="bg-white rounded shadow p-6">
-              <h1 className="text-2xl font-bold mb-4">{blog.title}</h1>
-              <p className="text-gray-500 mb-2">By {blog.author}</p>
-              <p className="text-gray-500 mb-4">{blog.UpdatedAt}</p>
-              <div>{blog.description}</div>
+            <div className="rounded p-6">
+              <h1 className="text-xl font-bold text-textSec">{blog.title}</h1>
+              <p className="text-gray-500 text-sizeParagraph"></p>
+              <p className="text-gray-500 text-sizeParagraph">
+                {dayjs(blog.UpdatedAt)
+                  .locale("id")
+                  .format("dddd, DD MMMM YYYY")}
+              </p>
+              <div className="text-sizeParagraph text-textFunc">
+                {blog.description}
+              </div>
+
+              <div className="flex items-center justify-between mt-2">
+                <p className="text-gray-500 text-sizeParagraph"></p>
+                <p className="text-gray-500 text-sizeParagraph">
+                  {blog.author}
+                </p>
+              </div>
             </div>
           </div>
         ))}
       </div>
-
-      {/* <div className="flex flex-wrap justify-center">
-        {isLoading ? (
-          <img
-            src={Loading}
-            alt="isLoading"
-            className="h-40 sm:h-60 mx-auto "
-          />
-        ) : !blogs || blogs == "" ? (
-          <div className="flex justify-center font-mono font-semibold text-[#295454]">
-            <img src={Empty} alt="isLoading" className="h-60 sm:h-80 mx-auto" />
-          </div>
-        ) : (
-          blogs.map((item, index) => (
-            <div key={index} onClick={() => clickBlog(item)}>
-              <div key={index} onClick={() => clickBlog(item)}>
-                <Link to={`/blog/${item._id}`}>
-                  <div className="w-full m-5 flex justify-center items-center">
-                    <div className="w-80 bg-white rounded-lg transform transition-all hover:translate-y-1 duration-300 shadow-lg hover:shadow-xl">
-                      <img
-                        className="h-50 object-fit: cover; rounded-t-xl "
-                        src={item.image}
-                        alt=""
-                      />
-                      <div className="p-2 mx-2">
-                        <p className="text-[10px] md:text-[12px] font-semibold text-gray-500">
-                          {splitDate(item.dateCreated)}
-                        </p>
-                        <div className="flex justify-between items-center">
-                          <h2 className="font-bold text-lg py-1 text-textPrimary">
-                            {item.title}
-                          </h2>
-                        </div>
-                        <p className="text-sm text-gray-600">{item.subTitle}</p>
-                      </div>
-
-                      <div className="flex justify-between m-3 ">
-                        <div className="author flex justify-center items-center">
-                          <img
-                            className="w-[24px] rounded-full"
-                            src="https://static.vecteezy.com/system/resources/thumbnails/006/487/917/small_2x/man-avatar-icon-free-vector.jpg"
-                            alt="author"
-                          />
-                          <p className="text-gray-500 mx-1 font-semibold md:font-bold text-[8px] md:text-[12px]">
-                            {item.createdBy.name}
-                          </p>
-                        </div>
-                        <div className="relative flex items-center justify-center px-8 md:px-10 overflow-hidden font-semibold md:font-bold text-bgPrimary transition duration-300 ease-out border-2 border-bgPrimary rounded-full group">
-                          <Link
-                            to={`/blog/${item._id}`}
-                            className="bg-bgPrimary absolute flex items-center justify-center w-full h-full duration-300 -translate-x-full text-white group-hover:translate-x-0 ease"
-                          >
-                            <BsFillArrowRightCircleFill />
-                          </Link>
-
-                          <Link
-                            to={`/blog/${item._id}`}
-                            className="text-[8px] md:text-[12px] absolute flex items-center justify-center w-full h-full text-bgPrimary transition-all duration-300 transform group-hover:translate-x-full ease"
-                          >
-                            ReadMore
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          ))
-        )}
-      </div> */}
-
-      {/* Card List Blog */}
     </div>
   );
 }
