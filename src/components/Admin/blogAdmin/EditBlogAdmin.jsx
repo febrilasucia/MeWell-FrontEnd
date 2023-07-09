@@ -20,6 +20,8 @@ const EditBlogAdmin = () => {
     navigate(-1);
   };
 
+  console.log('content', content);
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     let data = new FormData();
@@ -42,7 +44,7 @@ const EditBlogAdmin = () => {
       const response = await axios.request(config);
       console.log(JSON.stringify(response.data));
       // Navigasi ke halaman detail blog setelah berhasil update
-      navigate(`/blog/${id}`);
+      navigate(`/admin/blog`);
     } catch (error) {
       console.log(error);
     }
@@ -60,8 +62,7 @@ const EditBlogAdmin = () => {
         setTitle(blogData.title);
         setDescription(blogData.description);
         setAuthor(blogData.author);
-        // setContent(blogData.content);
-        handleContentChange(blogData.content);
+        setContent(blogData.content);
         console.log(blogData);
       } catch (error) {
         console.log(error);
@@ -72,10 +73,10 @@ const EditBlogAdmin = () => {
   }, [id]);
 
   const handleContentChange = (value) => {
-    // Ubah URL gambar dalam konten
+    // Mengubah URL gambar dalam konten menjadi URL lengkap dari server
     const updatedContent = value.replace(
-      /src="\/images\/([a-zA-Z0-9_]+\.[a-zA-Z]{3,4})"/g,
-      'src="http://localhost:5000/images/$1"'
+      /src="(\/images\/[a-zA-Z0-9_]+\.[a-zA-Z]{3,4})"/g,
+      `src="${process.env.REACT_APP_BASE_URL}$1"`
     );
 
     setContent(updatedContent);
@@ -95,132 +96,114 @@ const EditBlogAdmin = () => {
         <div className="w-[1000px] bg-bgTri mx-auto mt-5 justify-center rounded-md shadow-sm shadow-textFunc">
           <div className="p-5">
             <div className="flex-1">
-              <div className="w-full ">
+              <div className="w-full">
                 <form onSubmit={handleUpdate} className="space-y-4">
                   <table className="w-full">
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="title"
-                          className="block text-textSec mb-1"
-                        >
-                          Judul Blog
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="text"
-                          id="title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
-                          className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="title"
-                          className="block text-textSec mb-1"
-                        >
-                          Judul Blog
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="text"
-                          id="title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
-                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="description"
-                          className="block text-textSec mb-1"
-                        >
-                          Deskripsi Singkat
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="text"
-                          id="description"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                          className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="description"
-                          className="block text-textSec mb-1"
-                        >
-                          Author
-                        </label>
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          id="author"
-                          value={author}
-                          onChange={(e) => setAuthor(e.target.value)}
-                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="content"
-                          className="block text-textSec mb-1"
-                        >
-                          Konten
-                        </label>
-                      </td>
-                      <td className="py-3">
-                        <ReactQuill
-                          value={content}
-                          onChange={handleContentChange}
-                          modules={{
-                            toolbar: [
-                              [{ header: [1, 2, false] }],
-                              ['bold', 'italic', 'underline', 'strike'],
-                              ['link', 'image'],
-                              [{ list: 'ordered' }, { list: 'bullet' }],
-                              ['blockquote', 'code-block'],
-                              [{ align: [] }],
-                              [{ indent: '-1' }, { indent: '+1' }],
-                              [{ direction: 'rtl' }],
-                              ['clean'],
-                            ],
-                          }}
-                          formats={[
-                            'header',
-                            'bold',
-                            'italic',
-                            'underline',
-                            'strike',
-                            'link',
-                            'image',
-                            'list',
-                            'bullet',
-                            'blockquote',
-                            'code-block',
-                            'align',
-                            'indent',
-                            'direction',
-                          ]}
-                          className="border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td className="py-3">
+                          <label
+                            htmlFor="title"
+                            className="block text-textSec mb-1"
+                          >
+                            Judul Blog
+                          </label>
+                        </td>
+                        <td className="">
+                          <input
+                            type="text"
+                            id="title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3">
+                          <label
+                            htmlFor="description"
+                            className="block text-textSec mb-1"
+                          >
+                            Deskripsi Singkat
+                          </label>
+                        </td>
+                        <td className="">
+                          <input
+                            type="text"
+                            id="description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3">
+                          <label
+                            htmlFor="author"
+                            className="block text-textSec mb-1"
+                          >
+                            Author
+                          </label>
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            id="author"
+                            value={author}
+                            onChange={(e) => setAuthor(e.target.value)}
+                            className="w-full py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3">
+                          <label
+                            htmlFor="content"
+                            className="block text-textSec mb-1"
+                          >
+                            Konten
+                          </label>
+                        </td>
+                        <td className="py-3">
+                          <ReactQuill
+                            value={content}
+                            onChange={handleContentChange}
+                            modules={{
+                              toolbar: [
+                                [{ header: [1, 2, false] }],
+                                ['bold', 'italic', 'underline', 'strike'],
+                                ['link', 'image'],
+                                [{ list: 'ordered' }, { list: 'bullet' }],
+                                ['blockquote', 'code-block'],
+                                [{ align: [] }],
+                                [{ indent: '-1' }, { indent: '+1' }],
+                                [{ direction: 'rtl' }],
+                                ['clean'],
+                              ],
+                            }}
+                            formats={[
+                              'header',
+                              'bold',
+                              'italic',
+                              'underline',
+                              'strike',
+                              'link',
+                              'image',
+                              'list',
+                              'bullet',
+                              'blockquote',
+                              'code-block',
+                              'align',
+                              'indent',
+                              'direction',
+                            ]}
+                            className="border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                   <div
                     style={{
