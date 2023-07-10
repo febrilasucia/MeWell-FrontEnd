@@ -67,8 +67,9 @@ const CreateBlogAdmin = () => {
         console.log(error);
       }
     }
-
     makeRequest();
+
+    navigate('/admin/blog')
   };
 
   return (
