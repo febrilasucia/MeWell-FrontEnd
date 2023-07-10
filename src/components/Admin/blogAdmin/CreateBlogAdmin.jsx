@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import Sidebar from '../Sidebar';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import Sidebar from "../Sidebar";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CreateBlogAdmin = () => {
-  const [activePage, setActivePage] = useState('Blog');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [author, setAuthor] = useState('');
-  const [content, setContent] = useState('');
+  const [activePage, setActivePage] = useState("Blog");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
   const navigate = useNavigate();
+  
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -27,13 +29,28 @@ const CreateBlogAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = new FormData();
-    data.append('title', title);
-    data.append('description', description);
-    data.append('author', author);
-    data.append('content', content);
+    data.append("title", title);
+    data.append("description", description);
+    data.append("author", author);
+    data.append("content", content);
+
+    try {
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Data berhasil disimpan.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }); 
+      
+      setTimeout(() => {
+        navigate("/admin/blog");
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
 
     let config = {
-      method: 'post',
+      method: "post",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/blog`,
       headers: {
@@ -56,6 +73,7 @@ const CreateBlogAdmin = () => {
 
   return (
     <div className="flex">
+      
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
@@ -145,55 +163,55 @@ const CreateBlogAdmin = () => {
                           modules={{
                             toolbar: [
                               [{ header: [1, 2, false] }],
-                              ['bold', 'italic', 'underline', 'strike'],
-                              ['link', 'image'],
-                              [{ list: 'ordered' }, { list: 'bullet' }],
-                              ['blockquote', 'code-block'],
+                              ["bold", "italic", "underline", "strike"],
+                              ["link", "image"],
+                              [{ list: "ordered" }, { list: "bullet" }],
+                              ["blockquote", "code-block"],
                               [{ align: [] }],
-                              [{ indent: '-1' }, { indent: '+1' }],
-                              [{ direction: 'rtl' }],
-                              ['clean'],
+                              [{ indent: "-1" }, { indent: "+1" }],
+                              [{ direction: "rtl" }],
+                              ["clean"],
                             ],
                           }}
                           formats={[
-                            'header',
-                            'bold',
-                            'italic',
-                            'underline',
-                            'strike',
-                            'link',
-                            'image',
-                            'list',
-                            'bullet',
-                            'blockquote',
-                            'code-block',
-                            'align',
-                            'indent',
-                            'direction',
+                            "header",
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strike",
+                            "link",
+                            "image",
+                            "list",
+                            "bullet",
+                            "blockquote",
+                            "code-block",
+                            "align",
+                            "indent",
+                            "direction",
                           ]}
-                          className="border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          className="h-[200px] border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
                   </table>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      position: 'relative',
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      position: "relative",
                     }}
                     className="p-5 flex flex-wrap gap-2"
                   >
                     <button
                       type="button"
-                      className="w-[100px] px-4 py-2 bg-bgFunc text-white rounded-md hover:bg-bgFunc3 focus:outline-none focus:ring focus:ring-gray-300"
+                      className="w-[100px] px-4 py-2 mt-2 bg-bgFunc text-white rounded-md hover:bg-bgFunc3 focus:outline-none focus:ring focus:ring-gray-300"
                       onClick={handleGoBack}
                     >
                       Batal
                     </button>
                     <button
                       type="submit"
-                      className="w-[100px] px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring focus:ring-blue-300"
+                      className="w-[100px] px-4 py-2 mt-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring focus:ring-blue-300"
                     >
                       Simpan
                     </button>

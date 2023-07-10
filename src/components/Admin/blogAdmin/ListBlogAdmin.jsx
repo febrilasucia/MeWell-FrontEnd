@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import Sidebar from '../Sidebar';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import Sidebar from "../Sidebar";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function ListBlogAdmin() {
-  const [activePage, setActivePage] = useState('Blog');
+  const [activePage, setActivePage] = useState("Blog");
   const [blogs, setBlogs] = useState([]);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchBlogs = async () => {
       let config = {
-        method: 'get',
+        method: "get",
         maxBodyLength: Infinity,
         url: `${process.env.REACT_APP_BASE_URL}/blog`,
         headers: {
@@ -34,19 +35,39 @@ function ListBlogAdmin() {
     console.log(_id);
     try {
       const config = {
-        method: 'delete',
+        method: "delete",
         url: `${process.env.REACT_APP_BASE_URL}/blog/${_id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-      await axios.request(config);
-      // Setelah berhasil menghapus blog, perbarui state blogs
-      setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog._id !== _id));
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // Jika user memilih untuk menghapus
+          await axios.request(config);
+          // Setelah berhasil menghapus blog, perbarui state blogs
+          setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog._id !== _id));
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Jika user membatalkan penghapusan
+          Swal.fire("Cancelled", "Your file is safe :)", "error");
+        }
+      });
     } catch (error) {
       console.log(error);
     }
   };
+
 
   return (
     <div className="flex">
@@ -68,7 +89,7 @@ function ListBlogAdmin() {
                 id="addBlog"
                 className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 "
                 type="button"
-                to={'/admin/blog/create-blog'}
+                to={"/admin/blog/create-blog"}
               >
                 Tambah
               </Link>
@@ -122,14 +143,8 @@ function ListBlogAdmin() {
                 </thead>
                 <tbody>
                   {blogs.map((blog, index) => (
-                    <tr
-                      key={blog._id}
-                      className="bg-white border-b "
-                    >
-                      <tdgu
-                        scope="row"
-                        className="px-6 py-4 text-center "
-                      >
+                    <tr key={blog._id} className="bg-white border-b ">
+                      <tdgu scope="row" className="px-6 py-4 text-center ">
                         {index + 1}
                       </tdgu>
                       <td className="px-6 py-4">{blog.title}</td>
