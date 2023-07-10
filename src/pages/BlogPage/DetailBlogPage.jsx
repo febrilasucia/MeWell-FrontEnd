@@ -1,18 +1,20 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { splitDate } from "../../util/Helper";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import dayjs from "dayjs";
-import "dayjs/locale/id";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { splitDate } from '../../util/Helper';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import dayjs from 'dayjs';
+import 'dayjs/locale/id';
+import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
 
 function DetailBlogPage() {
   const { id } = useParams();
   const [isLoading, setisLoading] = useState(true);
   const [blog, setBlog] = useState([]);
-  const [dateCreated, setDateCreated] = useState("");
-  const [name, setName] = useState("");
+  const [dateCreated, setDateCreated] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     getBlogsById(id);
@@ -32,12 +34,12 @@ function DetailBlogPage() {
 
   const replaceImageSrc = (content) => {
     if (!content) {
-      return "";
+      return '';
     }
 
     const regex = /<img[^>]+src="([^">]+)"/g;
     const replacedContent = content.replace(regex, (match, src) => {
-      if (src.startsWith("/images")) {
+      if (src.startsWith('/images')) {
         return match.replace(src, `${process.env.REACT_APP_BASE_URL}${src}`);
       }
       return match;
@@ -56,17 +58,17 @@ function DetailBlogPage() {
           <h1 className=" text-2xl sm:text-4xl font-bold text-textSec text-center">
             {blog.title}
           </h1>
-            <p className="font-semibold text-lg text-[#71717a] text-center">
-              Author: {blog.author}
-            </p>
-            <p className="justify font-semibold text-lg text-[#71717a] text-center">
-              Updated at:{" "}
-              {dayjs(blog.UpdatedAt).locale("id").format("dddd, DD MMMM YYYY")}
-            </p>
-
-          <div
-            className="text-sizeParagraph text-textSec mt-5"
-            dangerouslySetInnerHTML={{ __html: replacedContent }}
+          <p className="font-semibold text-lg text-[#71717a] text-center">
+            Author: {blog.author}
+          </p>
+          <p className="justify font-semibold text-lg text-[#71717a] text-center">
+            Updated at:{' '}
+            {dayjs(blog.UpdatedAt).locale('id').format('dddd, DD MMMM YYYY')}
+          </p>
+          <ReactQuill
+            value={replacedContent}
+            readOnly={true}
+            theme={'bubble'}
           />
           <style>
             {`
@@ -89,3 +91,4 @@ function DetailBlogPage() {
 }
 
 export default DetailBlogPage;
+
