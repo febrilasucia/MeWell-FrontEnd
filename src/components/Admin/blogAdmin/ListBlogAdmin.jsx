@@ -68,7 +68,6 @@ function ListBlogAdmin() {
     }
   };
 
-
   return (
     <div className="flex">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
@@ -144,9 +143,9 @@ function ListBlogAdmin() {
                 <tbody>
                   {blogs.map((blog, index) => (
                     <tr key={blog._id} className="bg-white border-b ">
-                      <tdgu scope="row" className="px-6 py-4 text-center ">
+                      <td scope="row" className="px-6 py-4 text-center ">
                         {index + 1}
-                      </tdgu>
+                      </td>
                       <td className="px-6 py-4">{blog.title}</td>
                       <td className="px-6 py-4">{blog.description}</td>
                       <td className="px-6 py-4 flex gap-3">
