@@ -14,15 +14,6 @@ function ListBlog() {
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
 
-  // const searchBlog = (e) => {
-  //   e.preventDefault();
-  //   axios(`${import.meta.env.VITE_BASE_URL}/blog?title=${searching}`).then(
-  //     (res) => {
-  //       setBlogs(res.data);
-  //     }
-  //   );
-  // };
-
   useEffect(() => {
     window.scrollTo(0, 0);
     getBlogs();

@@ -83,7 +83,7 @@ function App() {
           <Route path="/admin/blog/:id/edit" element={<EditBlogAdminPage />} />
           <Route path="/admin/video" element={<ListVideoAdminPage />} />
           <Route path="/admin/video/create-video" element={<CreateVideoAdminPage />}/>
-          <Route path="/admin/video/edit-video" element={<EditVideoAdminPage />} />
+          <Route path="/admin/video/:id/edit" element={<EditVideoAdminPage />} />
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
       )}

@@ -53,13 +53,10 @@ function ListBlogAdmin() {
         cancelButtonText: "Cancel",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          // Jika user memilih untuk menghapus
           await axios.request(config);
-          // Setelah berhasil menghapus blog, perbarui state blogs
           setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog._id !== _id));
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          // Jika user membatalkan penghapusan
           Swal.fire("Cancelled", "Your file is safe :)", "error");
         }
       });
@@ -71,15 +68,11 @@ function ListBlogAdmin() {
   return (
     <div className="flex">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
-      {/* Content */}
       <div className="w-[1000px] mx-auto mt-10 justify-center">
-        {/* judul */}
         <div>
           <h1 className="text-sizeTri text-textSec font-bold">Blog</h1>
           <p className="my-3 text-textFunc">Dashboard / Blog</p>
         </div>
-        {/* judul */}
-        {/* content */}
 
         <div className="w-[1000px] bg-bgTri mx-auto mt-5 justify-center rounded-md shadow-sm shadow-textFunc">
           <div className="flex items-center justify-between px-5 pt-5">
@@ -161,10 +154,7 @@ function ListBlogAdmin() {
             </div>
           </div>
         </div>
-        {/* content */}
       </div>
-
-      {/* Content */}
     </div>
   );
 }

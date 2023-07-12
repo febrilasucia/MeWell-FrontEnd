@@ -13,8 +13,6 @@ const CreateBlogAdmin = () => {
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
-  
-
   const token = localStorage.getItem("token");
 
   const handleGoBack = () => {
@@ -40,11 +38,11 @@ const CreateBlogAdmin = () => {
         text: "Data berhasil disimpan.",
         icon: "success",
         confirmButtonText: "OK",
-      }); 
-      
+      });
+
       setTimeout(() => {
         navigate("/admin/blog");
-      }, 1000);
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -69,12 +67,11 @@ const CreateBlogAdmin = () => {
     }
     makeRequest();
 
-    navigate('/admin/blog')
+    navigate("/admin/blog");
   };
 
   return (
     <div className="flex">
-      
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}

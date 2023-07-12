@@ -1,14 +1,38 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import HeaderVideo from '../../image/list-video.png'
-import HeaderVideo2 from '../../image/list-video2.png'
-import ListVideo1 from "../../image2/27.png";
+import HeaderVideo from "../../image/list-video.png";
+import HeaderVideo2 from "../../image/list-video2.png";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import "dayjs/locale/id";
 
 function ListVideo() {
+  const navigate = useNavigate();
   const [searching, setSearching] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [blogs, setVideos] = useState([]);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getVideos();
+  }, []);
+
+  const getVideos = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/video`
+      );
+      setVideos(response.data.video);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(videos);
+
+  const handleClick = (id) => {
+    navigate(`/video/${id}`);
+  };
   const searchVideo = (e) => {
     e.preventDefault();
     axios(`${import.meta.env.VITE_BASE_URL}/blog?title=${searching}`).then(
@@ -73,62 +97,41 @@ function ListVideo() {
 
       {/* Card List Video */}
       <div className="flex flex-wrap justify-center mt-10">
-        <div class="max-w-sm m-5 bg-white hover:bg-[#f1f1f1] border border-gray-200 rounded-lg shadow">
-          <a href="#">
-            <img class="rounded-t-lg" src={ListVideo1} alt="" />
-          </a>
-          <div class="p-5">
-            <a href="#">
-              <h5 class="mb-2 text-sizePri font-bold text-textSec">Judul</h5>
-            </a>
-            <p class="mb-3  text-textFunc">
-              Here are the biggest enterprise technology acquisitions of 2021 so
-              far, in reverse chronological order.
-            </p>
+        {videos.map((video) => (
+          <div
+            key={video._id}
+            onClick={() => handleClick(video._id)}
+            className="max-w-sm m-5 bg-white hover:border shadow-sm hover:border-gray-200 rounded-lg cursor-pointer"
+          >
+            <iframe
+              width="380"
+              src={`https://www.youtube.com/embed/${video.videoLink}`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+            <div className="rounded p-6">
+              <h1 className="text-xl font-bold text-textSec">{video.title}</h1>
+              <p className="text-gray-500 text-sizeParagraph"></p>
+              <p className="text-gray-500 text-sizeParagraph">
+                {dayjs(video.UpdatedAt)
+                  .locale("id")
+                  .format("dddd, DD MMMM YYYY")}
+              </p>
+              <div className="text-sizeParagraph text-textFunc">
+                {video.description}
+              </div>
+
+              <div className="flex items-center justify-between mt-2">
+                <p className="text-gray-500 text-sizeParagraph"></p>
+                <p className="text-gray-500 text-sizeParagraph">
+                  {video.author}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="max-w-sm m-5 bg-white hover:bg-[#f1f1f1] border border-gray-200 rounded-lg shadow">
-          <a href="#">
-            <img class="rounded-t-lg" src={ListVideo1} alt="" />
-          </a>
-          <div class="p-5">
-            <a href="#">
-              <h5 class="mb-2 text-sizePri font-bold text-textSec">Judul</h5>
-            </a>
-            <p class="mb-3  text-textFunc">
-              Here are the biggest enterprise technology acquisitions of 2021 so
-              far, in reverse chronological order.
-            </p>
-          </div>
-        </div>
-        <div class="max-w-sm m-5 bg-white hover:bg-[#f1f1f1] border border-gray-200 rounded-lg shadow">
-          <a href="#">
-            <img class="rounded-t-lg" src={ListVideo1} alt="" />
-          </a>
-          <div class="p-5">
-            <a href="#">
-              <h5 class="mb-2 text-sizePri font-bold text-textSec">Judul</h5>
-            </a>
-            <p class="mb-3  text-textFunc">
-              Here are the biggest enterprise technology acquisitions of 2021 so
-              far, in reverse chronological order.
-            </p>
-          </div>
-        </div>
-        <div class="max-w-sm m-5 bg-white hover:bg-[#f1f1f1] border border-gray-200 rounded-lg shadow">
-          <a href="#">
-            <img class="rounded-t-lg" src={ListVideo1} alt="" />
-          </a>
-          <div class="p-5">
-            <a href="#">
-              <h5 class="mb-2 text-sizePri font-bold text-textSec">Judul</h5>
-            </a>
-            <p class="mb-3  text-textFunc">
-              Here are the biggest enterprise technology acquisitions of 2021 so
-              far, in reverse chronological order.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
       {/* Card List Video */}
     </div>
