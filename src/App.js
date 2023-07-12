@@ -76,9 +76,8 @@ function App() {
           <Route path="/admin/blog" element={<ListBlogAdminPage />} />
           <Route path="/admin/video" element={<ListVideoAdminPage />} />
           <Route path="/admin/konsul" element={<ListKonsulAdminPage />} />
-          <Route path="/admin/konsul/detail-konsul" element={<DetailKonsulAdminPage />}/>
-          <Route path="/admin/konsul/edit-konsul" element={<EditKonsulAdminPage />}/>
-          <Route path="/admin/konsul/create-konsul" element={<CreateKonsulAdminPage />}/>
+          <Route path="/admin/konsul/detail" element={<DetailKonsulAdminPage />}/>
+          <Route path="/admin/konsul/edit" element={<EditKonsulAdminPage />}/>
           <Route path="/admin/blog/create-blog" element={<CreateBlogAdminPage />}/>
           <Route path="/admin/blog/:id/edit" element={<EditBlogAdminPage />} />
           <Route path="/admin/video" element={<ListVideoAdminPage />} />

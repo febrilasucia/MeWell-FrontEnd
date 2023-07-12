@@ -100,6 +100,7 @@ const CreateVideoAdmin = () => {
                           value={title}
                           onChange={(e) => setTitle(e.target.value)}
                           className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          required
                         />
                       </td>
                     </tr>
