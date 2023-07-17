@@ -1,21 +1,24 @@
 import React, { useContext, useState } from 'react';
 import control from './assets/control.png';
 import logo from './assets/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoHori from '../../image/logo-tulisan-lentera2.png';
 import LogoMandeh from '../../image/logo-mandeh.png';
 import {
   FaBookReader,
   FaHome,
+  FaSignOutAlt,
   FaUserMd,
   FaUsers,
   FaVideo,
 } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpen } from '../../features/sidebarSlice';
+import { logout } from '../../features/authSlice';
 
 const Sidebar = ({ activePage, setActivePage }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { open } = useSelector((state) => state.sidebar);
 
   const Menus = [
@@ -29,6 +32,11 @@ const Sidebar = ({ activePage, setActivePage }) => {
   const handleMenuClick = (title) => {
     setActivePage(title);
     console.log(activePage);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout()); // Langkah 5: Panggil aksi logout saat tombol logout diklik
+    navigate('/');
   };
 
   return (
@@ -45,7 +53,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
           border-2 rounded-full  ${!open && 'rotate-180'}`}
           onClick={() => dispatch(setOpen(!open))}
         />
-        <div className="flex gap-x-4 items-center">
+        <Link to={'/'} className="flex gap-x-4 items-center">
           <img
             src={LogoMandeh}
             alt="LogoMandeh"
@@ -60,7 +68,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
               !open && 'scale-0'
             }`}
           />
-        </div>
+        </Link>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
             <Link to={Menu.link} key={index}>
@@ -84,6 +92,20 @@ const Sidebar = ({ activePage, setActivePage }) => {
               </li>
             </Link>
           ))}
+          {/* Tombol Logout */}
+          <li
+            className={`flex rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-md items-center gap-x-4 mt-9 ${
+              activePage === 'Logout' ? 'bg-bgOpt text-textOpt' : 'text-textSec'
+            }`}
+            onClick={() => handleLogout()} // Langkah 6: Panggil handler logout saat tombol logout diklik
+          >
+            <p className="text-center">
+              <FaSignOutAlt />
+            </p>
+            <span className={`${!open && 'hidden'} origin-left duration-200`}>
+              Logout
+            </span>
+          </li>
         </ul>
       </div>
     </div>
