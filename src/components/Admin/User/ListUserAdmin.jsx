@@ -17,23 +17,26 @@ function ListUserAdmin() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/users/`,
+      url: `${process.env.REACT_APP_BASE_URL}/user/`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
 
     try {
       const response = await axios.request(config);
-      setUsers(response.data.user);
-      console.log(response);
-      console.log(JSON.stringify(response.data));
+      setUsers(response.data);
+      console.log("ini respons",response);
+      console.log("ini json data", JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(users);
+  console.log("ini data users", users);
 
   const deleteUser = async (_id) => {
-    console.log(_id);
+    console.log("ini id", _id);
     try {
       const config = {
         method: "delete",
@@ -55,9 +58,7 @@ function ListUserAdmin() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axios.request(config);
-          setUsers((prevVideos) =>
-            prevVideos.filter((video) => video._id !== _id)
-          );
+          setUsers((prevUsers) => prevUsers.filter((user) => user._id !== _id));
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Cancelled", "Your file is safe :)", "error");

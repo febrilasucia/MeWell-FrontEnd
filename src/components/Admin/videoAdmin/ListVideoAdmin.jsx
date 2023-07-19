@@ -30,7 +30,7 @@ function ListVideoAdmin() {
     }
   };
 
-  console.log(videos);
+  console.log("ini data video",videos);
 
   const deleteVideo = async (_id) => {
     console.log(_id);
