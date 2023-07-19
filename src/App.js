@@ -13,7 +13,8 @@ import ListTes from './pages/TesPsikologiPage/ListTesPsikologi';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DashboardAdminPage from './pages/Admin/DashboardAdminPage';
-import DashboardUserPage from './pages/DashboardUserPage';
+import DashboardUserPage from "./pages/DashboardUserPage";
+import ProfilePage from './pages/ProfilePage';
 //konsul
 import DetailKonsultasiPage from "./pages/KonsultasiPage/DetailKonsultasiPage";
 import FormKonsultasiPage from "./components/Konsultasi/FormKonsultasi";
@@ -35,6 +36,11 @@ import ListBlogAdminPage from './pages/Admin/blogAdminPage/ListBlogAdminPage';
 import EditBlogAdminPage from './pages/Admin/blogAdminPage/EditBlogAdminPage';
 import CreateBlogAdminPage from './pages/Admin/blogAdminPage/CreateBlogAdminPage';
 import BlogIcon from './components/Admin/assets/BlogIcon';
+// user
+import ListUserAdminPage from './pages/Admin/userAdminPage/ListUserAdminPage'
+import EditUserAdminPage from './pages/Admin/userAdminPage/EditUserAdminPage'
+import CreateUserAdminPage from './pages/Admin/userAdminPage/CreateUserAdminPage'
+import DetailUserAdminPage from './pages/Admin/userAdminPage/DetailUserAdminPage'
 
 
 function App() {
@@ -61,6 +67,7 @@ function App() {
 
           {/* user */}
           <Route path="/dashboard" element={<DashboardUserPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/blog" element={<ListBlogPage />} />
           <Route path="/blog/:id" element={<DetailBlogPage />} />
           <Route path="/video" element={<ListVideo />} />
@@ -76,13 +83,17 @@ function App() {
           <Route path="/admin/blog" element={<ListBlogAdminPage />} />
           <Route path="/admin/video" element={<ListVideoAdminPage />} />
           <Route path="/admin/konsul" element={<ListKonsulAdminPage />} />
-          <Route path="/admin/konsul/detail" element={<DetailKonsulAdminPage />}/>
-          <Route path="/admin/konsul/edit" element={<EditKonsulAdminPage />}/>
+          <Route path="/admin/konsul/:id/detail" element={<DetailKonsulAdminPage />}/>
+          <Route path="/admin/konsul/:id/edit" element={<EditKonsulAdminPage />}/>
           <Route path="/admin/blog/create-blog" element={<CreateBlogAdminPage />}/>
           <Route path="/admin/blog/:id/edit" element={<EditBlogAdminPage />} />
           <Route path="/admin/video" element={<ListVideoAdminPage />} />
           <Route path="/admin/video/create-video" element={<CreateVideoAdminPage />}/>
           <Route path="/admin/video/:id/edit" element={<EditVideoAdminPage />} />
+          <Route path="/admin/user" element={<ListUserAdminPage />} />
+          <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
+          <Route path="/admin/user/create-user" element={<CreateUserAdminPage />} />
+          <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
       )}

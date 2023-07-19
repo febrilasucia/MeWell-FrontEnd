@@ -4,25 +4,25 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-function ListKonsulAdmin() {
-  const [activePage, setActivePage] = useState("Konsultasi");
-  const [konsuls, setKonsuls] = useState([]);
+function ListUserAdmin() {
+  const [activePage, setActivePage] = useState("User");
+  const [users, setUsers] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetchKonsuls();
+    fetchUsers();
   }, []);
 
-  const fetchKonsuls = async () => {
+  const fetchUsers = async () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/konsul/`,
+      url: `${process.env.REACT_APP_BASE_URL}/users/`,
     };
 
     try {
       const response = await axios.request(config);
-      setKonsuls(response.data.konsul);
+      setUsers(response.data.user);
       console.log(response);
       console.log(JSON.stringify(response.data));
     } catch (error) {
@@ -30,14 +30,14 @@ function ListKonsulAdmin() {
     }
   };
 
-  console.log(konsuls);
+  console.log(users);
 
-  const deleteKonsul = async (_id) => {
+  const deleteUser = async (_id) => {
     console.log(_id);
     try {
       const config = {
         method: "delete",
-        url: `${process.env.REACT_APP_BASE_URL}/konsul/${_id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/user/${_id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -55,8 +55,8 @@ function ListKonsulAdmin() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axios.request(config);
-          setKonsuls((prevKonsuls) =>
-            prevKonsuls.filter((konsul) => konsul._id !== _id)
+          setUsers((prevVideos) =>
+            prevVideos.filter((video) => video._id !== _id)
           );
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -75,8 +75,8 @@ function ListKonsulAdmin() {
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>
-          <h1 className="text-sizeTri text-textSec font-bold">Konsultasi</h1>
-          <p className="my-3 text-textFunc">Dashboard / Konsultasi </p>
+          <h1 className="text-sizeTri text-textSec font-bold">User</h1>
+          <p className="my-3 text-textFunc">Dashboard / User</p>
         </div>
         {/* judul */}
         {/* content */}
@@ -85,10 +85,10 @@ function ListKonsulAdmin() {
           <div className="flex items-center justify-between px-5 pt-5">
             <div>
               <Link
-                id="addBlog"
+                id="addUser"
                 className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 "
                 type="button"
-                to={"/konsultasi/form-konsultasi"}
+                to={"/admin/user/create-user"}
               >
                 Tambah
               </Link>
@@ -116,30 +116,24 @@ function ListKonsulAdmin() {
               <input
                 type="text"
                 id="table-search"
-                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="Search items"
               />
             </div>
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">
-              <table className="w-full text-sm text-left text-gray-500">
+              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className=" text-textOpt  bg-bgFunc3 text-center">
                   <tr>
                     <th scope="col" className="px-6 py-3">
                       No
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nama Pasien
+                      Nama
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nomor Telepon
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Kategori
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Via Konsul
+                      Email
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Aksi
@@ -147,44 +141,16 @@ function ListKonsulAdmin() {
                   </tr>
                 </thead>
                 <tbody>
-                  {konsuls.map((konsul, index) => (
-                    <tr key={konsul._id} className="bg-white border-b ">
-                      <td
-                        scope="row"
-                        className="px-6 py-4 text-center whitespace-nowrap"
-                      >
+                  {users.map((user, index) => (
+                    <tr key={user._id} className="bg-white border-b ">
+                      <th scope="row" className="px-6 py-4 text-center">
                         {index + 1}
-                      </td>
-                      <td className="px-6 py-4">{konsul.nama_pasien}</td>
-                      <td className="px-6 py-4 text-center hover:text-bgOpt">
-                        <a href={`https://wa.me/${konsul.no_wa}`}>
-                          {konsul.no_wa}
-                        </a>
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {" "}
-                        {konsul.kategori_pasien}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        {" "}
-                        {konsul.via_konsul}
-                      </td>
-                      <td className="px-6 py-4 flex gap-3 ">
-                        <Link
-                          className="hover:text-bgFunc3"
-                          to={`/admin/konsul/${konsul._id}/detail`}
-                        >
-                          {" "}
-                          Detail
-                        </Link>
-                        <Link
-                          className="hover:text-bgFunc3"
-                          to={`/admin/konsul/${konsul._id}/edit`}
-                        >
-                          {" "}
-                          Edit
-                        </Link>
-                        <button onClick={() => deleteKonsul(konsul._id)}>
+                      </th>
+                      <td className="px-6 py-4">{user.name}</td>
+                      <td className="px-6 py-4">{user.email}</td>
+                      <td className="px-6 py-4 flex gap-3">
+                        <Link to={`/admin/user/${user._id}/edit`}>Edit </Link>
+                        <button onClick={() => deleteUser(user._id)}>
                           Delete
                         </button>
                       </td>
@@ -203,4 +169,4 @@ function ListKonsulAdmin() {
   );
 }
 
-export default ListKonsulAdmin;
+export default ListUserAdmin;

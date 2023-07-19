@@ -34,6 +34,7 @@ function ListBlog() {
   const handleClick = (id) => {
     navigate(`/blog/${id}`);
   };
+
   return (
     <div className="bg-bgSec">
       {/* Header List Blog */}
@@ -107,8 +108,8 @@ function ListBlog() {
                   .locale("id")
                   .format("dddd, DD MMMM YYYY")}
               </p>
-              <div className="text-sizeParagraph text-textFunc">
-                {blog.description}
+              <div className="max-w-xs text-sizeParagraph text-textFunc">
+                <p className="truncate overflow-hidden">{blog.description}</p>
               </div>
 
               <div className="flex items-center justify-between mt-2">

@@ -21,7 +21,6 @@ const EditBlogAdmin = () => {
     navigate(-1);
   };
 
-  console.log("content", content);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
