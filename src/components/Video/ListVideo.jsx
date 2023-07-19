@@ -33,9 +33,10 @@ function ListVideo() {
   const handleClick = (id) => {
     navigate(`/video/${id}`);
   };
+
   const searchVideo = (e) => {
     e.preventDefault();
-    axios(`${import.meta.env.VITE_BASE_URL}/blog?title=${searching}`).then(
+    axios(`${import.meta.env.VITE_BASE_URL}/video?title=${searching}`).then(
       (res) => {
         setVideos(res.data);
       }
@@ -119,8 +120,8 @@ function ListVideo() {
                   .locale("id")
                   .format("dddd, DD MMMM YYYY")}
               </p>
-              <div className="text-sizeParagraph text-textFunc">
-                {video.description}
+              <div className="max-w-xs text-sizeParagraph text-textFunc">
+                <p className="truncate overflow-hidden">{video.description}</p>
               </div>
 
               <div className="flex items-center justify-between mt-2">

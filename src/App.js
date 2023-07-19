@@ -36,6 +36,11 @@ import ListBlogAdminPage from './pages/Admin/blogAdminPage/ListBlogAdminPage';
 import EditBlogAdminPage from './pages/Admin/blogAdminPage/EditBlogAdminPage';
 import CreateBlogAdminPage from './pages/Admin/blogAdminPage/CreateBlogAdminPage';
 import BlogIcon from './components/Admin/assets/BlogIcon';
+// user
+import ListUserAdminPage from './pages/Admin/userAdminPage/ListUserAdminPage'
+import EditUserAdminPage from './pages/Admin/userAdminPage/EditUserAdminPage'
+import CreateUserAdminPage from './pages/Admin/userAdminPage/CreateUserAdminPage'
+import DetailUserAdminPage from './pages/Admin/userAdminPage/DetailUserAdminPage'
 import UserDashboardGuard from './pages/UserDashboardGuard';
 import AdminDashboardGuard from './pages/Admin/AdminDashboardGuard';
 
@@ -82,13 +87,17 @@ function App() {
           <Route path="/admin/blog" element={<AdminDashboardGuard><ListBlogAdminPage /></AdminDashboardGuard>}/>
           <Route path="/admin/video" element={<AdminDashboardGuard><ListVideoAdminPage /></AdminDashboardGuard>} />
           <Route path="/admin/konsul" element={<AdminDashboardGuard><ListKonsulAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/konsul/detail" element={<AdminDashboardGuard><DetailKonsulAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/konsul/edit" element={<EditKonsulAdminPage />} />
+          <Route path="/admin/konsul/:id/detail" element={<AdminDashboardGuard><DetailKonsulAdminPage /></AdminDashboardGuard>} />
+          <Route path="/admin/konsul/:id/edit" element={<EditKonsulAdminPage />} />
           <Route path="/admin/blog/create-blog" element={<AdminDashboardGuard><CreateBlogAdminPage /></AdminDashboardGuard>} />
           <Route path="/admin/blog/:id/edit" element={<AdminDashboardGuard><EditBlogAdminPage /></AdminDashboardGuard>} />
           <Route path="/admin/video" element={<AdminDashboardGuard><ListVideoAdminPage /></AdminDashboardGuard>} />
           <Route path="/admin/video/create-video" element={<AdminDashboardGuard><CreateVideoAdminPage /></AdminDashboardGuard>}/>
           <Route path="/admin/video/:id/edit" element={<AdminDashboardGuard><EditVideoAdminPage /></AdminDashboardGuard>} />
+          <Route path="/admin/user" element={<ListUserAdminPage />} />
+          <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
+          <Route path="/admin/user/create-user" element={<CreateUserAdminPage />} />
+          <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
       )}

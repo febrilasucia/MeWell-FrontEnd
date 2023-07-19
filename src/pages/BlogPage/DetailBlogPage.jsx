@@ -11,15 +11,12 @@ import ReactQuill from 'react-quill';
 
 function DetailBlogPage() {
   const { id } = useParams();
-  const [isLoading, setisLoading] = useState(true);
   const [blog, setBlog] = useState([]);
   const [dateCreated, setDateCreated] = useState('');
   const [name, setName] = useState('');
 
   useEffect(() => {
     getBlogsById(id);
-    // getContent(id);
-    setisLoading(false);
     window.scrollTo(0, 0);
   }, []);
 
