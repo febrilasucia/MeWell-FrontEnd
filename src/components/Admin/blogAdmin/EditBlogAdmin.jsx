@@ -1,37 +1,41 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import Sidebar from "../Sidebar";
-import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import Sidebar from '../Sidebar';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const EditBlogAdmin = () => {
-  const [activePage, setActivePage] = useState("Blog");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
+  const [activePage, setActivePage] = useState('Blog');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [author, setAuthor] = useState('');
+  const [content, setContent] = useState('');
+  const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState(null);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
+  console.log('content', content);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     let data = new FormData();
-    data.append("title", title);
-    data.append("description", description);
-    data.append("author", author);
-    data.append("content", content);
+    data.append('title', title);
+    data.append('description', description);
+    data.append('author', author);
+    data.append('content', content);
 
     let config = {
-      method: "patch",
+      method: 'patch',
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/blog/${id}`,
       headers: {
@@ -44,21 +48,20 @@ const EditBlogAdmin = () => {
       const response = await axios.request(config);
       console.log(JSON.stringify(response.data));
       // Navigasi ke halaman detail blog setelah berhasil update
-      
 
       Swal.fire({
-        title: "Do you want to save the changes?",
+        title: 'Do you want to save the changes?',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: "Save",
+        confirmButtonText: 'Save',
         denyButtonText: `Don't save`,
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           navigate(`/admin/blog`);
-          Swal.fire("Saved!", "", "success");
+          Swal.fire('Saved!', '', 'success');
         } else if (result.isDenied) {
-          Swal.fire("Changes are not saved", "", "info");
+          Swal.fire('Changes are not saved', '', 'info');
         }
       });
     } catch (error) {
@@ -69,7 +72,7 @@ const EditBlogAdmin = () => {
   useEffect(() => {
     // Fetch data blog yang akan diupdate
     const fetchBlog = async () => {
-      console.log("fetch blog running");
+      console.log('fetch blog running');
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/blog/${id}`
@@ -79,7 +82,7 @@ const EditBlogAdmin = () => {
         setDescription(blogData.description);
         setAuthor(blogData.author);
         setContent(blogData.content);
-        console.log(blogData);
+        setThumbnail(blogData.thumbnail || null);
       } catch (error) {
         console.log(error);
       }
@@ -96,6 +99,48 @@ const EditBlogAdmin = () => {
     );
 
     setContent(updatedContent);
+  };
+
+  const handleThumbnailChange = (e) => {
+    const file = e.target.files[0];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+
+    if (file.size > maxSize) {
+      Swal.fire({
+        title: 'Ukuran Gambar Terlalu Besar',
+        text: 'Ukuran gambar tidak boleh melebihi 2MB.',
+        icon: 'error',
+      });
+      setThumbnail(null); // Reset the selected thumbnail
+      setThumbnailPreview(null); // Reset the thumbnail preview
+      return;
+    }
+
+    setThumbnail(file);
+
+    // Create a preview of the thumbnail
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setThumbnailPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+
+    // Check image dimensions before uploading
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      const width = img.width;
+      const height = img.height;
+      if (width !== 1080 || height !== 716) {
+        Swal.fire({
+          title: 'Ukuran Gambar Salah',
+          text: 'Ukuran gambar harus 1080x716 pixel.',
+          icon: 'error',
+        });
+        setThumbnail(null); // Reset the selected thumbnail
+        setThumbnailPreview(null); // Reset the thumbnail preview
+      }
+    };
   };
 
   return (
@@ -175,6 +220,42 @@ const EditBlogAdmin = () => {
                     <tr>
                       <td className="py-3">
                         <label
+                          htmlFor="thumbnail"
+                          className="block text-textSec mb-1"
+                        >
+                          Thumbnail Gambar (JPG/PNG format, 1000x1300 pixel,
+                          maksimum 2MB)
+                        </label>
+                      </td>
+                      <td>
+                        <input
+                          type="file"
+                          id="thumbnail"
+                          accept=".jpg, .png"
+                          onChange={handleThumbnailChange}
+                          className="py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                        {thumbnailPreview && (
+                          <div className="mt-2">
+                            <p className="text-textFunc">Pratinjau Gambar:</p>
+                            <img
+                              src={thumbnailPreview}
+                              alt="Thumbnail Preview"
+                              className="w-48 h-32 mt-2 border rounded-md object-cover"
+                            />
+                          </div>
+                        )}
+                        {!thumbnail && (
+                          <p className="text-textFunc mt-2">
+                            Silakan pilih gambar dengan format JPG atau PNG,
+                            ukuran 1000x1300 pixel, dan maksimum 2MB.
+                          </p>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3">
+                        <label
                           htmlFor="content"
                           className="block text-textSec mb-1"
                         >
@@ -188,31 +269,31 @@ const EditBlogAdmin = () => {
                           modules={{
                             toolbar: [
                               [{ header: [1, 2, false] }],
-                              ["bold", "italic", "underline", "strike"],
-                              ["link", "image"],
-                              [{ list: "ordered" }, { list: "bullet" }],
-                              ["blockquote", "code-block"],
+                              ['bold', 'italic', 'underline', 'strike'],
+                              ['link', 'image'],
+                              [{ list: 'ordered' }, { list: 'bullet' }],
+                              ['blockquote', 'code-block'],
                               [{ align: [] }],
-                              [{ indent: "-1" }, { indent: "+1" }],
-                              [{ direction: "rtl" }],
-                              ["clean"],
+                              [{ indent: '-1' }, { indent: '+1' }],
+                              [{ direction: 'rtl' }],
+                              ['clean'],
                             ],
                           }}
                           formats={[
-                            "header",
-                            "bold",
-                            "italic",
-                            "underline",
-                            "strike",
-                            "link",
-                            "image",
-                            "list",
-                            "bullet",
-                            "blockquote",
-                            "code-block",
-                            "align",
-                            "indent",
-                            "direction",
+                            'header',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strike',
+                            'link',
+                            'image',
+                            'list',
+                            'bullet',
+                            'blockquote',
+                            'code-block',
+                            'align',
+                            'indent',
+                            'direction',
                           ]}
                           className="h-[200px] border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
@@ -221,9 +302,9 @@ const EditBlogAdmin = () => {
                   </table>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      position: "relative",
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      position: 'relative',
                     }}
                     className="p-5 flex flex-wrap gap-2"
                   >
