@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 // ! user
+// profile
+import ProfilePage from './pages/ProfilePage'
 // blog
 import ListBlogPage from './pages/BlogPage/ListBlogPage';
 import DetailBlogPage from './pages/BlogPage/DetailBlogPage';
@@ -68,6 +70,7 @@ function App() {
 
           {/* user */}
           <Route path="/dashboard" element={<DashboardUserPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/blog" element={<ListBlogPage />} />
           <Route path="/blog/:id" element={<DetailBlogPage />} />
           <Route path="/video" element={<ListVideo />} />
@@ -95,8 +98,8 @@ function App() {
           <Route path="/admin/video/create-video" element={<AdminDashboardGuard><CreateVideoAdminPage /></AdminDashboardGuard>}/>
           <Route path="/admin/video/:id/edit" element={<AdminDashboardGuard><EditVideoAdminPage /></AdminDashboardGuard>} />
           <Route path="/admin/user" element={<ListUserAdminPage />} />
-          <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
           <Route path="/admin/user/create-user" element={<CreateUserAdminPage />} />
+          <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
           <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>

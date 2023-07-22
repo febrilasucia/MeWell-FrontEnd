@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import Sidebar from "../Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const EditUserAdmin = () => {
-  const [title, setTitle] = useState("");
-  const [videoLink, setVideoLink] = useState("");
-  const [description, setDescription] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
-  const [activePage, setActivePage] = useState("Video");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  // const [role, setRole] = useState("");
+  const [profileUrl, setProfileUrl] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [work, setWork] = useState("");
+  // const [isVerified, setIsVerified] = useState("");
+  const [activePage, setActivePage] = useState("User");
   const navigate = useNavigate();
   const { id } = useParams();
   const token = localStorage.getItem("token");
@@ -24,16 +26,20 @@ const EditUserAdmin = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     let data = new FormData();
-    data.append("title", title);
-    data.append("videoLink", videoLink);
-    data.append("description", description);
-    data.append("author", author);
-    data.append("content", content);
+    data.append("name", name);
+    data.append("email", email);
+    // data.append("role", role);
+    data.append("profileUrl", profileUrl);
+    data.append("dateOfBirth", dateOfBirth);
+    data.append("gender", gender);
+    data.append("age", age);
+    data.append("work", work);
+    // data.append("isVerified", isVerified);
 
     let config = {
       method: "patch",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/video/${id}`,
+      url: `${process.env.REACT_APP_BASE_URL}/user/${id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -53,7 +59,7 @@ const EditUserAdmin = () => {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          navigate(`/admin/video`);
+          navigate(`/admin/user`);
           Swal.fire("Saved!", "", "success");
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
@@ -65,35 +71,35 @@ const EditUserAdmin = () => {
   };
 
   useEffect(() => {
-    const fetchVideo = async () => {
+    const fetchUser = async () => {
       console.log("fetch is running");
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/video/${id}`
+          `${process.env.REACT_APP_BASE_URL}/user/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-        const videoData = response.data.data;
-        setTitle(videoData.title);
-        setVideoLink(videoData.videoLink);
-        setDescription(videoData.description);
-        setAuthor(videoData.author);
-        setContent(videoData.content);
-        console.log(videoData);
+        const userData = response.data;
+        setName(userData.name);
+        setEmail(userData.email);
+        // setRole(userData.role);
+        setProfileUrl(userData.profileUrl);
+        setDateOfBirth(userData.dateOfBirth);
+        setGender(userData.gender);
+        setAge(userData.age);
+        setWork(userData.work);
+        // setIsVerified(userData.isVerified);
+        console.log(userData);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchVideo();
-  }, [id]);
-
-  const handleContentChange = (value) => {
-    const updatedContent = value.replace(
-      /src="(\/images\/[a-zA-Z0-9_]+\.[a-zA-Z]{3,4})"/g,
-      `src="${process.env.REACT_APP_BASE_URL}$1"`
-    );
-
-    setContent(updatedContent);
-  };
+    fetchUser();
+  }, [id, token]);
 
   return (
     <div className="flex">
@@ -101,8 +107,8 @@ const EditUserAdmin = () => {
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>
-          <h1 className="text-sizeTri text-textSec font-bold">Edit Video</h1>
-          <p className="my-3 text-textFunc">Dashboard / Video / Edit</p>
+          <h1 className="text-sizeTri text-textSec font-bold">Edit User</h1>
+          <p className="my-3 text-textFunc">Dashboard / User / Edit</p>
         </div>
         {/* judul */}
         {/* content */}
@@ -118,15 +124,15 @@ const EditUserAdmin = () => {
                           htmlFor="title"
                           className="block text-textSec mb-1"
                         >
-                          Judul Video
+                          Nama
                         </label>
                       </td>
                       <td className="">
                         <input
                           type="text"
-                          id="title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
+                          id="name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                           className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
@@ -137,16 +143,35 @@ const EditUserAdmin = () => {
                           htmlFor="author"
                           className="block text-textSec mb-1"
                         >
-                          Author
+                          Email
                         </label>
                       </td>
                       <td className="">
                         <input
                           type="text"
-                          id="author"
-                          value={author}
-                          onChange={(e) => setAuthor(e.target.value)}
+                          id="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3">
+                        <label
+                          htmlFor="profileUrl"
+                          className="block text-textSec mb-1"
+                        >
+                          Profile Url
+                        </label>
+                      </td>
+                      <td className="">
+                        <input
+                          type="text"
+                          id="profileUrl"
+                          value={profileUrl}
+                          onChange={(e) => setProfileUrl(e.target.value)}
+                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
@@ -156,15 +181,15 @@ const EditUserAdmin = () => {
                           htmlFor="videoLink"
                           className="block text-textSec mb-1"
                         >
-                          Link Video
+                          Tanggal Lahir
                         </label>
                       </td>
                       <td className="">
                         <input
-                          type="text"
-                          id="videoLink"
-                          value={videoLink}
-                          onChange={(e) => setVideoLink(e.target.value)}
+                          type="date"
+                          id="dateOfBirth"
+                          value={dateOfBirth}
+                          onChange={(e) => setDateOfBirth(e.target.value)}
                           className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
@@ -172,65 +197,57 @@ const EditUserAdmin = () => {
                     <tr>
                       <td className="py-3">
                         <label
-                          htmlFor="description"
+                          htmlFor="videoLink"
                           className="block text-textSec mb-1"
                         >
-                          Deskripsi Singkat
+                          Jenis Kelamin
                         </label>
                       </td>
                       <td className="">
                         <input
                           type="text"
-                          id="description"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                          className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          id="gender"
+                          value={gender}
+                          onChange={(e) => setGender(e.target.value)}
+                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>
                     <tr>
                       <td className="py-3">
                         <label
-                          htmlFor="content"
+                          htmlFor="videoLink"
                           className="block text-textSec mb-1"
                         >
-                          Konten
+                          Umur
                         </label>
                       </td>
+                      <td className="">
+                        <input
+                          type="text"
+                          id="age"
+                          value={age}
+                          onChange={(e) => setAge(e.target.value)}
+                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
                       <td className="py-3">
-                        <ReactQuill
-                          value={content}
-                          onChange={handleContentChange}
-                          modules={{
-                            toolbar: [
-                              [{ header: [1, 2, false] }],
-                              ["bold", "italic", "underline", "strike"],
-                              ["link", "image"],
-                              [{ list: "ordered" }, { list: "bullet" }],
-                              ["blockquote", "code-block"],
-                              [{ align: [] }],
-                              [{ indent: "-1" }, { indent: "+1" }],
-                              [{ direction: "rtl" }],
-                              ["clean"],
-                            ],
-                          }}
-                          formats={[
-                            "header",
-                            "bold",
-                            "italic",
-                            "underline",
-                            "strike",
-                            "link",
-                            "image",
-                            "list",
-                            "bullet",
-                            "blockquote",
-                            "code-block",
-                            "align",
-                            "indent",
-                            "direction",
-                          ]}
-                          className="h-[150px] border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                        <label
+                          htmlFor="videoLink"
+                          className="block text-textSec mb-1"
+                        >
+                          Pekerjaan
+                        </label>
+                      </td>
+                      <td className="">
+                        <input
+                          type="text"
+                          id="work"
+                          value={work}
+                          onChange={(e) => setWork(e.target.value)}
+                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
                       </td>
                     </tr>

@@ -150,6 +150,7 @@ function ListUserAdmin() {
                       <td className="px-6 py-4">{user.name}</td>
                       <td className="px-6 py-4">{user.email}</td>
                       <td className="px-6 py-4 flex gap-3">
+                        <Link to={`/admin/user/${user._id}/detail`}>Detail </Link>
                         <Link to={`/admin/user/${user._id}/edit`}>Edit </Link>
                         <button onClick={() => deleteUser(user._id)}>
                           Delete
