@@ -1,10 +1,14 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { FaUserCircle, FaCheckCircle } from "react-icons/fa";
+import { FaUserCircle, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Profile() {
+  const authState = useSelector((state) => state.auth);
+  console.log(authState);
+
   return (
     <div>
       <Header />
@@ -39,22 +43,22 @@ function Profile() {
                       <tr>
                         <td className="p-3">Nama Lengkap</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">Febrila Sucia</td>
-                      </tr>
-                      <tr>
-                        <td className="p-3">Jenis Kelamin</td>
-                        <td className="p-3">:</td>
-                        <td className="p-3">Perempuan</td>
+                        <td className="p-3">{authState.user.name}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Tanggal Lahir</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">15/02/2002</td>
+                        <td className="p-3">{authState.user.dateOfBirth}</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3">Jenis Kelamin</td>
+                        <td className="p-3">:</td>
+                        <td className="p-3">{authState.user.gender}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Pekerjaan</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">Berkuliah</td>
+                        <td className="p-3">{authState.user.work}</td>
                       </tr>
                     </thead>
                   </table>
@@ -75,7 +79,8 @@ function Profile() {
               </div>
               <div className="my-[40px] text-textSec justify-center items-center text-center flex-wrap w-full">
                 <p>
-                  Hello, Febrila Sucia <br /> Welcome to your profile page
+                  Hello, {authState.user.name} <br /> Welcome to your profile
+                  page
                 </p>
                 <div>
                   <Link
@@ -105,18 +110,22 @@ function Profile() {
                       <tr>
                         <td className="p-3">Email</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">febrilasucia@gmail.com</td>
+                        <td className="p-3">{authState.user.email}</td>
                       </tr>
                       <tr>
-                        <td className="p-3">Password</td>
+                        <td className="p-3">Role</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">*******</td>
+                        <td className="p-3">{authState.user.role}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Verified</td>
                         <td className="p-3">:</td>
                         <td className="p-3">
-                          <FaCheckCircle />
+                          {authState.user.isVerified ? (
+                            <FaCheckCircle className="text-green-500"/>
+                          ) : (
+                            <FaTimesCircle className="text-red-500"/>
+                          )}
                         </td>
                       </tr>
                     </thead>
