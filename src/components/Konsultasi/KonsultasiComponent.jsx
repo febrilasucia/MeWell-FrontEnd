@@ -1,18 +1,63 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   FaPhoneAlt,
   FaEnvelope,
   FaInstagram,
   FaHandHoldingHeart,
-} from "react-icons/fa";
-import Konsultan from "../../image2/32.png";
-import Online from "../../image2/33.png";
-import { Link } from "react-router-dom";
+} from 'react-icons/fa';
+import Konsultan from '../../image2/32.png';
+import Online from '../../image2/33.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 function KonsultasiComponent() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const authState = useSelector((state) => state.auth);
+  const handleKonsultasi = async () => {
+    if (authState.isLogin === false) {
+      try {
+        // Tampilkan pesan kesalahan menggunakan SweetAlert atau cara lain sesuai preferensi Anda
+        const result = await Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'You need to login first!',
+          showCancelButton: true,
+          cancelButtonText: 'Cancel',
+          confirmButtonText: 'Go to login',
+        });
+
+        if (result.isConfirmed) {
+          navigate('/login'); // Navigasi ke halaman login jika pengguna memilih "Go to login"
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        // Tampilkan pesan kesalahan menggunakan SweetAlert atau cara lain sesuai preferensi Anda
+        const result = await Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'You need to login first!',
+          showCancelButton: true,
+          cancelButtonText: 'Cancel',
+          confirmButtonText: 'Go to login',
+        });
+
+        if (result.isConfirmed) {
+          navigate('/konsultasi/form-konsultasi'); // Navigasi ke halaman login jika pengguna memilih "Go to login"
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
   return (
     <div>
       <div className=" md:flex">
@@ -32,7 +77,7 @@ function KonsultasiComponent() {
             </p>
             {/* ingat untuk konsultasi harus mempunyai akun, jikalau tidak maka di alihkan ke halaman login dan dengan alert anda harus login terlebih dahulu */}
             <Link
-              to={"/konsultasi/form-konsultasi"}
+              onClick={handleKonsultasi}
               className="inline-block mt-5 mb-10 bg-bgOpt2 hover:bg-bgOpt font-bold py-2 px-4 rounded-xl"
             >
               Konsultasi Sekarang
