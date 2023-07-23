@@ -22,23 +22,39 @@ function Register() {
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  console.log(formData);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_BASE_URL}/auth/register`,
+      data: formData,
+    };
     try {
-      await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/auth/register`,
-        formData
-      );
+      const makeRequest = async () => {
+        try {
+          const response = await axios.request(config);
+          console.log(response.data);
+          console.log(JSON.stringify(response.data));
+        } catch (error) {
+          console.log(error);
+
+          console.log(error.response.data.message);
+        }
+      };
+      makeRequest();
+      // setShowAlert(true);
     } catch (error) {
       setMessage(error.response.data.message);
     }
-    setShowAlert(true);
   };
-  
+
   const handleAlertClose = () => {
     setShowAlert(false);
     // Navigate to home
@@ -48,6 +64,8 @@ function Register() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const passwordMatch = formData.password === formData.confPassword;
 
   return (
     <div>
@@ -160,18 +178,30 @@ function Register() {
                       value={formData.confPassword}
                       onChange={handleChange}
                     />
+                    <div
+                      className="text-red-500 text-[10px] mb-1"
+                      style={{
+                        position: "absolute",
+                        visibility:
+                          formData.password && !passwordMatch
+                            ? "visible"
+                            : "hidden",
+                      }}
+                    >
+                      *Password and Confirm Password do not match
+                    </div>
                   </div>
                   <div>
                     <input
                       type="text"
                       name="work"
-                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
+                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-6 "
                       placeholder="Pekerjaan"
                       required
                       value={formData.work}
                       onChange={handleChange}
                     />
-                  </div>
+                  </div>
                 </div>
               </div>
 
