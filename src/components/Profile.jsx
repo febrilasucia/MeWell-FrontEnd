@@ -122,9 +122,9 @@ function Profile() {
                         <td className="p-3">:</td>
                         <td className="p-3">
                           {authState.user.isVerified ? (
-                            <FaCheckCircle className="text-green-500"/>
+                            <FaCheckCircle className="text-green-500" />
                           ) : (
-                            <FaTimesCircle className="text-red-500"/>
+                            <FaTimesCircle className="text-red-500" />
                           )}
                         </td>
                       </tr>
