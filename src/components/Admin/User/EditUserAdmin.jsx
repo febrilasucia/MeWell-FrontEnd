@@ -1,78 +1,72 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Sidebar from "../Sidebar";
-import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Sidebar from '../Sidebar';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { formatDate, formatDate2, splitDate } from '../../../util/Helper';
 
 const EditUserAdmin = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   // const [role, setRole] = useState("");
-  const [profileUrl, setProfileUrl] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [work, setWork] = useState("");
+  const [profileUrl, setProfileUrl] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
+  const [work, setWork] = useState('');
   // const [isVerified, setIsVerified] = useState("");
-  const [activePage, setActivePage] = useState("User");
+  const [activePage, setActivePage] = useState('User');
   const navigate = useNavigate();
   const { id } = useParams();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const handleGoBack = () => {
     navigate(-1);
   };
-
+  console.log(dateOfBirth);
   const handleUpdate = async (e) => {
     e.preventDefault();
-    let data = new FormData();
-    data.append("name", name);
-    data.append("email", email);
-    // data.append("role", role);
-    data.append("profileUrl", profileUrl);
-    data.append("dateOfBirth", dateOfBirth);
-    data.append("gender", gender);
-    data.append("age", age);
-    data.append("work", work);
-    // data.append("isVerified", isVerified);
-
-    let config = {
-      method: "patch",
-      maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/user/${id}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: data,
+    const data = {
+      name,
+      email,
+      dateOfBirth,
+      gender,
+      age,
+      work,
     };
 
     try {
-      const response = await axios.request(config);
-      console.log(JSON.stringify(response.data));
-
       Swal.fire({
-        title: "Do you want to save the changes?",
+        title: 'Do you want to save the changes?',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: "Save",
+        confirmButtonText: 'Save',
         denyButtonText: `Don't save`,
-      }).then((result) => {
+      }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+          const response = await axios.patch(
+            `${process.env.REACT_APP_BASE_URL}/user/${id}`,
+            data,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log(response);
           navigate(`/admin/user`);
-          Swal.fire("Saved!", "", "success");
+          Swal.fire('Saved!', '', 'success');
         } else if (result.isDenied) {
-          Swal.fire("Changes are not saved", "", "info");
+          Swal.fire('Changes are not saved', '', 'info');
         }
       });
     } catch (error) {
       console.log(error);
     }
   };
-
   useEffect(() => {
     const fetchUser = async () => {
-      console.log("fetch is running");
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/user/${id}`,
@@ -87,12 +81,11 @@ const EditUserAdmin = () => {
         setEmail(userData.email);
         // setRole(userData.role);
         setProfileUrl(userData.profileUrl);
-        setDateOfBirth(userData.dateOfBirth);
+        setDateOfBirth(formatDate2(userData.dateOfBirth));
         setGender(userData.gender);
         setAge(userData.age);
         setWork(userData.work);
         // setIsVerified(userData.isVerified);
-        console.log(userData);
       } catch (error) {
         console.log(error);
       }
@@ -153,25 +146,7 @@ const EditUserAdmin = () => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="w-full py-2 px-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="profileUrl"
-                          className="block text-textSec mb-1"
-                        >
-                          Profile Url
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="text"
-                          id="profileUrl"
-                          value={profileUrl}
-                          onChange={(e) => setProfileUrl(e.target.value)}
-                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          disabled
                         />
                       </td>
                     </tr>
@@ -197,20 +172,22 @@ const EditUserAdmin = () => {
                     <tr>
                       <td className="py-3">
                         <label
-                          htmlFor="videoLink"
+                          htmlFor="gender"
                           className="block text-textSec mb-1"
                         >
                           Jenis Kelamin
                         </label>
                       </td>
                       <td className="">
-                        <input
-                          type="text"
+                        <select
                           id="gender"
                           value={gender}
                           onChange={(e) => setGender(e.target.value)}
                           className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
+                        >
+                          <option value="Laki-laki">Laki-laki</option>
+                          <option value="Perempuan">Perempuan</option>
+                        </select>
                       </td>
                     </tr>
                     <tr>
@@ -254,9 +231,9 @@ const EditUserAdmin = () => {
                   </table>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      position: "relative",
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      position: 'relative',
                     }}
                     className="p-5 flex flex-wrap gap-2"
                   >
