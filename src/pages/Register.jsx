@@ -44,7 +44,6 @@ function Register() {
           console.log(JSON.stringify(response.data));
         } catch (error) {
           console.log(error);
-
           console.log(error.response.data.message);
         }
       };
