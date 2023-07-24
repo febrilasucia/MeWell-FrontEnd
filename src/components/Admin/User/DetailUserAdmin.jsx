@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { formatDate } from "../../../util/Helper";
 
 const DetailUserAdmin = () => {
   const [name, setName] = useState("");
@@ -54,7 +55,6 @@ const DetailUserAdmin = () => {
 
     fetchUser();
   }, [id, token]);
-
   return (
     <div className="flex">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
@@ -144,7 +144,7 @@ const DetailUserAdmin = () => {
                           id="dateOfBirth"
                           className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         >
-                          : {dateOfBirth}
+                          : {formatDate(dateOfBirth)}
                         </p>
                       </td>
                     </tr>
