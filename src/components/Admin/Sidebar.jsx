@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpen } from "../../features/sidebarSlice";
-import { logout } from '../../features/authSlice';
+import { logout } from "../../features/authSlice";
 
 const Sidebar = ({ activePage, setActivePage }) => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
 
   const handleLogout = () => {
     dispatch(logout()); // Langkah 5: Panggil aksi logout saat tombol logout diklik
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -53,19 +53,19 @@ const Sidebar = ({ activePage, setActivePage }) => {
           border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => dispatch(setOpen(!open))}
         />
-        <Link to={'/'} className="flex gap-x-4 items-center">
+        <Link to={"/"} className="flex gap-x-4 items-center">
           <img
             src={LogoMandeh}
             alt="LogoMandeh"
             className={`cursor-pointer w-[40px] duration-500 ${
-              open && 'rotate-[360deg]'
+              open && "rotate-[360deg]"
             }`}
           />
           <img
             src={LogoHori}
             alt="LogoHori"
             className={`text-textSec origin-left w-[170px] duration-200 ${
-              !open && 'scale-0'
+              !open && "scale-0"
             }`}
           />
         </Link>
@@ -95,14 +95,14 @@ const Sidebar = ({ activePage, setActivePage }) => {
           {/* Tombol Logout */}
           <li
             className={`flex rounded-md p-2 cursor-pointer hover:bg-bgOpt hover:text-textOpt text-md items-center gap-x-4 mt-9 ${
-              activePage === 'Logout' ? 'bg-bgOpt text-textOpt' : 'text-textSec'
+              activePage === "Logout" ? "bg-bgOpt text-textOpt" : "text-textSec"
             }`}
             onClick={() => handleLogout()} // Langkah 6: Panggil handler logout saat tombol logout diklik
           >
             <p className="text-center">
               <FaSignOutAlt />
             </p>
-            <span className={`${!open && 'hidden'} origin-left duration-200`}>
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
               Logout
             </span>
           </li>

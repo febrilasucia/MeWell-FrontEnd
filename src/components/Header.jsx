@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
-import LogoHori from '../image/logo-hori.png';
-import LogoMandeh from '../image/logo-mandeh.png';
-import LogoTulisanMandeh from '../image/logo-tulisan-lentera2.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../features/authSlice';
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import LogoHori from "../image/logo-hori.png";
+import LogoMandeh from "../image/logo-mandeh.png";
+import LogoTulisanMandeh from "../image/logo-tulisan-lentera2.png";
+import { useDispatch, useSelector } from "react-redux";
+// import { logout } from "../features/authSlice";
+import { logout } from "../action/logoutAction";
+import { RiAdminLine, RiLogoutBoxLine, RiProfileLine } from "react-icons/ri";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +28,7 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     setDropdownOpen(false);
+    window.location.href = "/";
   };
 
   useEffect(() => {
@@ -35,10 +38,10 @@ function Header() {
       }
     };
 
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
 
@@ -54,7 +57,7 @@ function Header() {
               <div className="">
                 <div className="w-[470px] p-2 flex flex-wrap items-center justify-around">
                   <div className="">
-                    <Link to={'/'}>
+                    <Link to={"/"}>
                       <div>
                         <img
                           className="h-[30px]"
@@ -65,7 +68,7 @@ function Header() {
                     </Link>
                   </div>
                   <div className="">
-                    <Link to={'/'}>
+                    <Link to={"/"}>
                       <div>
                         <img
                           className="h-[30px]"
@@ -86,13 +89,13 @@ function Header() {
                       color="#FFB803"
                     >
                       <path
-                        className={!isOpen ? 'block' : 'hidden'}
+                        className={!isOpen ? "block" : "hidden"}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                       />
                       <path
-                        className={isOpen ? 'block' : 'hidden'}
+                        className={isOpen ? "block" : "hidden"}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         d="M6 18L18 6M6 6l12 12"
@@ -107,27 +110,27 @@ function Header() {
 
         <div
           className={`${
-            isOpen ? 'block' : 'hidden'
+            isOpen ? "block" : "hidden"
           } lg:flex flex-col lg:flex-row justify-between items-center w-full text-textSec`}
         >
           <div className="ml-3 flex flex-col lg:flex-row gap-4">
-            <Link to={'/'} className=" hover:font-bold ">
+            <Link to={"/"} className=" hover:font-bold ">
               Home
             </Link>
-            <Link to={'/blog'} className=" hover:font-bold">
+            <Link to={"/blog"} className=" hover:font-bold">
               Blog
             </Link>
-            <Link to={'/video'} className=" hover:font-bold">
+            <Link to={"/video"} className=" hover:font-bold">
               Video
             </Link>
-            <Link to={'/tes'} className=" hover:font-bold">
+            <Link to={"/tes"} className=" hover:font-bold">
               Tes Psikologi
             </Link>
-            <Link to={'/konsultasi'} className=" hover:font-bold">
+            <Link to={"/konsultasi"} className=" hover:font-bold">
               Konsultasi
             </Link>
           </div>
-          <div className={!isOpen ? 'block' : 'hidden'}>
+          <div className={!isOpen ? "block" : "hidden"}>
             <img className="h-[30px]" src={LogoHori} alt="LogoHori" />
           </div>
           <div className="my-3 flex items-center lg:flex-row" ref={dropdownRef}>
@@ -142,34 +145,34 @@ function Header() {
                     {user.name}
                   </div>
                   {dropdownOpen && (
-                    // dropdown-menu w-48 py-2 mt-2 ml-4 text-base text-left rounded-lg shadow-lg bg-white
-                    <ul className="dropdown-menu w-48 py-2 mt-2 ml-4 text-base text-left rounded-lg shadow-lg min-w-max items-center  bg-white float-left  list-none   m-0 bg-clip-padding border-none dropdown-menu fixed right-5">
+                    <ul className="dropdown-menu text-textSec w-48 py-2 mt-2 ml-4 text-base text-left rounded-lg shadow-lg min-w-max items-center  bg-bgPri float-left  list-none   m-0 bg-clip-padding border-none dropdown-menu fixed right-5">
+                      {user.role === "admin" && (
+                        <li>
+                          <Link
+                            className="px-4 flex gap-2 items-center py-2 hover:bg-gray-200"
+                            to="/admin/dashboard"
+                          >
+                            <RiAdminLine /> Admin
+                          </Link>
+                        </li>
+                      )}
                       <li>
                         <Link
-                          className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                          className="flex  gap-2 px-4 py-2  hover:bg-gray-200"
                           to="/profile"
                         >
+                          <RiProfileLine />
                           Profile
                         </Link>
                       </li>
                       <li>
                         <Link
-                          className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                          className="flex items-center gap-2 px-4 py-2  hover:bg-gray-200"
                           onClick={handleLogout}
                         >
-                          Logout
+                          <RiLogoutBoxLine /> Logout
                         </Link>
                       </li>
-                      {user.role === 'admin' && (
-                        <li>
-                          <Link
-                            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                            to="/admin/dashboard"
-                          >
-                            Admin
-                          </Link>
-                        </li>
-                      )}
                     </ul>
                   )}
                 </div>

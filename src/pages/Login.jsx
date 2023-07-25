@@ -3,10 +3,11 @@ import { useState } from "react";
 import LogoMandehLogin from "../image/logo-mandeh-login.png";
 import LogoMandeh from "../image/logo-hori.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import axios from "axios";
 import { fetchUser, setToken } from "../features/authSlice";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -46,15 +47,19 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       if (error.response) {
-        if (error.response.status === 401) {
-          // Handle 401 Unauthorized error
-          if (error.response.data.message === "Email or password is invalid") {
-            setError(error.response.data.message);
-          } else {
-            setError(error.response.data.message);
-          }
+        if (
+          error.response.data.message ===
+          "Email is not verified, please verify it before logging in"
+        ) {
+          Swal.fire({
+            icon: "error",
+            title: "Email Not Verified",
+            text: "Please verify your email before logging in!",
+            timer: 3000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+          });
         } else {
-          // Handle other errors
           setError(error.response.data.message);
         }
       }
@@ -78,14 +83,6 @@ const Login = () => {
   }, []);
   return (
     <div>
-      {/* {error && (
-        <div className="mt-4">
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md transition-opacity duration-300 ease-in-out">
-            {error}
-          </div>
-        </div>
-      )} */}
-
       {/* image logo */}
       <div className="absolute opacity-25">
         <img src={LogoMandehLogin} className="h-screen" />

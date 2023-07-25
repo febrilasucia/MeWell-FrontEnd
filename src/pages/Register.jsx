@@ -3,9 +3,9 @@ import { useState } from 'react';
 import LogoMandehLogin from '../image/logo-mandeh-login.png';
 import LogoMandeh from '../image/logo-hori.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { FaAngleDoubleRight } from 'react-icons/fa';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 function Register() {
   const [message, setMessage] = useState('');
@@ -19,7 +19,7 @@ function Register() {
     age: '',
     work: '',
   });
-  const [showAlert, setShowAlert] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
 
   console.log(formData);
@@ -28,10 +28,37 @@ function Register() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   let config = {
+  //     method: 'post',
+  //     maxBodyLength: Infinity,
+  //     url: `${process.env.REACT_APP_BASE_URL}/auth/register`,
+  //     data: formData,
+  //   };
+  //   try {
+  //     const makeRequest = async () => {
+  //       try {
+  //         const response = await axios.request(config);
+  //         console.log(response.data);
+  //         console.log(JSON.stringify(response.data));
+  //       } catch (error) {
+  //         console.log(error);
+  //         console.log(error.response.data.message);
+  //       }
+  //     };
+  //     makeRequest();
+  //     // setShowAlert(true);
+  //   } catch (error) {
+  //     setMessage(error.response.data.message);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let config = {
-      method: 'post',
+      method: "post",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/auth/register`,
       data: formData,
@@ -42,6 +69,23 @@ function Register() {
           const response = await axios.request(config);
           console.log(response.data);
           console.log(JSON.stringify(response.data));
+
+          // Check if registration is successful with the specified message
+          if (
+            response.data.message ===
+            "Registration is successful, please verify email"
+          ) {
+            // Show SweetAlert for successful registration
+            Swal.fire({
+              icon: "success",
+              title: "Registration Successful!",
+              text: "Please verify your email before logging in.",
+              confirmButtonText: "OK",
+            }).then(() => {
+              // Navigate to login page after user clicks "OK" button
+              navigate("/login");
+            });
+          }
         } catch (error) {
           console.log(error);
           console.log(error.response.data.message);
@@ -54,11 +98,11 @@ function Register() {
     }
   };
 
-  const handleAlertClose = () => {
-    setShowAlert(false);
-    // Navigate to home
-    navigate('/');
-  };
+  // const handleAlertClose = () => {
+  //   // setShowAlert(false);
+  //   // Navigate to home
+  //   navigate('/');
+  // };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -238,7 +282,7 @@ function Register() {
         </div>
         {/* tombol back */}
 
-        {showAlert && (
+        {/* {showAlert && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white border border-gray-300 rounded-lg p-4 shadow-md">
               <p className="text-green-600 font-semibold text-lg">
@@ -255,7 +299,7 @@ function Register() {
               </button>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
