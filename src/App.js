@@ -19,7 +19,7 @@ import DashboardUserPage from "./pages/DashboardUserPage";
 //konsul
 import DetailKonsultasiPage from "./pages/KonsultasiPage/DetailKonsultasiPage";
 import FormKonsultasiPage from "./components/Konsultasi/FormKonsultasi";
-// import DetailTesIE from "./pages/v_Tes-Psikologi/TesIE/Detail";
+import ChoosePsikologPage from "./components/Konsultasi/ChoosePsikolog";
 import DetailTesIE from "./pages/TesPsikologiPage/TesIEPage/TesIE";
 import DetailKetergantunganPage from "./pages/TesPsikologiPage/Ketergantungan/DetailKetergantunganPage";
 
@@ -31,7 +31,6 @@ import CreateVideoAdminPage from "./pages/Admin/videoAdminPage/CreateVideoAdminP
 // konsul
 import ListKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/ListKonsulAdminPage";
 import DetailKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/DetailKonsulAdminPage";
-import CreateKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/CreateKonsulAdminPage";
 import EditKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/EditKonsulAdminPage";
 // blog
 import ListBlogAdminPage from "./pages/Admin/blogAdminPage/ListBlogAdminPage";
@@ -76,6 +75,10 @@ function App() {
           <Route path="/video" element={<ListVideo />} />
           <Route path="/video/:id" element={<DetailVideoPage />} />
           <Route path="/konsultasi" element={<DetailKonsultasiPage />} />
+          <Route
+            path="konsultasi/pilih-psikolog"
+            element={<ChoosePsikologPage />}
+          />
           <Route
             path="/konsultasi/success"
             element={<DetailKonsultasiPage />}
