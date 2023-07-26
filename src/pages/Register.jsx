@@ -283,7 +283,7 @@ function Register() {
                         type="file"
                         name="ktp"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                        placeholder="Upload KTP"
+                        placeholder="Link Gdrive KTP"
                         value={formData.dateOfBirth}
                         onChange={handleChange}
                       />
@@ -293,10 +293,10 @@ function Register() {
                         Upload Ijazah
                       </p>
                       <input
-                        type="file"
+                        type="text"
                         name="ijazah"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                        placeholder="Upload Ijazah"
+                        placeholder="Link Gdrive Ijazah"
                         value={formData.dateOfBirth}
                         onChange={handleChange}
                       />
