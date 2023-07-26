@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import LogoMandehLogin from '../image/logo-mandeh-login.png';
-import LogoMandeh from '../image/logo-hori.png';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaAngleDoubleRight } from 'react-icons/fa';
-import axios from 'axios';
-import Swal from 'sweetalert2'
+import React, { useEffect } from "react";
+import { useState } from "react";
+import LogoMandehLogin from "../image/logo-mandeh-login.png";
+import LogoMandeh from "../image/logo-hori.png";
+import { Link, useNavigate } from "react-router-dom";
+import { FaAngleDoubleRight } from "react-icons/fa";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function Register() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confPassword: '',
-    dateOfBirth: '',
-    gender: '',
-    age: '',
-    work: '',
+    name: "",
+    email: "",
+    password: "",
+    confPassword: "",
+    dateOfBirth: "",
+    gender: "",
+    age: "",
+    work: "",
+    role: "",
   });
   // const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
@@ -28,32 +29,6 @@ function Register() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   let config = {
-  //     method: 'post',
-  //     maxBodyLength: Infinity,
-  //     url: `${process.env.REACT_APP_BASE_URL}/auth/register`,
-  //     data: formData,
-  //   };
-  //   try {
-  //     const makeRequest = async () => {
-  //       try {
-  //         const response = await axios.request(config);
-  //         console.log(response.data);
-  //         console.log(JSON.stringify(response.data));
-  //       } catch (error) {
-  //         console.log(error);
-  //         console.log(error.response.data.message);
-  //       }
-  //     };
-  //     makeRequest();
-  //     // setShowAlert(true);
-  //   } catch (error) {
-  //     setMessage(error.response.data.message);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,12 +73,6 @@ function Register() {
     }
   };
 
-  // const handleAlertClose = () => {
-  //   // setShowAlert(false);
-  //   // Navigate to home
-  //   navigate('/');
-  // };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -128,7 +97,7 @@ function Register() {
         </div>
         {/* image logo lengkap */}
         {/* card */}
-        <div className="flex flex-col h-screen justify-center">
+        <div className="flex flex-col my-10 justify-center">
           <div className="m-auto bg-bgSec w-full max-w-3xl p-4 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <h5 className="text-[54px] font-semibold text-textPri text-center">
@@ -244,9 +213,117 @@ function Register() {
                       value={formData.work}
                       onChange={handleChange}
                     />
-                  </div>
+                  </div>
                 </div>
               </div>
+              {/* dropdown */}
+              <div className="mx-[40px] mt-[100px]">
+                <div>
+                  <p className="text-textSec text-sizeParagraph">
+                    Upload Foto Profil
+                  </p>
+                  <input
+                    type="file"
+                    name="profilUrl"
+                    className="bg-gray-50 border mb-5 border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
+                  />
+                </div>
+                <p className="text-textSec text-sizeParagraph">
+                  Note : Jikalau kamu ingin menjadi distributor psikolog Me-Well
+                  dapat mendaftar dengan memilih Calon Psikolog Freelance
+                  Me-Well pada dropdown
+                </p>
+                <div className="w-full">
+                  <select
+                    name="role"
+                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
+                    value={formData.role}
+                    onChange={handleChange}
+                  >
+                    <option value="">Pilih Role</option>
+                    <option value="user">User Website Me-Well</option>
+                    <option value="psikolog">
+                      Calon Psikolog Freelance Me-Well
+                    </option>
+                  </select>
+                </div>
+
+                {/* data khusus calon psikolog */}
+                {formData.role === "psikolog" && (
+                  <div className="">
+                    <div>
+                      <input
+                        type="text"
+                        name="pendidikan"
+                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
+                        placeholder="Pendidikan Terakhir"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        name="univ"
+                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5"
+                        placeholder="Universitas Asal"
+                        value={formData.dateOfBirth}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div>
+                      <p className="text-textSec text-sizeParagraph mt-5">
+                        Upload KTP Asli
+                      </p>
+                      <input
+                        type="file"
+                        name="ktp"
+                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
+                        placeholder="Upload KTP"
+                        value={formData.dateOfBirth}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div>
+                      <p className="text-textSec text-sizeParagraph mt-5">
+                        Upload Ijazah
+                      </p>
+                      <input
+                        type="file"
+                        name="ijazah"
+                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
+                        placeholder="Upload Ijazah"
+                        value={formData.dateOfBirth}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div>
+                      <input
+                        type="text"
+                        name="alasan"
+                        className="bg-gray-50 h-[100px] border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
+                        placeholder="Alasan mendaftar Freelance Psikolog di Lentera Mandeh"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <p className="text-textSec text-sizeParagraph mt-5">
+                      Nota : Apabila telah mendaftar silahkan menunggu dan
+                      mengecek secara berkala email & akun Me-Well anda.
+                    </p>
+                  </div>
+                )}
+
+                {/* data khusus calon psikolog */}
+              </div>
+              {/* dropdown */}
 
               {/* form */}
 
@@ -257,7 +334,7 @@ function Register() {
                 Daftar
               </button>
               <div className="text-sm font-medium text-gray-500 text-center ">
-                Sudah mempunyai akun? masuk{' '}
+                Sudah mempunyai akun? masuk{" "}
                 <a href="/login" className="text-bgFunc3 hover:underline ">
                   disini
                 </a>
@@ -271,12 +348,12 @@ function Register() {
         <div className="flex items-center float-right mr-10 -mt-8 text-bgFunc hover:text-bgFunc2 font-medium ">
           <div>
             <Link to="/" className="">
-              Kembali{' '}
+              Kembali{" "}
             </Link>
           </div>
           <div>
             <Link to="/">
-              <FaAngleDoubleRight className="" />{' '}
+              <FaAngleDoubleRight className="" />{" "}
             </Link>
           </div>
         </div>

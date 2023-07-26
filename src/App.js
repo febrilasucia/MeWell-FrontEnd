@@ -1,50 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 // ! user
 // profile
-import ProfilePage from './pages/ProfilePage'
+import ProfilePage from "./pages/ProfilePage";
 // blog
-import ListBlogPage from './pages/BlogPage/ListBlogPage';
-import DetailBlogPage from './pages/BlogPage/DetailBlogPage';
+import ListBlogPage from "./pages/BlogPage/ListBlogPage";
+import DetailBlogPage from "./pages/BlogPage/DetailBlogPage";
 // video
-import ListVideo from './pages/VideoPage/ListVideoPage';
-import DetailVideoPage from './pages/VideoPage/DetailVideoPage';
+import ListVideo from "./pages/VideoPage/ListVideoPage";
+import DetailVideoPage from "./pages/VideoPage/DetailVideoPage";
 // tes
-import ListTes from './pages/TesPsikologiPage/ListTesPsikologi';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import DashboardAdminPage from './pages/Admin/DashboardAdminPage';
-import DashboardUserPage from './pages/DashboardUserPage';
+import ListTes from "./pages/TesPsikologiPage/ListTesPsikologi";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import DashboardAdminPage from "./pages/Admin/DashboardAdminPage";
+import DashboardUserPage from "./pages/DashboardUserPage";
 //konsul
-import DetailKonsultasiPage from './pages/KonsultasiPage/DetailKonsultasiPage';
-import FormKonsultasiPage from './components/Konsultasi/FormKonsultasi';
+import DetailKonsultasiPage from "./pages/KonsultasiPage/DetailKonsultasiPage";
+import FormKonsultasiPage from "./components/Konsultasi/FormKonsultasi";
 // import DetailTesIE from "./pages/v_Tes-Psikologi/TesIE/Detail";
-import DetailTesIE from './pages/TesPsikologiPage/TesIEPage/TesIE';
-import DetailKetergantunganPage from './pages/TesPsikologiPage/Ketergantungan/DetailKetergantunganPage';
+import DetailTesIE from "./pages/TesPsikologiPage/TesIEPage/TesIE";
+import DetailKetergantunganPage from "./pages/TesPsikologiPage/Ketergantungan/DetailKetergantunganPage";
 
 // ! Admin
 // video
-import ListVideoAdminPage from './pages/Admin/videoAdminPage/ListVideoAdminPage';
-import EditVideoAdminPage from './pages/Admin/videoAdminPage/EditVideoAdminPage';
-import CreateVideoAdminPage from './pages/Admin/videoAdminPage/CreateVideoAdminPage';
+import ListVideoAdminPage from "./pages/Admin/videoAdminPage/ListVideoAdminPage";
+import EditVideoAdminPage from "./pages/Admin/videoAdminPage/EditVideoAdminPage";
+import CreateVideoAdminPage from "./pages/Admin/videoAdminPage/CreateVideoAdminPage";
 // konsul
-import ListKonsulAdminPage from './pages/Admin/konsultasiAdminPage/ListKonsulAdminPage';
-import DetailKonsulAdminPage from './pages/Admin/konsultasiAdminPage/DetailKonsulAdminPage';
-import CreateKonsulAdminPage from './pages/Admin/konsultasiAdminPage/CreateKonsulAdminPage';
-import EditKonsulAdminPage from './pages/Admin/konsultasiAdminPage/EditKonsulAdminPage';
+import ListKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/ListKonsulAdminPage";
+import DetailKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/DetailKonsulAdminPage";
+import CreateKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/CreateKonsulAdminPage";
+import EditKonsulAdminPage from "./pages/Admin/konsultasiAdminPage/EditKonsulAdminPage";
 // blog
-import ListBlogAdminPage from './pages/Admin/blogAdminPage/ListBlogAdminPage';
-import EditBlogAdminPage from './pages/Admin/blogAdminPage/EditBlogAdminPage';
-import CreateBlogAdminPage from './pages/Admin/blogAdminPage/CreateBlogAdminPage';
-import BlogIcon from './components/Admin/assets/BlogIcon';
+import ListBlogAdminPage from "./pages/Admin/blogAdminPage/ListBlogAdminPage";
+import EditBlogAdminPage from "./pages/Admin/blogAdminPage/EditBlogAdminPage";
+import CreateBlogAdminPage from "./pages/Admin/blogAdminPage/CreateBlogAdminPage";
+import BlogIcon from "./components/Admin/assets/BlogIcon";
 // user
-import ListUserAdminPage from './pages/Admin/userAdminPage/ListUserAdminPage'
-import EditUserAdminPage from './pages/Admin/userAdminPage/EditUserAdminPage'
-import CreateUserAdminPage from './pages/Admin/userAdminPage/CreateUserAdminPage'
-import DetailUserAdminPage from './pages/Admin/userAdminPage/DetailUserAdminPage'
-import UserDashboardGuard from './pages/UserDashboardGuard';
-import AdminDashboardGuard from './pages/Admin/AdminDashboardGuard';
+import ListUserAdminPage from "./pages/Admin/userAdminPage/ListUserAdminPage";
+import EditUserAdminPage from "./pages/Admin/userAdminPage/EditUserAdminPage";
+import CreateUserAdminPage from "./pages/Admin/userAdminPage/CreateUserAdminPage";
+import DetailUserAdminPage from "./pages/Admin/userAdminPage/DetailUserAdminPage";
+import UserDashboardGuard from "./pages/UserDashboardGuard";
+import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -77,6 +77,10 @@ function App() {
           <Route path="/video/:id" element={<DetailVideoPage />} />
           <Route path="/konsultasi" element={<DetailKonsultasiPage />} />
           <Route
+            path="/konsultasi/success"
+            element={<DetailKonsultasiPage />}
+          />
+          <Route
             path="/konsultasi/form-konsultasi"
             element={<FormKonsultasiPage />}
           />
@@ -86,21 +90,101 @@ function App() {
           {/* user */}
 
           {/* admin */}
-          <Route path="/admin/dashboard" element={ <AdminDashboardGuard> <DashboardAdminPage /></AdminDashboardGuard> } />
-          <Route path="/admin/blog" element={<AdminDashboardGuard><ListBlogAdminPage /></AdminDashboardGuard>}/>
-          <Route path="/admin/video" element={<AdminDashboardGuard><ListVideoAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/konsul" element={<AdminDashboardGuard><ListKonsulAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/konsul/:id/detail" element={<AdminDashboardGuard><DetailKonsulAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/konsul/:id/edit" element={<EditKonsulAdminPage />} />
-          <Route path="/admin/blog/create-blog" element={<AdminDashboardGuard><CreateBlogAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/blog/:id/edit" element={<AdminDashboardGuard><EditBlogAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/video" element={<AdminDashboardGuard><ListVideoAdminPage /></AdminDashboardGuard>} />
-          <Route path="/admin/video/create-video" element={<AdminDashboardGuard><CreateVideoAdminPage /></AdminDashboardGuard>}/>
-          <Route path="/admin/video/:id/edit" element={<AdminDashboardGuard><EditVideoAdminPage /></AdminDashboardGuard>} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminDashboardGuard>
+                {" "}
+                <DashboardAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/blog"
+            element={
+              <AdminDashboardGuard>
+                <ListBlogAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/video"
+            element={
+              <AdminDashboardGuard>
+                <ListVideoAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/konsul"
+            element={
+              <AdminDashboardGuard>
+                <ListKonsulAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/konsul/:id/detail"
+            element={
+              <AdminDashboardGuard>
+                <DetailKonsulAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/konsul/:id/edit"
+            element={<EditKonsulAdminPage />}
+          />
+          <Route
+            path="/admin/blog/create-blog"
+            element={
+              <AdminDashboardGuard>
+                <CreateBlogAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/blog/:id/edit"
+            element={
+              <AdminDashboardGuard>
+                <EditBlogAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/video"
+            element={
+              <AdminDashboardGuard>
+                <ListVideoAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/video/create-video"
+            element={
+              <AdminDashboardGuard>
+                <CreateVideoAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
+          <Route
+            path="/admin/video/:id/edit"
+            element={
+              <AdminDashboardGuard>
+                <EditVideoAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
           <Route path="/admin/user" element={<ListUserAdminPage />} />
-          <Route path="/admin/user/create-user" element={<CreateUserAdminPage />} />
+          <Route
+            path="/admin/user/create-user"
+            element={<CreateUserAdminPage />}
+          />
           <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
-          <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
+          <Route
+            path="/admin/user/:id/detail"
+            element={<DetailUserAdminPage />}
+          />
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
       )}
