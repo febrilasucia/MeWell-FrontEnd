@@ -20,6 +20,8 @@ import DashboardUserPage from "./pages/DashboardUserPage";
 import DetailKonsultasiPage from "./pages/KonsultasiPage/DetailKonsultasiPage";
 import FormKonsultasiPage from "./components/Konsultasi/FormKonsultasi";
 import ChoosePsikologPage from "./components/Konsultasi/ChoosePsikolog";
+import DetailPayment from "./components/Konsultasi/DetailPayment";
+import UploadPayment from "./components/Konsultasi/UploadPayment";
 import DetailTesIE from "./pages/TesPsikologiPage/TesIEPage/TesIE";
 import DetailKetergantunganPage from "./pages/TesPsikologiPage/Ketergantungan/DetailKetergantunganPage";
 
@@ -75,6 +77,14 @@ function App() {
           <Route path="/video" element={<ListVideo />} />
           <Route path="/video/:id" element={<DetailVideoPage />} />
           <Route path="/konsultasi" element={<DetailKonsultasiPage />} />
+          <Route
+            path="/konsultasi/detail-payment"
+            element={<DetailPayment />}
+          />
+          <Route
+            path="/konsultasi/upload-payment"
+            element={<UploadPayment />}
+          />
           <Route
             path="konsultasi/pilih-psikolog"
             element={<ChoosePsikologPage />}
