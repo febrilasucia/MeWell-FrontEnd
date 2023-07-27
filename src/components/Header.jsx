@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import LogoHori from "../image/logo-hori.png";
 import LogoMandeh from "../image/logo-mandeh.png";
 import LogoTulisanMandeh from "../image/logo-tulisan-lentera2.png";
 import { useDispatch, useSelector } from "react-redux";
-// import { logout } from "../features/authSlice";
-import { logout } from "../action/logoutAction";
+import { logout } from "../features/authSlice";
+// import { logout } from "../action/logoutAction";
 import { RiAdminLine, RiLogoutBoxLine, RiProfileLine } from "react-icons/ri";
-
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -28,7 +28,8 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     setDropdownOpen(false);
-    window.location.href = "/";
+    navigate("/");
+    // window.location.href('/')
   };
 
   useEffect(() => {
@@ -167,6 +168,7 @@ function Header() {
                       </li>
                       <li>
                         <Link
+                          type="button"
                           className="flex items-center gap-2 px-4 py-2  hover:bg-gray-200"
                           onClick={handleLogout}
                         >

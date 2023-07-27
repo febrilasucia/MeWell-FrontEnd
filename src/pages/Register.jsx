@@ -19,6 +19,12 @@ function Register() {
     age: "",
     work: "",
     role: "",
+    isPsikolog: "",
+    pendidikan: "",
+    univ: "",
+    ktpUrl: "",
+    ijazahUrl: "",
+    alasan: "",
   });
   // const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();

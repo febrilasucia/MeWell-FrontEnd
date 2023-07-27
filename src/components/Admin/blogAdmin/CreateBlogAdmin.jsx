@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Sidebar from '../Sidebar';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import ImageCompress from 'quill-image-compress';
+
+Quill.register('modules/imageCompress', ImageCompress);
 
 const CreateBlogAdmin = () => {
   const [activePage, setActivePage] = useState('Blog');
@@ -257,6 +260,13 @@ const CreateBlogAdmin = () => {
                               [{ direction: 'rtl' }],
                               ['clean'],
                             ],
+                            imageCompress: {
+                              quality: 0.7, // default
+                              maxWidth: 1000, // default
+                              maxHeight: 1000, // default
+                              imageType: 'image/jpeg', // default
+                              debug: true, // default
+                            },
                           }}
                           formats={[
                             'header',
