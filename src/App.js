@@ -71,32 +71,25 @@ function App() {
 
           {/* user */}
           <Route path="/dashboard" element={<DashboardUserPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+
+          <Route
+            path="/profile"
+            element={
+              <UserDashboardGuard>
+                <ProfilePage />
+              </UserDashboardGuard>
+            }
+          />
           <Route path="/blog" element={<ListBlogPage />} />
           <Route path="/blog/:id" element={<DetailBlogPage />} />
           <Route path="/video" element={<ListVideo />} />
           <Route path="/video/:id" element={<DetailVideoPage />} />
           <Route path="/konsultasi" element={<DetailKonsultasiPage />} />
-          <Route
-            path="/konsultasi/detail-payment"
-            element={<DetailPayment />}
-          />
-          <Route
-            path="/konsultasi/upload-payment"
-            element={<UploadPayment />}
-          />
-          <Route
-            path="konsultasi/pilih-psikolog"
-            element={<ChoosePsikologPage />}
-          />
-          <Route
-            path="/konsultasi/success"
-            element={<DetailKonsultasiPage />}
-          />
-          <Route
-            path="/konsultasi/form-konsultasi"
-            element={<FormKonsultasiPage />}
-          />
+          <Route path="/konsultasi/detail-payment" element={<DetailPayment />} />
+          <Route path="/konsultasi/upload-payment" element={<UploadPayment />} />
+          <Route path="konsultasi/pilih-psikolog" element={<ChoosePsikologPage />} />
+          <Route path="/konsultasi/success" element={<DetailKonsultasiPage />} />
+          <Route path="/konsultasi/form-konsultasi" element={<FormKonsultasiPage />} />
           <Route path="/tes" element={<ListTes />} />
           <Route path="/tes/detail-ie" element={<DetailTesIE />} />
           <Route path="/tes/detail-gk" element={<DetailKetergantunganPage />} />
@@ -107,7 +100,6 @@ function App() {
             path="/admin/dashboard"
             element={
               <AdminDashboardGuard>
-                {" "}
                 <DashboardAdminPage />
               </AdminDashboardGuard>
             }
@@ -144,10 +136,7 @@ function App() {
               </AdminDashboardGuard>
             }
           />
-          <Route
-            path="/admin/konsul/:id/edit"
-            element={<EditKonsulAdminPage />}
-          />
+          <Route path="/admin/konsul/:id/edit" element={<EditKonsulAdminPage />} />
           <Route
             path="/admin/blog/create-blog"
             element={
@@ -189,15 +178,9 @@ function App() {
             }
           />
           <Route path="/admin/user" element={<ListUserAdminPage />} />
-          <Route
-            path="/admin/user/create-user"
-            element={<CreateUserAdminPage />}
-          />
+          <Route path="/admin/user/create-user" element={<CreateUserAdminPage />} />
           <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
-          <Route
-            path="/admin/user/:id/detail"
-            element={<DetailUserAdminPage />}
-          />
+          <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
           <Route path="/blog-icon" element={<BlogIcon />} />
         </Routes>
       )}

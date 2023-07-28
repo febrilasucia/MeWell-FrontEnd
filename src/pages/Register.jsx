@@ -19,7 +19,7 @@ function Register() {
     age: "",
     work: "",
     role: "",
-    isPsikolog: "",
+    isPsikolog: "Menunggu",
     pendidikan: "",
     univ: "",
     ktpUrl: "",

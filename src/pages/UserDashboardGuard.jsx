@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const UserDashboardGuard = ({ children }) => {
   const navigate = useNavigate();
@@ -13,12 +13,13 @@ const UserDashboardGuard = ({ children }) => {
         !authState ||
         !authState.user ||
         !authState.user.role ||
-        authState.user.role !== 'user'
+        authState.user.role !== "user" ||
+        authState.isLogin === false
       ) {
-        throw new Error('Unauthorized');
+        throw new Error("Unauthorized");
       }
     } catch (error) {
-      navigate('/login?message=Unauthorized');
+      navigate("/login?message=Unauthorized");
     }
   }, [navigate, authState]);
 
