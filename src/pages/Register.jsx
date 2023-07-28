@@ -38,12 +38,20 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Remove 'isPsikolog' from formData if the role is not 'psikolog'
+    const filteredFormData = { ...formData };
+    if (formData.role !== "psikolog") {
+      delete filteredFormData.isPsikolog;
+    }
+
     let config = {
       method: "post",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/auth/register`,
-      data: formData,
+      data: filteredFormData,
     };
+
     try {
       const makeRequest = async () => {
         try {
@@ -230,9 +238,9 @@ function Register() {
                   </p>
                   <input
                     type="file"
-                    name="profilUrl"
+                    name="profile"
                     className="bg-gray-50 border mb-5 border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                    value={formData.dateOfBirth}
+                    value={formData.profile}
                     onChange={handleChange}
                   />
                 </div>
@@ -265,8 +273,7 @@ function Register() {
                         name="pendidikan"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                         placeholder="Pendidikan Terakhir"
-                        required
-                        value={formData.name}
+                        value={formData.pendidikan}
                         onChange={handleChange}
                       />
                     </div>
@@ -276,7 +283,7 @@ function Register() {
                         name="univ"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5"
                         placeholder="Universitas Asal"
-                        value={formData.dateOfBirth}
+                        value={formData.univ}
                         onChange={handleChange}
                       />
                     </div>
@@ -290,7 +297,7 @@ function Register() {
                         name="ktp"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
                         placeholder="Link Gdrive KTP"
-                        value={formData.dateOfBirth}
+                        value={formData.ktp}
                         onChange={handleChange}
                       />
                     </div>
@@ -299,11 +306,11 @@ function Register() {
                         Upload Ijazah
                       </p>
                       <input
-                        type="text"
+                        type="file"
                         name="ijazah"
                         className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
                         placeholder="Link Gdrive Ijazah"
-                        value={formData.dateOfBirth}
+                        value={formData.ijazah}
                         onChange={handleChange}
                       />
                     </div>
@@ -315,7 +322,7 @@ function Register() {
                         className="bg-gray-50 h-[100px] border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                         placeholder="Alasan mendaftar Freelance Psikolog di Lentera Mandeh"
                         required
-                        value={formData.name}
+                        value={formData.alasan}
                         onChange={handleChange}
                       />
                     </div>
