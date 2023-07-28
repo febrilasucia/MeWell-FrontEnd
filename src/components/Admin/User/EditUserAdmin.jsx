@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Sidebar from '../Sidebar';
-import { useNavigate, useParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { formatDate, formatDate2, splitDate } from '../../../util/Helper';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Sidebar from "../Sidebar";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import { formatDate, formatDate2, splitDate } from "../../../util/Helper";
 
 const EditUserAdmin = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   // const [role, setRole] = useState("");
-  const [profileUrl, setProfileUrl] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender, setGender] = useState('');
-  const [age, setAge] = useState('');
-  const [work, setWork] = useState('');
+  const [profileUrl, setProfileUrl] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [work, setWork] = useState("");
   // const [isVerified, setIsVerified] = useState("");
-  const [activePage, setActivePage] = useState('User');
+  const [activePage, setActivePage] = useState("User");
   const navigate = useNavigate();
   const { id } = useParams();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const handleGoBack = () => {
     navigate(-1);
   };
   console.log(dateOfBirth);
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     const data = {
@@ -37,10 +38,10 @@ const EditUserAdmin = () => {
 
     try {
       Swal.fire({
-        title: 'Do you want to save the changes?',
+        title: "Do you want to save the changes?",
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: 'Save',
+        confirmButtonText: "Save",
         denyButtonText: `Don't save`,
       }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
@@ -56,9 +57,9 @@ const EditUserAdmin = () => {
           );
           console.log(response);
           navigate(`/admin/user`);
-          Swal.fire('Saved!', '', 'success');
+          Swal.fire("Saved!", "", "success");
         } else if (result.isDenied) {
-          Swal.fire('Changes are not saved', '', 'info');
+          Swal.fire("Changes are not saved", "", "info");
         }
       });
     } catch (error) {
@@ -231,9 +232,9 @@ const EditUserAdmin = () => {
                   </table>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      position: 'relative',
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      position: "relative",
                     }}
                     className="p-5 flex flex-wrap gap-2"
                   >

@@ -68,7 +68,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
-
           {/* user */}
           <Route path="/dashboard" element={<DashboardUserPage />} />
           <Route path="/profile" element={<ProfilePage />} />
@@ -78,6 +77,15 @@ function App() {
           <Route path="/video/:id" element={<DetailVideoPage />} />
           <Route path="/konsultasi" element={<DetailKonsultasiPage />} />
           <Route
+            path="/konsultasi/form-konsultasi"
+            element={<FormKonsultasiPage />}
+          />
+          /konsultasi/form-konsultasi/:id/pilih-psikolog
+          <Route
+            path="/konsultasi/form-konsultasi/:id/pilih-psikolog"
+            element={<ChoosePsikologPage />}
+          />
+          <Route
             path="/konsultasi/detail-payment"
             element={<DetailPayment />}
           />
@@ -86,22 +94,13 @@ function App() {
             element={<UploadPayment />}
           />
           <Route
-            path="konsultasi/pilih-psikolog"
-            element={<ChoosePsikologPage />}
-          />
-          <Route
             path="/konsultasi/success"
             element={<DetailKonsultasiPage />}
-          />
-          <Route
-            path="/konsultasi/form-konsultasi"
-            element={<FormKonsultasiPage />}
           />
           <Route path="/tes" element={<ListTes />} />
           <Route path="/tes/detail-ie" element={<DetailTesIE />} />
           <Route path="/tes/detail-gk" element={<DetailKetergantunganPage />} />
           {/* user */}
-
           {/* admin */}
           <Route
             path="/admin/dashboard"
