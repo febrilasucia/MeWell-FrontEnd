@@ -1,14 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import PsiImg from "../../image/psikologimage.jpg";
 import { FaStarHalf, FaStar } from "react-icons/fa";
+import axios from "axios";
 
 function ChoosePsikolog() {
   const token = localStorage.getItem("token");
   const [psikologId, setPsikologId] = useState("");
   const { id } = useParams();
+  const [psikolog, setpsikolog] = useState([]);
+
+  const fetchPsikolog = async () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_BASE_URL}/user?role=psikolog&isPsikolog=Diterima`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    async function makeRequest() {
+      try {
+        const response = await axios.request(config);
+        setpsikolog(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    makeRequest();
+  };
+
+  useEffect(() => {
+    fetchPsikolog();
+  }, []);
 
   const handleUpdate = async (e) => {
     const data = {
@@ -49,36 +77,38 @@ function ChoosePsikolog() {
             </h1>
             <div className="p-5">
               <div className=" my-[10px] flex flex-wrap justify-center">
-                <Link
-                  to="#"
-                  className="flex flex-col mb-5 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100"
-                >
-                  <img
-                    className="object-cover mx-2 w-full rounded-t-lg h-96 md:h-auto md:w-36 md:rounded-none md:rounded-l-lg"
-                    src={PsiImg}
-                  />
-                  <form onSubmit={handleUpdate}></form>
-                  <div className="flex flex-col justify-between p-4 leading-normal">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-textSec dark:text-white">
-                      Prof. Dr. Desi, M.Psi., Psikolog
-                    </h5>
-                    <p className="mb-3 font-normal text-textFunc">
-                      Sudah lebih 3 tahun berpengalaman dalam konseling anak
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <p className="mb-3 flex font-normal text-yellow-500 dark:text-gray-400">
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStarHalf />
+                {psikolog.map((psi) => (
+                  <Link
+                    to="#"
+                    className="flex flex-col mb-5 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100"
+                  >
+                    <img
+                      className="object-cover mx-2 w-full rounded-t-lg h-96 md:h-auto md:w-36 md:rounded-none md:rounded-l-lg"
+                      src={PsiImg}
+                    />
+                    <form onSubmit={handleUpdate}></form>
+                    <div className="flex flex-col justify-between p-4 leading-normal">
+                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-textSec">
+                        {psi.name}
+                      </h5>
+                      <p className="mb-3 font-normal text-textFunc">
+                        Sudah lebih 3 tahun berpengalaman dalam konseling anak
                       </p>
-                      <p className="mb-3 font-normal text-green-500 dark:text-gray-400">
-                        Rp. 200.000
-                      </p>
+                      <div className="flex justify-between items-center">
+                        <p className="mb-3 flex font-normal text-yellow-500">
+                          <FaStar />
+                          <FaStar />
+                          <FaStar />
+                          <FaStar />
+                          <FaStarHalf />
+                        </p>
+                        <p className="mb-3 font-normal text-green-500">
+                          Rp. 200.000
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                ))}
               </div>
             </div>
           </form>
