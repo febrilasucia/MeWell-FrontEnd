@@ -7,7 +7,15 @@ import { useSelector } from "react-redux";
 
 function Profile() {
   const authState = useSelector((state) => state.auth);
-  console.log(authState);
+
+  // Cek apakah authState atau authState.user ada sebelum mengakses propertinya
+  const userName = authState?.user?.name || "Guest";
+  const dateOfBirth = authState?.user?.dateOfBirth || "N/A";
+  const gender = authState?.user?.gender || "N/A";
+  const work = authState?.user?.work || "N/A";
+  const email = authState?.user?.email || "N/A";
+  const role = authState?.user?.role || "N/A";
+  const isVerified = authState?.user?.isVerified || false;
 
   return (
     <div>
@@ -43,22 +51,22 @@ function Profile() {
                       <tr>
                         <td className="p-3">Nama Lengkap</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">{authState.user.name}</td>
+                        <td className="p-3">{userName}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Tanggal Lahir</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">{authState.user.dateOfBirth}</td>
+                        <td className="p-3">{dateOfBirth}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Jenis Kelamin</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">{authState.user.gender}</td>
+                        <td className="p-3">{gender}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Pekerjaan</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">{authState.user.work}</td>
+                        <td className="p-3">{work}</td>
                       </tr>
                     </thead>
                   </table>
@@ -79,7 +87,7 @@ function Profile() {
               </div>
               <div className="my-[40px] text-textSec justify-center items-center text-center flex-wrap w-full">
                 <p>
-                  Hello, {authState.user.name} <br /> Welcome to your profile
+                  Hello, {userName} <br /> Welcome to your profile
                   page
                 </p>
                 <div>
@@ -110,18 +118,18 @@ function Profile() {
                       <tr>
                         <td className="p-3">Email</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">{authState.user.email}</td>
+                        <td className="p-3">{email}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Role</td>
                         <td className="p-3">:</td>
-                        <td className="p-3">{authState.user.role}</td>
+                        <td className="p-3">{role}</td>
                       </tr>
                       <tr>
                         <td className="p-3">Verified</td>
                         <td className="p-3">:</td>
                         <td className="p-3">
-                          {authState.user.isVerified ? (
+                          {isVerified ? (
                             <FaCheckCircle className="text-green-500" />
                           ) : (
                             <FaTimesCircle className="text-red-500" />

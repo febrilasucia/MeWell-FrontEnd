@@ -70,7 +70,14 @@ function App() {
           <Route path="/" element={<Home />} />
           {/* user */}
           <Route path="/dashboard" element={<DashboardUserPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/profile"
+            element={
+              <UserDashboardGuard>
+                <ProfilePage />
+              </UserDashboardGuard>
+            }
+          />
           <Route path="/blog" element={<ListBlogPage />} />
           <Route path="/blog/:id" element={<DetailBlogPage />} />
           <Route path="/video" element={<ListVideo />} />
@@ -80,7 +87,6 @@ function App() {
             path="/konsultasi/form-konsultasi"
             element={<FormKonsultasiPage />}
           />
-          /konsultasi/form-konsultasi/:id/pilih-psikolog
           <Route
             path="/konsultasi/form-konsultasi/:id/pilih-psikolog"
             element={<ChoosePsikologPage />}
@@ -106,7 +112,6 @@ function App() {
             path="/admin/dashboard"
             element={
               <AdminDashboardGuard>
-                {" "}
                 <DashboardAdminPage />
               </AdminDashboardGuard>
             }
