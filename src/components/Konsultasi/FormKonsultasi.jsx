@@ -47,25 +47,25 @@ function FormKonsultasi() {
       try {
         const response = await axios.request(config);
         console.log(JSON.stringify(response.data));
+        return response;
       } catch (error) {
         console.log(error);
       }
     }
 
-    makeRequest();
-    navigate("/konsultasi");
-
+    const newRequest = await makeRequest();
+    const idPsikolog = newRequest.data.data.id;
     try {
       Swal.fire({
         title: "Berhasil!",
-        text: "Data berhasil disimpan.",
+        text: "Silahkan Pilih Psikolog.",
         icon: "success",
         confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(`/konsultasi/form-konsultasi/${idPsikolog}/pilih-psikolog`);
+        }
       });
-
-      setTimeout(() => {
-        navigate("/pilih-psikolog");
-      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -119,7 +119,7 @@ function FormKonsultasi() {
                   required
                 />
                 <label
-                  for="nama_pasien"
+                  htmlFor="nama_pasien"
                   className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Nama Pasien
@@ -137,7 +137,7 @@ function FormKonsultasi() {
                   required
                 />
                 <label
-                  for="nama_ortu"
+                  htmlFor="nama_ortu"
                   className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Nama Orang Tua
@@ -156,7 +156,7 @@ function FormKonsultasi() {
                     required
                   />
                   <label
-                    for="tempat_lahir"
+                    htmlFor="tempat_lahir"
                     className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >
                     Tempat Lahir
@@ -174,7 +174,7 @@ function FormKonsultasi() {
                     required
                   />
                   <label
-                    for="tgl_lahir"
+                    htmlFor="tgl_lahir"
                     className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >
                     Tanggal Lahir
@@ -216,7 +216,7 @@ function FormKonsultasi() {
                     required
                   />
                   <label
-                    for="no_wa"
+                    htmlFor="no_wa"
                     className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                   >
                     Nomor Whatsapp (62812345678)
@@ -235,7 +235,7 @@ function FormKonsultasi() {
                   required
                 />
                 <label
-                  for="alamat"
+                  htmlFor="alamat"
                   className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Alamat
@@ -308,7 +308,7 @@ function FormKonsultasi() {
                   required
                 />
                 <label
-                  for="riwayat"
+                  htmlFor="riwayat"
                   className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Riwayat Penyakit
@@ -326,7 +326,7 @@ function FormKonsultasi() {
                   required
                 />
                 <label
-                  for="keluhan"
+                  htmlFor="keluhan"
                   className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                   Keluhan
