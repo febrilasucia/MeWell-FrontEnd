@@ -60,7 +60,7 @@ const DetailPayment = () => {
       {/* 1. Tampilkan detail konsultasi  */}
       {/* 2. Tampilkan detail Psikolog yang dipilih */}
       {/* 3. Tampilkan detail pembayaran yang akan dilakukan user */}
-      <Header />
+      {/* <Header /> */}
       <div className="flex">
         <div className="w-[1000px] mx-auto mt-10 justify-center">
           <div className="text-center my-5">
@@ -337,80 +337,13 @@ const DetailPayment = () => {
                   </div>
                 </div>
                 {/* 2. Tampilkan detail Psikolog yang dipilih */}
-                {/* 3. Tampilkan detail pembayaran yang akan dilakukan user */}
-                <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">
-                  DETAIL PEMBAYARAN
-                </h1>
-                <div className="p-5">
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      position: "relative",
-                    }}
-                  >
-                    <div className="flex flex-col text-center">
-                      {/* <h1 className="text-textSec font-bold ">
-                        <Tanggal></Tanggal> Pembayaran
-                      </h1> */}
-                      <p className="text-textSec text-sizeParagraph">
-                        Rabu, 26/07/2023
-                      </p>
-                      <p className="text-textSec text-sizeParagraph">
-                        22.10 WIB
-                      </p>
-                    </div>
-                  </div>
-                  <div className="w-full my-3 border border-textFunc"></div>
-
-                  <div className="mt-5">
-                    <div className="flex justify-between">
-                      <div>Subtotal</div>
-                      <div>Rp. 200.000</div>
-                    </div>
-                    <div className="flex justify-between mt-1">
-                      <div>Diskon</div>
-                      <div>Rp. 0</div>
-                    </div>
-                    <div className="flex justify-between mt-1">
-                      <div>Jasa Aplikasi</div>
-                      <div>Rp. 10.000</div>
-                    </div>
-                    <div className="w-full my-3 border border-textFunc"></div>
-                    <div className="flex justify-between mt-1">
-                      <div>Total Pembayaran</div>
-                      <div>
-                        <b>Rp. 210.000</b>
-                      </div>
-                    </div>
-                    <div className="w-full my-3 border border-textFunc"></div>
-                  </div>
-                  <p className="mt-5 text-gray-500">
-                    Apabila data anda sudah benar, silahkan melakukan pembayaran
-                    konsultasi anda melalui :
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-[100px] my-5">
-                      <img src={LogoBCA} alt="" />
-                    </div>
-                    <div>No. Rek : 12344566 A/N Me-Well Admin</div>
-                  </div>
-
-                  <div className="mt-5 text-gray-500">
-                    Apabila telah selesai melakukan transfer pada nomor rekening
-                    diatas silahkan upload bukti transfer dibawah ini
-                  </div>
-                  <div>Upload Bukti Transfer</div>
-                  <div>Button Selesai</div>
-                </div>
-                {/* 3. Tampilkan detail pembayaran yang akan dilakukan user */}
               </form>
             </div>
           </div>
           {/* 1. Tampilkan detail konsultasi  */}
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
