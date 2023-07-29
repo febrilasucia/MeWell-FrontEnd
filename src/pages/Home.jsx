@@ -11,6 +11,7 @@ import Train from "../image2/24.png";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { FaUser } from "react-icons/fa";
 
 function Home() {
   const token = useSelector((state) => state.auth.token);
