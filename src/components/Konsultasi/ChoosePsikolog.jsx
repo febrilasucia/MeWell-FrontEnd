@@ -1,32 +1,76 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import PsiImg from "../../image/psikologimage.jpg";
 import { FaStarHalf, FaStar } from "react-icons/fa";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function ChoosePsikolog() {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   const [psikologId, setPsikologId] = useState("");
+  const [isPayment, setIsPayment] = useState("");
   const { id } = useParams();
 
   const handleUpdate = async (e) => {
-    const data = {
-      psikologId,
-    };
+    e.preventDefault();
+    let data = new FormData();
+    data.append("psikologId", psikologId);
+    data.append("isPayment", isPayment);
 
     let config = {
       method: "patch",
       maxBodyLength: Infinity,
-      url: "http://localhost:5000/konsul/64ae34e6da917bb15167afab",
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/${id}`,
       headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTkxOGZmYTU5M2RhNmJmNDdhOGMwYiIsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaXNWZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNjkwNTMxNDk1LCJleHAiOjE2OTA2MTc4OTV9.DCdI5JHaqgCrXAWWPYLJFy_0LXjD3i90EovLszQbyXY",
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
+
+    try {
+      const response = await axios.request(config);
+      console.log(JSON.stringify(response.data));
+      // Navigasi ke halaman detail blog setelah berhasil update
+
+      Swal.fire({
+        title: "Do you want to save the psikolog?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Cancel`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          navigate(`/konsultasi/detail-payment`);
+          Swal.fire("Saved!", "", "success");
+        } else if (result.isDenied) {
+          Swal.fire("Psikolog are not saved", "", "info");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
+  useEffect(() => {
+    // Fetch data blog yang akan diupdate
+    const fetchKonsul = async () => {
+      console.log("fetch konsul running");
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/konsul/${id}`
+        );
+        const konsulData = response.data.data;
+        setPsikologId(konsulData.psikologId);
+        console.log(konsulData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchKonsul();
+  }, [id]);
 
   return (
     <div>
