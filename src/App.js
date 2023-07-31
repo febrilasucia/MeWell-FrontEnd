@@ -46,6 +46,7 @@ import CreateUserAdminPage from "./pages/Admin/userAdminPage/CreateUserAdminPage
 import DetailUserAdminPage from "./pages/Admin/userAdminPage/DetailUserAdminPage";
 import UserDashboardGuard from "./pages/UserDashboardGuard";
 import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
+import LoginGuard from "./pages/LoginGuard";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -90,9 +91,9 @@ function App() {
           <Route
             path="/konsultasi/:id/pilih-psikolog"
             element={
-              <UserDashboardGuard>
+              <LoginGuard>
                 <ChoosePsikologPage />
-              </UserDashboardGuard>
+              </LoginGuard>
             }
           />
           <Route
