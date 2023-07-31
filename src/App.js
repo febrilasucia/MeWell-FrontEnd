@@ -15,7 +15,7 @@ import ListTes from "./pages/TesPsikologiPage/ListTesPsikologi";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DashboardAdminPage from "./pages/Admin/DashboardAdminPage";
-import DashboardUserPage from "./pages/DashboardUserPage";
+// import DashboardUserPage from "./pages/DashboardUserPage";
 //konsul
 import DetailKonsultasiPage from "./pages/KonsultasiPage/DetailKonsultasiPage";
 import FormKonsultasiPage from "./components/Konsultasi/FormKonsultasi";
@@ -47,6 +47,7 @@ import DetailUserAdminPage from "./pages/Admin/userAdminPage/DetailUserAdminPage
 import UserDashboardGuard from "./pages/UserDashboardGuard";
 import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
 import LoginGuard from "./pages/LoginGuard";
+import DashboardUser from "./components/User/DashboardUser";
 
 // ! Psikolog
 import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
@@ -72,8 +73,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
-          {/* user ruter*/}
-          <Route path="/dashboard" element={<DashboardUserPage />} />
+          {/* user router*/}
+          <Route path="/user/dashboard" element={<DashboardUser />} />
           <Route
             path="/profile"
             element={
