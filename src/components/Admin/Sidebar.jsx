@@ -6,6 +6,7 @@ import LogoHori from "../../image/logo-tulisan-lentera2.png";
 import LogoMandeh from "../../image/logo-mandeh.png";
 import {
   FaBookReader,
+  FaComment,
   FaHome,
   FaSignOutAlt,
   FaUserMd,
@@ -25,8 +26,9 @@ const Sidebar = ({ activePage, setActivePage }) => {
     { title: "Dashboard", icon: <FaHome />, link: "/admin/dashboard" },
     { title: "Blog", icon: <FaBookReader />, link: "/admin/blog" },
     { title: "Video", icon: <FaVideo />, link: "/admin/video" },
-    { title: "Konsultasi ", icon: <FaUserMd />, link: "/admin/konsul" },
+    { title: "Konsultasi ", icon: <FaComment />, link: "/admin/konsul" },
     { title: "User", icon: <FaUsers />, link: "/admin/user" },
+    { title: "Psikolog", icon: <FaUserMd />, link: "/admin/psikolog" },
   ];
 
   const handleMenuClick = (title) => {

@@ -6,13 +6,14 @@ import LogoMandeh from "../image/logo-mandeh.png";
 import LogoTulisanMandeh from "../image/logo-tulisan-lentera2.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/authSlice";
-// import { logout } from "../action/logoutAction";
 import { RiAdminLine, RiLogoutBoxLine, RiProfileLine } from "react-icons/ri";
+
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [role, setRole] = useState("");
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -29,7 +30,6 @@ function Header() {
     dispatch(logout());
     setDropdownOpen(false);
     navigate("/");
-    // window.location.href('/')
   };
 
   useEffect(() => {
@@ -45,6 +45,19 @@ function Header() {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
+
+  let linkTo = "";
+
+  if (role === "admin") {
+    linkTo = "/admin/dashboard";
+  } else if (role === "psikolog") {
+    linkTo = "/psikolog/dashboard";
+  } else if (role === "user") {
+    linkTo = "/user/dashboard";
+  } else {
+    // Jika role tidak sesuai, Anda bisa mengatur linkTo ke halaman lain yang sesuai.
+    linkTo = "/user/dashboard";
+  }
 
   return (
     <nav className="bg-bgSec shadow-xl z-10">
@@ -147,16 +160,16 @@ function Header() {
                   </div>
                   {dropdownOpen && (
                     <ul className="dropdown-menu text-textSec w-48 py-2 mt-2 ml-4 text-base text-left rounded-lg shadow-lg min-w-max items-center  bg-bgPri float-left  list-none   m-0 bg-clip-padding border-none dropdown-menu fixed right-5">
-                      {user.role === "admin" && (
-                        <li>
-                          <Link
-                            className="px-4 flex gap-2 items-center py-2 hover:bg-gray-200"
-                            to="/admin/dashboard"
-                          >
-                            <RiAdminLine /> Admin
-                          </Link>
-                        </li>
-                      )}
+                      {/* {user.role === "admin" && ( */}
+                      <li>
+                        <Link
+                          className="px-4 flex gap-2 items-center py-2 hover:bg-gray-200"
+                          to={linkTo}
+                        >
+                          <RiAdminLine /> Dashboard
+                        </Link>
+                      </li>
+                      {/* // )} */}
                       <li>
                         <Link
                           className="flex  gap-2 px-4 py-2  hover:bg-gray-200"
