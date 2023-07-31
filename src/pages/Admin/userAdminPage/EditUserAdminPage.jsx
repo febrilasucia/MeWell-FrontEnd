@@ -1,5 +1,5 @@
 import React from 'react'
-import EditUserAdmin from '../../../components/Admin/User/EditUserAdmin'
+import EditUserAdmin from '../../../components/Admin/userAdmin/EditUserAdmin'
 
 function EditUserAdminPage() {
   return (

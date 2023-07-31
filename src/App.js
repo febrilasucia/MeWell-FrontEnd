@@ -53,6 +53,7 @@ import ListPsikologAdminPage from "./pages/Admin/psikologAdminPage/ListPsikologA
 
 // ! Psikolog
 import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
+import ChatPasienPsikologPage from "./pages/Psikolog/ChatPasienPsikologPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -228,6 +229,10 @@ function App() {
           <Route
             path="/psikolog/dashboard"
             element={<DashboardPsikologPage />}
+          />
+          <Route
+            path="/psikolog/chat"
+            element={<ChatPasienPsikologPage />}
           />
           {/* psikolog router */}
         </Routes>
