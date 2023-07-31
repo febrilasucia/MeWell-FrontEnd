@@ -54,9 +54,9 @@ const DetailPayment = () => {
     fetchKonsul();
   }, [id]);
 
-  const paymentDetail= () => {
-
-  }
+  const paymentDetail = () => {
+    navigate(`/konsultasi/${id}/upload-payment`)
+  };
 
   return (
     <div className="mb-6">
@@ -314,6 +314,7 @@ const DetailPayment = () => {
                 <div className="p-5">
                   <div class="flex flex-col mb-5 items-center md:flex-row md:max-w-4xl ">
                     <img
+                      alt="PsiImg"
                       className="object-cover mx-2 w-full rounded-t-lg h-96 md:h-auto md:w-36 md:rounded-none md:rounded-l-lg"
                       src={PsiImg}
                     />

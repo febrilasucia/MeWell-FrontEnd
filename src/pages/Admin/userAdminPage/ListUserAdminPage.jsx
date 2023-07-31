@@ -1,5 +1,5 @@
 import React from "react";
-import ListUserAdmin from "../../../components/Admin/User/ListUserAdmin";
+import ListUserAdmin from "../../../components/Admin/userAdmin/ListUserAdmin";
 
 function UserPage() {
   return (

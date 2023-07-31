@@ -1,5 +1,5 @@
 import React from "react";
-import DetailUserAdmin from "../../../components/Admin/User/DetailUserAdmin";
+import DetailUserAdmin from "../../../components/Admin/userAdmin/DetailUserAdmin";
 
 function DetailUserAdminPage() {
   return (
