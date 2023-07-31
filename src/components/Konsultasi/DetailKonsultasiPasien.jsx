@@ -57,8 +57,12 @@ const DetailPayment = () => {
     fetchKonsul();
   }, [id]);
 
+  const paymentDetail= () => {
+
+  }
+
   return (
-    <div>
+    <div className="mb-6">
       {/* 1. Tampilkan detail konsultasi  */}
       {/* 2. Tampilkan detail Psikolog yang dipilih */}
       {/* 3. Tampilkan detail pembayaran yang akan dilakukan user */}
@@ -340,6 +344,14 @@ const DetailPayment = () => {
                 </div>
                 {/* 2. Tampilkan detail Psikolog yang dipilih */}
               </form>
+            </div>
+            <div className="text-center mt-4">
+              <button
+                onClick={paymentDetail}
+                className="bg-opt text-black py-2 px-4 rounded-md"
+              >
+                Detail Pembayaran
+              </button>
             </div>
           </div>
           {/* 1. Tampilkan detail konsultasi  */}
