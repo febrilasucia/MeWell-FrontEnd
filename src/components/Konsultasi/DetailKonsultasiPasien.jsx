@@ -22,6 +22,7 @@ const DetailPayment = () => {
   const [viaKonsul, setViaKonsul] = useState("");
   const [riwayat, setRiwayat] = useState("");
   const [keluhan, setKeluhan] = useState("");
+  const [namaPsikolog, setNamaPsikolog] = useState("");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -48,6 +49,7 @@ const DetailPayment = () => {
         setKeluhan(konsulData.keluhan);
         setViaKonsul(konsulData.via_konsul);
         console.log(konsulData);
+        setNamaPsikolog(konsulData.psikologId.name);
       } catch (error) {
         console.log(error);
       }
@@ -316,7 +318,7 @@ const DetailPayment = () => {
                     />
                     <div className="flex flex-col justify-between p-4 leading-normal">
                       <h5 class="mb-2 text-2xl font-bold tracking-tight text-textSec dark:text-white">
-                        Prof. Dr. Desi, M.Psi., Psikolog
+                        {namaPsikolog}
                       </h5>
                       <p class="mb-3 font-normal text-textFunc">
                         Sudah lebih 3 tahun berpengalaman dalam konseling anak

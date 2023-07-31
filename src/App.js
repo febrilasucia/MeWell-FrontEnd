@@ -88,8 +88,12 @@ function App() {
             element={<FormKonsultasiPage />}
           />
           <Route
-            path="/konsultasi/form-konsultasi/:id/pilih-psikolog"
-            element={<ChoosePsikologPage />}
+            path="/konsultasi/:id/pilih-psikolog"
+            element={
+              <UserDashboardGuard>
+                <ChoosePsikologPage />
+              </UserDashboardGuard>
+            }
           />
           <Route
             path="/konsultasi/:id/detail-konsul"

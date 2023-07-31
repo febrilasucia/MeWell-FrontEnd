@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import PsiImg from "../../image/psikologimage.jpg";
@@ -7,10 +7,13 @@ import { FaStarHalf, FaStar } from "react-icons/fa";
 import axios from "axios";
 
 function ChoosePsikolog() {
+  const navigate = useNavigate()
   const token = localStorage.getItem("token");
   const [psikologId, setPsikologId] = useState("");
   const { id } = useParams();
   const [psikolog, setpsikolog] = useState([]);
+
+  console.log(psikologId);
 
   const fetchPsikolog = async () => {
     let config = {
@@ -38,7 +41,7 @@ function ChoosePsikolog() {
     fetchPsikolog();
   }, []);
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (psikologId) => {
     const data = {
       psikologId,
     };
@@ -46,14 +49,21 @@ function ChoosePsikolog() {
     let config = {
       method: "patch",
       maxBodyLength: Infinity,
-      url: "http://localhost:5000/konsul/64ae34e6da917bb15167afab",
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/${id}`,
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YTkxOGZmYTU5M2RhNmJmNDdhOGMwYiIsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaXNWZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNjkwNTMxNDk1LCJleHAiOjE2OTA2MTc4OTV9.DCdI5JHaqgCrXAWWPYLJFy_0LXjD3i90EovLszQbyXY",
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
+
+    try {
+      const response = await axios.request(config);
+      console.log(JSON.stringify(response.data));
+      navigate(`/konsultasi/${id}/detail-konsul`)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -77,9 +87,10 @@ function ChoosePsikolog() {
             </h1>
             <div className="p-5">
               <div className=" my-[10px] flex flex-wrap justify-center">
-                {psikolog.map((psi) => (
+                {psikolog.map((psi, index) => (
                   <Link
-                    to="#"
+                    key={index}
+                    onClick={() => handleUpdate(psi._id)}
                     className="flex flex-col mb-5 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100"
                   >
                     <img

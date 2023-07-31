@@ -18,43 +18,40 @@ function FormKonsultasi() {
   const [keluhan, setKeluhan] = useState("");
   const token = localStorage.getItem("token");
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let data = new FormData();
-    data.append("nama_pasien", namaPasien);
-    data.append("nama_ortu", namaOrtu);
-    data.append("tempat_lahir", placeBirth);
-    data.append("tgl_lahir", dateBirth);
-    data.append("gender", gender);
-    data.append("no_wa", nomor);
-    data.append("alamat", address);
-    data.append("kategori_pasien", kategori);
-    data.append("via_konsul", viaKonsul);
-    data.append("riwayat", riwayat);
-    data.append("keluhan", keluhan);
+    let data = JSON.stringify({
+      nama_pasien: namaPasien,
+      nama_ortu: namaOrtu,
+      tempat_lahir: placeBirth,
+      tgl_lahir: dateBirth,
+      gender,
+      no_wa: nomor,
+      alamat: address,
+      kategori_pasien: kategori,
+      via_konsul: viaKonsul,
+      riwayat,
+      keluhan,
+    });
 
+    console.log(data);
     let config = {
-      method: "post",
+      method: 'post',
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/konsul`,
-      headers: {
-        Authorization: `Bearer ${token}`,
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}`
       },
-      data: data,
+      data : data
     };
 
-    async function makeRequest() {
-      try {
-        const response = await axios.request(config);
-        console.log(JSON.stringify(response.data));
-        return response;
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    const response = await axios.request(config);
+    console.log(response);
 
-    const newRequest = await makeRequest();
-    const idPsikolog = newRequest.data.data.id;
+
+    const idPsikolog = response.data.data.id;
     try {
       Swal.fire({
         title: "Berhasil!",
@@ -63,7 +60,7 @@ function FormKonsultasi() {
         confirmButtonText: "OK",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate(`/konsultasi/form-konsultasi/${idPsikolog}/pilih-psikolog`);
+          navigate(`/konsultasi/${idPsikolog}/pilih-psikolog`);
         }
       });
     } catch (error) {
