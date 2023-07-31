@@ -48,6 +48,8 @@ import UserDashboardGuard from "./pages/UserDashboardGuard";
 import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
 import LoginGuard from "./pages/LoginGuard";
 import DashboardUser from "./components/User/DashboardUser";
+//psikolog
+import ListPsikologAdminPage from "./pages/Admin/psikologAdminPage/ListPsikologAdminPage";
 
 // ! Psikolog
 import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
@@ -212,7 +214,14 @@ function App() {
             path="/admin/user/:id/detail"
             element={<DetailUserAdminPage />}
           />
-          <Route path="/blog-icon" element={<BlogIcon />} />
+          <Route
+            path="/admin/psikolog"
+            element={
+              <AdminDashboardGuard>
+                <ListPsikologAdminPage />
+              </AdminDashboardGuard>
+            }
+          />
           {/* admin router*/}
 
           {/* psikolog router */}
