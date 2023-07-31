@@ -49,7 +49,7 @@ import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
 import LoginGuard from "./pages/LoginGuard";
 
 // ! Psikolog
-import DashboardPsikologPage from "./pages/Psikolog/DashboardPage";
+import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -215,7 +215,10 @@ function App() {
           {/* admin router*/}
 
           {/* psikolog router */}
-          <Route path="/psikolog/dashboard" element={DashboardPsikologPage} />
+          <Route
+            path="/psikolog/dashboard"
+            element={<DashboardPsikologPage />}
+          />
           {/* psikolog router */}
         </Routes>
       )}
