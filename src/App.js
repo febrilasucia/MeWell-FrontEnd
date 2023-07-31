@@ -47,6 +47,9 @@ import DetailUserAdminPage from "./pages/Admin/userAdminPage/DetailUserAdminPage
 import UserDashboardGuard from "./pages/UserDashboardGuard";
 import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
 
+// ! Psikolog
+import DashboardPsikologPage from "./pages/Psikolog/DashboardPage";
+
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -68,7 +71,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
-          {/* user */}
+          {/* user ruter*/}
           <Route path="/dashboard" element={<DashboardUserPage />} />
           <Route
             path="/profile"
@@ -110,8 +113,9 @@ function App() {
           <Route path="/tes" element={<ListTes />} />
           <Route path="/tes/detail-ie" element={<DetailTesIE />} />
           <Route path="/tes/detail-gk" element={<DetailKetergantunganPage />} />
-          {/* user */}
-          {/* admin */}
+          {/* user router*/}
+
+          {/* admin router */}
           <Route
             path="/admin/dashboard"
             element={
@@ -207,6 +211,11 @@ function App() {
             element={<DetailUserAdminPage />}
           />
           <Route path="/blog-icon" element={<BlogIcon />} />
+          {/* admin router*/}
+
+          {/* psikolog router */}
+          <Route path="/psikolog/dashboard" element={DashboardPsikologPage} />
+          {/* psikolog router */}
         </Routes>
       )}
     </div>
