@@ -54,8 +54,12 @@ const DetailPayment = () => {
     fetchKonsul();
   }, [id]);
 
+  const paymentDetail = () => {
+    navigate(`/konsultasi/${id}/upload-payment`)
+  };
+
   return (
-    <div>
+    <div className="mb-6">
       {/* 1. Tampilkan detail konsultasi  */}
       {/* 2. Tampilkan detail Psikolog yang dipilih */}
       {/* 3. Tampilkan detail pembayaran yang akan dilakukan user */}
@@ -310,6 +314,7 @@ const DetailPayment = () => {
                 <div className="p-5">
                   <div class="flex flex-col mb-5 items-center md:flex-row md:max-w-4xl ">
                     <img
+                      alt="PsiImg"
                       className="object-cover mx-2 w-full rounded-t-lg h-96 md:h-auto md:w-36 md:rounded-none md:rounded-l-lg"
                       src={PsiImg}
                     />
@@ -337,6 +342,14 @@ const DetailPayment = () => {
                 </div>
                 {/* 2. Tampilkan detail Psikolog yang dipilih */}
               </form>
+            </div>
+            <div className="text-center mt-4">
+              <button
+                onClick={paymentDetail}
+                className="bg-opt text-black py-2 px-4 rounded-md"
+              >
+                Detail Pembayaran
+              </button>
             </div>
           </div>
           {/* 1. Tampilkan detail konsultasi  */}
