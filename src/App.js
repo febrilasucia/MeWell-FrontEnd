@@ -80,14 +80,7 @@ function App() {
           {/* user router*/}
           <Route path="/user/dashboard" element={<DashboardUser />} />
 
-          <Route
-            path="/profile"
-            element={
-              <LoginGuard>
-                <ProfilePage />
-              </LoginGuard>
-            }
-          />
+          <Route path="/profile" element={ <LoginGuard><ProfilePage /></LoginGuard>}/>
 
           <Route path="/profile" element={<UserDashboardGuard><ProfilePage /></UserDashboardGuard>}/>
           <Route path="/blog" element={<ListBlogPage />} />
@@ -126,10 +119,7 @@ function App() {
 
           {/* psikolog router */}
 
-          <Route
-            path="/psikolog/dashboard"
-            element={<DashboardPsikologPage />}
-          />
+          <Route path="/psikolog/dashboard" element={<DashboardPsikologPage />}/>
           <Route path="/psikolog/status" element={<StatusPsikologPage />} />
           <Route path="/psikolog/dashboard" element={<DashboardPsikologPage />} />
 
