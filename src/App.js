@@ -54,6 +54,7 @@ import ListPsikologAdminPage from "./pages/Admin/psikologAdminPage/ListPsikologA
 // ! Psikolog
 import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
 import StatusPsikologPage from "./components/Psikolog/StatusPsikolog";
+import SuccessForm from "./components/Konsultasi/SuccessForm";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -98,7 +99,7 @@ function App() {
           <Route path="/konsultasi/:id/pilih-psikolog" element={<LoginGuard><ChoosePsikologPage /></LoginGuard>}/>
           <Route path="/konsultasi/:id/detail-konsul" element={<DetailKonsultasiPasien />} />
           <Route path="/konsultasi/:id/upload-payment" element={<UploadPayment />} />
-          <Route path="/konsultasi/success" element={<DetailKonsultasiPage />} />
+          <Route path="/konsultasi/success" element={<SuccessForm />} />
           <Route path="/tes" element={<ListTes />} />
           <Route path="/tes/detail-ie" element={<DetailTesIE />} />
           <Route path="/tes/detail-gk" element={<DetailKetergantunganPage />} />
