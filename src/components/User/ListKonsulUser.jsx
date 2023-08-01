@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../Sidebar";
+import Sidebar from "./SidebarUser";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -148,7 +148,7 @@ function ListKonsulUser() {
                 </thead>
                 <tbody>
                   {konsuls.map((konsul, index) => (
-                    <tr key={konsul._id === authState.id} className="bg-white border-b ">
+                    <tr key={konsul._id} className="bg-white border-b ">
                       <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                         {index + 1}
                       </td>

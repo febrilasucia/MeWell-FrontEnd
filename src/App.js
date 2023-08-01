@@ -48,6 +48,8 @@ import UserDashboardGuard from "./pages/UserDashboardGuard";
 import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
 import LoginGuard from "./pages/LoginGuard";
 import DashboardUser from "./components/User/DashboardUser";
+import ListKonsulUser from "./components/User/ListKonsulUser";
+
 //psikolog
 import ListPsikologAdminPage from "./pages/Admin/psikologAdminPage/ListPsikologAdminPage";
 
@@ -78,17 +80,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
           {/* user router*/}
+
           <Route path="/user/dashboard" element={<DashboardUser />} />
-
-          <Route
-            path="/profile"
-            element={
-              <LoginGuard>
-                <ProfilePage />
-              </LoginGuard>
-            }
-          />
-
+          <Route path="/user/konsul" element={<ListKonsulUser />} />
+          <Route path="/profile" element={<LoginGuard><ProfilePage /></LoginGuard>}/>
           <Route path="/profile" element={<UserDashboardGuard><ProfilePage /></UserDashboardGuard>}/>
           <Route path="/blog" element={<ListBlogPage />} />
           <Route path="/blog/:id" element={<DetailBlogPage />} />
