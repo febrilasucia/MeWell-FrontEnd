@@ -16,6 +16,13 @@ const DetailUserAdmin = () => {
   const [age, setAge] = useState("");
   const [work, setWork] = useState("");
   const [isVerified, setIsVerified] = useState("");
+  const [isPsikolog, setIsPsikolog] = useState("");
+  const [pendidikan, setPendidikan] = useState("");
+  const [univ, setUniv] = useState("");
+  const [ktpUrl, setKtpUrl] = useState("");
+  const [ijazahUrl, setIjazahUrl] = useState("");
+  const [alasan, setAlasan] = useState("");
+
   const [activePage, setActivePage] = useState("User");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -47,6 +54,7 @@ const DetailUserAdmin = () => {
         setAge(userData.age);
         setWork(userData.work);
         setIsVerified(userData.isVerified);
+        setIsPsikolog(userData.isPsikolog);
         console.log(userData);
       } catch (error) {
         console.log(error);
@@ -116,7 +124,7 @@ const DetailUserAdmin = () => {
                           htmlFor="profileUrl"
                           className="block text-textSec mb-1"
                         >
-                          : Profile Url
+                          Profile Url
                         </label>
                       </td>
                       <td className="">
@@ -247,6 +255,35 @@ const DetailUserAdmin = () => {
                         </p>
                       </td>
                     </tr>
+                    {role === "psikolog" && (
+                      <tr>
+                        <td className="py-3">
+                          <label
+                            htmlFor="isVerified"
+                            className="block text-textSec mb-1"
+                          >
+                            Status Penerimaan
+                          </label>
+                        </td>
+                        <td>
+                          <p
+                            type="isPsikolog"
+                            id="isPsikolog"
+                            className={
+                              isPsikolog === "Menunggu"
+                                ? "border h-10 w-32 text-white text-center shadow-sm py-2 bg-gray-500 rounded-md"
+                                : isPsikolog === "Diterima"
+                                ? "border h-10 w-32 text-white text-center shadow-sm py-2 bg-green-500 rounded-md"
+                                : isPsikolog === "Ditolak"
+                                ? "border h-10 w-32 text-white text-center shadow-sm py-2 bg-red-500 rounded-md"
+                                : "border h-10 w-32 text-white text-center shadow-sm py-2 bg-bgOpt2 rounded-md"
+                            }
+                          >
+                            {isPsikolog}
+                          </p>
+                        </td>
+                      </tr>
+                    )}
                   </table>
                   <div
                     style={{

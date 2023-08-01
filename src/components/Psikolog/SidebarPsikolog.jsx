@@ -8,6 +8,7 @@ import {
   FaBookReader,
   FaComments,
   FaHome,
+  FaSchool,
   FaSignOutAlt,
   FaUserMd,
   FaUsers,
@@ -26,6 +27,11 @@ const Sidebar = ({ activePage, setActivePage }) => {
     { title: "Dashboard", icon: <FaHome />, link: "/psikolog/dashboard" },
     { title: "Konsultasi ", icon: <FaUserMd />, link: "/psikolog/konsul" },
     { title: "Chat Pasien", icon: <FaComments />, link: "/psikolog/chat" },
+    {
+      title: "Status Kelulusan",
+      icon: <FaSchool />,
+      link: "/psikolog/status",
+    },
   ];
 
   const handleMenuClick = (title) => {

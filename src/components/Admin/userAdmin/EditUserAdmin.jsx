@@ -8,13 +8,13 @@ import { formatDate, formatDate2, splitDate } from "../../../util/Helper";
 const EditUserAdmin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // const [role, setRole] = useState("");
+  const [role, setRole] = useState("");
   const [profileUrl, setProfileUrl] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
   const [work, setWork] = useState("");
-  // const [isVerified, setIsVerified] = useState("");
+  const [isPsikolog, setIsPsikolog] = useState("");
   const [activePage, setActivePage] = useState("User");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -34,6 +34,8 @@ const EditUserAdmin = () => {
       gender,
       age,
       work,
+      isPsikolog,
+      role,
     };
 
     try {
@@ -80,13 +82,13 @@ const EditUserAdmin = () => {
         const userData = response.data;
         setName(userData.name);
         setEmail(userData.email);
-        // setRole(userData.role);
+        setRole(userData.role);
         setProfileUrl(userData.profileUrl);
         setDateOfBirth(formatDate2(userData.dateOfBirth));
         setGender(userData.gender);
         setAge(userData.age);
         setWork(userData.work);
-        // setIsVerified(userData.isVerified);
+        setIsPsikolog(userData.isPsikolog);
       } catch (error) {
         console.log(error);
       }
@@ -229,6 +231,30 @@ const EditUserAdmin = () => {
                         />
                       </td>
                     </tr>
+                    {role === "psikolog" && (
+                      <tr>
+                        <td className="py-3">
+                          <label
+                            htmlFor="gender"
+                            className="block text-textSec mb-1"
+                          >
+                            Status Penerimaan
+                          </label>
+                        </td>
+                        <td className="">
+                          <select
+                            id="isPsikolog"
+                            value={isPsikolog}
+                            onChange={(e) => setIsPsikolog(e.target.value)}
+                            className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                          >
+                            <option value="Menunggu">Menunggu</option>
+                            <option value="Diterima">Diterima</option>
+                            <option value="Ditolak">Ditolak</option>
+                          </select>
+                        </td>
+                      </tr>
+                    )}
                   </table>
                   <div
                     style={{

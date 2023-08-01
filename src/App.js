@@ -53,6 +53,7 @@ import ListPsikologAdminPage from "./pages/Admin/psikologAdminPage/ListPsikologA
 
 // ! Psikolog
 import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
+import StatusPsikologPage from "./components/Psikolog/StatusPsikolog";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -80,9 +81,9 @@ function App() {
           <Route
             path="/profile"
             element={
-              <UserDashboardGuard>
+              <LoginGuard>
                 <ProfilePage />
-              </UserDashboardGuard>
+              </LoginGuard>
             }
           />
           <Route path="/blog" element={<ListBlogPage />} />
@@ -229,6 +230,7 @@ function App() {
             path="/psikolog/dashboard"
             element={<DashboardPsikologPage />}
           />
+          <Route path="/psikolog/status" element={<StatusPsikologPage />} />
           {/* psikolog router */}
         </Routes>
       )}

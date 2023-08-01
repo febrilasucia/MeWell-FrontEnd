@@ -156,12 +156,12 @@ function ListPsikologAdmin() {
                             <div
                               className={
                                 user.isPsikolog === "Menunggu"
-                                  ? "border h-10 text-white text-center border-gray-800 py-2 bg-gray-500 rounded-md"
+                                  ? "border h-10 text-white text-center shadow-sm py-2 bg-gray-500 rounded-md"
                                   : user.isPsikolog === "Diterima"
-                                  ? "border h-10 text-white text-center border-bgTri py-2 bg-green-500 rounded-md"
+                                  ? "border h-10 text-white text-center shadow-sm py-2 bg-green-500 rounded-md"
                                   : user.isPsikolog === "Ditolak"
-                                  ? "border h-10 text-white text-center border-bgTri py-2 bg-red-500 rounded-md"
-                                  : "border h-10 text-white text-center border-bgTri py-2 bg-bgOpt2 rounded-md"
+                                  ? "border h-10 text-white text-center shadow-sm py-2 bg-red-500 rounded-md"
+                                  : "border h-10 text-white text-center shadow-sm py-2 bg-bgOpt2 rounded-md"
                               }
                             >
                               {user.isPsikolog}
