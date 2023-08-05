@@ -9,47 +9,34 @@ import Swal from "sweetalert2";
 
 function Register() {
   const [message, setMessage] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confPassword: "",
-    dateOfBirth: "",
-    gender: "",
-    age: "",
-    work: "",
-    role: "",
-    isPsikolog: "Menunggu",
-    pendidikan: "",
-    univ: "",
-    ktpUrl: "",
-    ijazahUrl: "",
-    alasan: "",
-  });
-  // const [showAlert, setShowAlert] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
+  const [gender, setGender] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [placeOfBirth, setPlaceOfBirth] = useState("");
+  const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
-
-  console.log(formData);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Remove 'isPsikolog' from formData if the role is not 'psikolog'
-    const filteredFormData = { ...formData };
-    if (formData.role !== "psikolog") {
-      delete filteredFormData.isPsikolog;
-    }
+    let data = new FormData();
+    data.append("name", name);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("confPassword", confPassword);
+    data.append("gender", gender);
+    data.append("date_birth", dateOfBirth);
+    data.append("place_birth", placeOfBirth);
+    data.append("profile", profile);
 
     let config = {
       method: "post",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/auth/register`,
-      data: filteredFormData,
+      data: data,
     };
 
     try {
@@ -60,10 +47,7 @@ function Register() {
           console.log(JSON.stringify(response.data));
 
           // Check if registration is successful with the specified message
-          if (
-            response.data.message ===
-            "Registration is successful, please verify email"
-          ) {
+          if (response.data.message === "Registration is successful, please verify email") {
             // Show SweetAlert for successful registration
             Swal.fire({
               icon: "success",
@@ -87,11 +71,45 @@ function Register() {
     }
   };
 
+  const handleProfileChange = (e) => {
+    const file = e.target.files[0];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+
+    if (file.size > maxSize) {
+      Swal.fire({
+        title: "Ukuran Gambar Terlalu Besar",
+        text: "Ukuran gambar tidak boleh melebihi 2MB.",
+        icon: "error",
+      });
+      setProfile(null); // Reset the selected thumbnail
+      return;
+    }
+
+    setProfile(file);
+
+    // // Check image dimensions before uploading
+    // const img = new Image();
+    // img.src = URL.createObjectURL(file);
+    // img.onload = () => {
+    //   const width = img.width;
+    //   const height = img.height;
+    //   if (width !== 1080 || height !== 716) {
+    //     Swal.fire({
+    //       title: "Ukuran Gambar Salah",
+    //       text: "Ukuran gambar harus 1080x716 pixel.",
+    //       icon: "error",
+    //     });
+    //     setProfile(null); // Reset the selected thumbnail
+    //     setThumbnailPreview(null); // Reset the thumbnail preview
+    //   }
+    // };
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const passwordMatch = formData.password === formData.confPassword;
+  const passwordMatch = password === confPassword;
 
   return (
     <div>
@@ -103,23 +121,15 @@ function Register() {
         {/* image logo */}
         {/* image logo lengkap */}
         <div className="relative">
-          <img
-            src={LogoMandeh}
-            className="w-[250px] absolute right-0 mt-5"
-            alt="Logo Mandeh"
-          />
+          <img src={LogoMandeh} className="w-[250px] absolute right-0 mt-5" alt="Logo Mandeh" />
         </div>
         {/* image logo lengkap */}
         {/* card */}
         <div className="flex flex-col my-10 justify-center">
           <div className="m-auto bg-bgSec w-full max-w-3xl p-4 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
             <form className="space-y-6" onSubmit={handleSubmit}>
-              <h5 className="text-[54px] font-semibold text-textPri text-center">
-                Registrasi
-              </h5>
-              <p className="text-sm text-gray-500  text-center font-medium">
-                Silahkan masukan data lengkap anda
-              </p>
+              <h5 className="text-[54px] font-semibold text-textPri text-center">Registrasi</h5>
+              <p className="text-sm text-gray-500  text-center font-medium">Silahkan masukan data lengkap anda</p>
 
               {/* form */}
               <div className="flex flex-wrap justify-center w-full h-[250px] max-w-3xl gap-5">
@@ -131,8 +141,8 @@ function Register() {
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                       placeholder="Nama"
                       required
-                      value={formData.name}
-                      onChange={handleChange}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                   <div>
@@ -140,32 +150,31 @@ function Register() {
                       type="date"
                       name="dateOfBirth"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5"
-                      value={formData.dateOfBirth}
-                      onChange={handleChange}
+                      value={dateOfBirth}
+                      onChange={(e) => setDateOfBirth(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="placeOfBirth"
+                      placeholder="Tempat Lahir"
+                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5"
+                      value={placeOfBirth}
+                      onChange={(e) => setPlaceOfBirth(e.target.value)}
                     />
                   </div>
                   <div>
                     <select
                       name="gender"
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                      value={formData.gender}
-                      onChange={handleChange}
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
                     >
                       <option value="">Pilih Jenis Kelamin</option>
-                      <option value="Laki-laki">Laki-laki</option>
-                      <option value="Perempuan">Perempuan</option>
+                      <option value="L">Laki-laki</option>
+                      <option value="P">Perempuan</option>
                     </select>
-                  </div>
-                  <div>
-                    <input
-                      type="number"
-                      name="age"
-                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                      placeholder="Umur"
-                      required
-                      value={formData.age}
-                      onChange={handleChange}
-                    />
                   </div>
                 </div>
                 <div className="w-[300px]">
@@ -177,8 +186,8 @@ function Register() {
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                       placeholder="Email"
                       required
-                      value={formData.email}
-                      onChange={handleChange}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div>
@@ -189,8 +198,8 @@ function Register() {
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                       placeholder="Password"
                       required
-                      value={formData.password}
-                      onChange={handleChange}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   <div>
@@ -201,17 +210,14 @@ function Register() {
                       className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
                       placeholder="Konfirmasi Password"
                       required
-                      value={formData.confPassword}
-                      onChange={handleChange}
+                      value={confPassword}
+                      onChange={(e) => setConfPassword(e.target.value)}
                     />
                     <div
                       className="text-red-500 text-[10px] mb-1"
                       style={{
                         position: "absolute",
-                        visibility:
-                          formData.password && !passwordMatch
-                            ? "visible"
-                            : "hidden",
+                        visibility: password && !passwordMatch ? "visible" : "hidden",
                       }}
                     >
                       *Password and Confirm Password do not match
@@ -219,125 +225,16 @@ function Register() {
                   </div>
                   <div>
                     <input
-                      type="text"
-                      name="work"
-                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-6 "
-                      placeholder="Pekerjaan"
-                      required
-                      value={formData.work}
-                      onChange={handleChange}
+                      type="file"
+                      name="profile"
+                      accept=".jpg, .png"
+                      id="profile"
+                      className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
+                      onChange={handleProfileChange}
                     />
                   </div>
                 </div>
               </div>
-              {/* dropdown */}
-              <div className="mx-[40px] mt-[100px]">
-                <div>
-                  <p className="text-textSec text-sizeParagraph">
-                    Upload Foto Profil
-                  </p>
-                  <input
-                    type="file"
-                    name="profile"
-                    className="bg-gray-50 border mb-5 border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                    value={formData.profile}
-                    onChange={handleChange}
-                  />
-                </div>
-                <p className="text-textSec text-sizeParagraph">
-                  Note : Jikalau kamu ingin menjadi distributor psikolog Me-Well
-                  dapat mendaftar dengan memilih Calon Psikolog Freelance
-                  Me-Well pada dropdown
-                </p>
-                <div className="w-full">
-                  <select
-                    name="role"
-                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                    value={formData.role}
-                    onChange={handleChange}
-                  >
-                    <option value="">Pilih Role</option>
-                    <option value="user">User Website Me-Well</option>
-                    <option value="psikolog">
-                      Calon Psikolog Freelance Me-Well
-                    </option>
-                  </select>
-                </div>
-
-                {/* data khusus calon psikolog */}
-                {formData.role === "psikolog" && (
-                  <div className="">
-                    <div>
-                      <input
-                        type="text"
-                        name="pendidikan"
-                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                        placeholder="Pendidikan Terakhir"
-                        value={formData.pendidikan}
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        name="univ"
-                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5"
-                        placeholder="Universitas Asal"
-                        value={formData.univ}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div>
-                      <p className="text-textSec text-sizeParagraph mt-5">
-                        Upload KTP Asli
-                      </p>
-                      <input
-                        type="file"
-                        name="ktp"
-                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                        placeholder="Link Gdrive KTP"
-                        value={formData.ktp}
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div>
-                      <p className="text-textSec text-sizeParagraph mt-5">
-                        Upload Ijazah
-                      </p>
-                      <input
-                        type="file"
-                        name="ijazah"
-                        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                        placeholder="Link Gdrive Ijazah"
-                        value={formData.ijazah}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div>
-                      <input
-                        type="text"
-                        name="alasan"
-                        className="bg-gray-50 h-[100px] border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                        placeholder="Alasan mendaftar Freelance Psikolog di Lentera Mandeh"
-                        required
-                        value={formData.alasan}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <p className="text-textSec text-sizeParagraph mt-5">
-                      Nota : Apabila telah mendaftar silahkan menunggu dan
-                      mengecek secara berkala email & akun Me-Well anda.
-                    </p>
-                  </div>
-                )}
-
-                {/* data khusus calon psikolog */}
-              </div>
-              {/* dropdown */}
-
               {/* form */}
 
               <button
@@ -371,25 +268,6 @@ function Register() {
           </div>
         </div>
         {/* tombol back */}
-
-        {/* {showAlert && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white border border-gray-300 rounded-lg p-4 shadow-md">
-              <p className="text-green-600 font-semibold text-lg">
-                Registrasi berhasil!
-              </p>
-              <p className="text-gray-500 mt-2">
-                Selamat, Anda telah berhasil melakukan registrasi.
-              </p>
-              <button
-                className="text-sm text-white bg-blue-500 hover:bg-blue-600 font-medium rounded-lg px-4 py-2 mt-4"
-                onClick={handleAlertClose}
-              >
-                Tutup
-              </button>
-            </div>
-          </div>
-        )} */}
       </div>
     </div>
   );

@@ -1,23 +1,9 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
-import {
-  FaUsers,
-  FaFileVideo,
-  FaBookOpen,
-  FaUserMd,
-  FaVideo,
-} from "react-icons/fa";
+import { FaUsers, FaFileVideo, FaBookOpen, FaUserMd, FaVideo } from "react-icons/fa";
 
 const DashboardAdmin = () => {
   const [activePage, setActivePage] = useState("Dashboard");
-
-  // Dummy data for the dashboard
-  const dummyData = {
-    blogs: 25,
-    videos: 10,
-    consultations: 5,
-    users: 1000,
-  };
 
   return (
     <>

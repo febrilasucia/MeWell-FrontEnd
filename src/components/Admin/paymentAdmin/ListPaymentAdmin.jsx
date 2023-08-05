@@ -4,40 +4,40 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-function ListKonsulAdmin() {
-  const [activePage, setActivePage] = useState("Konsultasi");
-  const [konsuls, setKonsuls] = useState([]);
+function ListPaymentAdmin() {
+  const [activePage, setActivePage] = useState("Pembayaran");
+  const [payments, setPayments] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetchKonsuls();
+    fetchPayments();
   }, []);
 
-  const fetchKonsuls = async () => {
+  const fetchPayments = async () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/konsul/`,
+      url: `${process.env.REACT_APP_BASE_URL}/payment/`,
     };
 
     try {
       const response = await axios.request(config);
-      setKonsuls(response.data.konsul);
-      console.log(response);
+      setPayments(response.data);
+      console.log("ini respont", response);
       console.log(JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(konsuls);
+  console.log("ini payments", payments);
 
-  const deleteKonsul = async (_id) => {
-    console.log(_id);
+  const deletePayment = async (_id) => {
+    // console.log(_id);
     try {
       const config = {
         method: "delete",
-        url: `${process.env.REACT_APP_BASE_URL}/konsul/${_id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/payment/${_id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -55,7 +55,7 @@ function ListKonsulAdmin() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axios.request(config);
-          setKonsuls((prevKonsuls) => prevKonsuls.filter((konsul) => konsul._id !== _id));
+          setPayments((prevPayments) => prevPayments.filter((payment) => payment._id !== _id));
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Cancelled", "Your file is safe :)", "error");
@@ -73,24 +73,14 @@ function ListKonsulAdmin() {
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>
-          <h1 className="text-sizeTri text-textSec font-bold">Konsultasi</h1>
-          <p className="my-3 text-textFunc">Dashboard / Konsultasi </p>
+          <h1 className="text-sizeTri text-textSec font-bold">Pembayaran</h1>
+          <p className="my-3 text-textFunc">Dashboard / Pembayaran </p>
         </div>
         {/* judul */}
         {/* content */}
 
         <div className="w-[1000px] bg-bgTri mx-auto mt-5 justify-center rounded-md shadow-sm shadow-textFunc">
           <div className="flex items-center justify-between px-5 pt-5">
-            <div>
-              <Link
-                id="addBlog"
-                className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 "
-                type="button"
-                to={"/konsultasi/form-konsultasi"}
-              >
-                Tambah
-              </Link>
-            </div>
             <label htmlFor="table-search" className="sr-only">
               Search
             </label>
@@ -128,16 +118,10 @@ function ListKonsulAdmin() {
                       No
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nama Pasien
+                      Id Konsultasi
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nomor Telepon
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Kategori
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Via Konsul
+                      Status
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Aksi
@@ -145,30 +129,36 @@ function ListKonsulAdmin() {
                   </tr>
                 </thead>
                 <tbody>
-                  {konsuls.map((konsul, index) => (
-                    <tr key={konsul._id} className="bg-white border-b ">
-                      <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
-                        {index + 1}
-                      </td>
-                      <td className="px-6 py-4">{konsul.nama_pasien}</td>
-                      <td className="px-6 py-4 text-center hover:text-bgOpt">
-                        <a href={`https://wa.me/${konsul.no_wa}`}>{konsul.no_wa}</a>
-                      </td>
-                      <td className="px-6 py-4 text-center"> {konsul.kategori_pasien}</td>
-                      <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
-                      <td className="px-6 py-4 flex gap-3 ">
-                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>
-                          {" "}
-                          Detail
-                        </Link>
-                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/edit`}>
-                          {" "}
-                          Edit
-                        </Link>
-                        <button onClick={() => deleteKonsul(konsul._id)}>Delete</button>
+                  {payments.length === 0 ? (
+                    <tr>
+                      <td colSpan="4" className="px-6 py-4 text-center">
+                        <p>Belum ada yang melakukan transaksi pembayaran</p>
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    payments.map((payment, index) => (
+                      <tr key={payment._id} className="bg-white border-b">
+                        <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
+                          {index + 1}
+                        </td>
+                        <td className="px-6 py-4">{payment.idKonsultasi}</td>
+                        <td className="px-6 py-4 text-center hover:text-bgOpt">
+                          {payment.buktiPembayaran ? payment.status : <p>Menunggu Pembayaran</p>}
+                        </td>
+                        <td className="px-6 py-4 flex gap-3">
+                          <Link className="hover:text-bgFunc3" to={`/admin/payment/${payment._id}/detail`}>
+                            {" "}
+                            Detail
+                          </Link>
+                          <Link className="hover:text-bgFunc3" to={`/admin/payment/${payment._id}/edit`}>
+                            {" "}
+                            Edit
+                          </Link>
+                          <button onClick={() => deletePayment(payment._id)}>Delete</button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
@@ -182,4 +172,4 @@ function ListKonsulAdmin() {
   );
 }
 
-export default ListKonsulAdmin;
+export default ListPaymentAdmin;

@@ -14,6 +14,7 @@ import DetailVideoPage from "./pages/VideoPage/DetailVideoPage";
 import ListTes from "./pages/TesPsikologiPage/ListTesPsikologi";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import RegisterPsikolg from "./pages/RegisterPsikolog";
 import DashboardAdminPage from "./pages/Admin/DashboardAdminPage";
 // import DashboardUserPage from "./pages/DashboardUserPage";
 //konsul
@@ -49,14 +50,18 @@ import AdminDashboardGuard from "./pages/Admin/AdminDashboardGuard";
 import LoginGuard from "./pages/LoginGuard";
 import DashboardUser from "./components/User/DashboardUser";
 import ListKonsulUser from "./components/User/ListKonsulUser";
-
 //psikolog
 import ListPsikologAdminPage from "./pages/Admin/psikologAdminPage/ListPsikologAdminPage";
+//payment
+import ListPaymentAdminPage from './pages/Admin/paymentAdminPage/ListPaymentAdminPage'
+import DetailPaymentAdminPage from './pages/Admin/paymentAdminPage/DetailPaymentAdminPage'
+import EditPaymentAdminPage from './pages/Admin/paymentAdminPage/EditPaymentAdminPage'
 
 // ! Psikolog
 import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
 import StatusPsikologPage from "./components/Psikolog/StatusPsikolog";
 import SuccessForm from "./components/Konsultasi/SuccessForm";
+import RegisterPsikolog from "./pages/RegisterPsikolog";
 import ListKonsulPsikologPage from "./pages/Psikolog/ListKonsulPsikologPage";
 import DetailKonsulPsikologPage from "./pages/Psikolog/DetailKonsulPsikologPage";
 
@@ -80,6 +85,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/register/psikolog" element={<RegisterPsikolog />} />
           <Route path="/" element={<Home />} />
           {/* user router*/}
 
@@ -118,6 +124,11 @@ function App() {
           <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
           <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
           <Route path="/admin/psikolog" element={<AdminDashboardGuard><ListPsikologAdminPage /></AdminDashboardGuard>}/>
+          {/* pembayaran */}
+          <Route path="/admin/payment" element={<AdminDashboardGuard><ListPaymentAdminPage /></AdminDashboardGuard>}/>
+          <Route path="/admin/payment/:id/edit" element={<AdminDashboardGuard><EditPaymentAdminPage /></AdminDashboardGuard>}/>
+          <Route path="/admin/payment/:id/detail" element={<AdminDashboardGuard><DetailPaymentAdminPage /></AdminDashboardGuard>}/>
+
           {/* admin router*/}
 
           {/* psikolog router */}
