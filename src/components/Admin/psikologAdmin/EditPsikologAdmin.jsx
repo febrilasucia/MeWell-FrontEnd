@@ -40,61 +40,49 @@ const EditPsikologAdmin = () => {
 
   useEffect(() => {
     fetchPsikolog();
-  }, [psikolog_id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const handleStatusPsikolog = async () => {
+  const updateStatus = async (status) => {
+    let data = JSON.stringify({
+      user_id: userId,
+      status: status,
+    });
+
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_BASE_URL}/auth/status/psikolog`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data,
+    };
+
+    try {
+      await axios.request(config);
+      navigate("/admin/psikolog");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleStatusPsikolog = async (e) => {
+    e.preventDefault();
     Swal.fire({
       title: "Do you want to save the changes?",
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Save",
       denyButtonText: `Don't save`,
-    }).then(async (result) => {
+    }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        let data = new FormData();
-        data.append("user_id", userId);
-        data.append("status", "Diterima");
-
-        let config = {
-          method: "post",
-          maxBodyLength: Infinity,
-          url: `${process.env.REACT_APP_BASE_URL}/auth/status/psikolog`,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          data: data,
-        };
-
-        try {
-          const response = await axios.request(config);
-          console.log(JSON.stringify(response.data));
-        } catch (error) {
-          console.log(error);
-        }
-
+        updateStatus("Diterima");
         Swal.fire("Saved!", "", "success");
       } else if (result.isDenied) {
-        let data = new FormData();
-        data.append("user_id", userId);
-        data.append("status", "Ditolak");
-
-        let config = {
-          method: "post",
-          maxBodyLength: Infinity,
-          url: `${process.env.REACT_APP_BASE_URL}/auth/status/psikolog`,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          data: data,
-        };
-
-        try {
-          const response = await axios.request(config);
-          console.log(JSON.stringify(response.data));
-        } catch (error) {
-          console.log(error);
-        }
+        updateStatus("Ditolak");
         Swal.fire("Changes are not saved", "", "info");
       }
     });
