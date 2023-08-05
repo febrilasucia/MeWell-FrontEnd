@@ -19,9 +19,9 @@ function UploadPayment() {
     console.log(id, status, buktiPembayaran);
 
     let data = new FormData();
-    data.append("idKonsultasi", id);
+    data.append("konsultasi_id", id);
     data.append("status", status);
-    data.append("buktiPembayaran", buktiPembayaran);
+    data.append("bukti_pembayaran", buktiPembayaran);
 
     let config = {
       method: "post",
