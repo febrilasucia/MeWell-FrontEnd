@@ -10,16 +10,14 @@ function ListPsikologAdmin() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetchUsers();
+    fetchPsikologRegister();
   }, []);
 
-  const psikologUsers = users.filter((user) => user.isPsikolog);
-
-  const fetchUsers = async () => {
+  const fetchPsikologRegister = async () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/user/`,
+      url: `${process.env.REACT_APP_BASE_URL}/psikolog/registrasi`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -28,8 +26,6 @@ function ListPsikologAdmin() {
     try {
       const response = await axios.request(config);
       setUsers(response.data);
-      console.log("ini respons", response);
-      console.log("ini json data", JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
     }
@@ -138,51 +134,44 @@ function ListPsikologAdmin() {
                     <th scope="col" className="px-6 py-3">
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th scope="col ol-start-2" className="px-6 py-3">
                       Aksi
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {psikologUsers.map((user, index) => {
-                    if (user.isPsikolog) {
-                      return (
-                        <tr key={user._id} className="bg-white border-b ">
-                          <th scope="row" className="px-6 py-4 text-center">
-                            {index + 1}
-                          </th>
-                          <td className="px-6 py-4">{user.name}</td>
-                          <td className="px-6 py-4">
-                            <div
-                              className={
-                                user.isPsikolog === "Menunggu"
-                                  ? "border h-10 text-white text-center shadow-sm py-2 bg-gray-500 rounded-md"
-                                  : user.isPsikolog === "Diterima"
-                                  ? "border h-10 text-white text-center shadow-sm py-2 bg-green-500 rounded-md"
-                                  : user.isPsikolog === "Ditolak"
-                                  ? "border h-10 text-white text-center shadow-sm py-2 bg-red-500 rounded-md"
-                                  : "border h-10 text-white text-center shadow-sm py-2 bg-bgOpt2 rounded-md"
-                              }
-                            >
-                              {user.isPsikolog}
-                            </div>
-                          </td>
+                  {users.map((user, index) => {
+                    return (
+                      <tr key={user._id} className="bg-white border-b ">
+                        <th scope="row" className="px-6 py-4 text-center">
+                          {index + 1}
+                        </th>
+                        <td className="px-6 py-4">{user.user.name}</td>
+                        <td className="px-6 py-4">{user.status}</td>
 
-                          <td className="px-6 py-4 flex gap-3">
-                            <Link to={`/admin/user/${user._id}/detail`}>
-                              Detail{" "}
-                            </Link>
-                            <Link to={`/admin/user/${user._id}/edit`}>
-                              Edit{" "}
-                            </Link>
-                            <button onClick={() => deleteUser(user._id)}>
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    }
-                    return null;
+                        <td className="px-6 py-4">
+                          <div
+                            className={
+                              user.status === "Menunggu"
+                                ? "border h-10 text-white text-center shadow-sm py-2 bg-gray-500 rounded-md"
+                                : user.isPsikolog === "Diterima"
+                                ? "border h-10 text-white text-center shadow-sm py-2 bg-green-500 rounded-md"
+                                : user.isPsikolog === "Ditolak"
+                                ? "border h-10 text-white text-center shadow-sm py-2 bg-red-500 rounded-md"
+                                : "border h-10 text-white text-center shadow-sm py-2 bg-bgOpt2 rounded-md"
+                            }
+                          >
+                            {user.status}
+                          </div>
+                        </td>
+
+                        <td className="px-6 py-4 flex gap-3">
+                          <Link to={`/admin/user/${user._id}/detail`}>Detail </Link>
+                          <Link to={`/admin/user/${user._id}/edit`}>Edit </Link>
+                          <button onClick={() => deleteUser(user._id)}>Delete</button>
+                        </td>
+                      </tr>
+                    );
                   })}
                 </tbody>
               </table>

@@ -33,7 +33,7 @@ const DashboardAdmin = () => {
           {/* judul */}
           {/* content */}
           <div className="flex flex-wrap gap-5  w-[980px] p-5 bg-bgTri rounded-md shadow-sm shadow-textFunc">
-            <div class="flex p-5 items-center justify-center gap-5  w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
+            <div className="flex p-5 items-center justify-center gap-5  w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
               <div>
                 <FaUsers className="w-20 h-20 text-textSec" />
               </div>
@@ -43,10 +43,10 @@ const DashboardAdmin = () => {
                     Users
                   </h5>
                 </a>
-                <p class="mb-3 font-normal text-textFunc">Jumlah : 10</p>
+                <p className="mb-3 font-normal text-textFunc">Jumlah : 10</p>
               </div>
             </div>
-            <div class="flex p-5 items-center justify-center gap-5 w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
+            <div className="flex p-5 items-center justify-center gap-5 w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
               <div>
                 <FaBookOpen className="w-20 h-20 text-textSec" />
               </div>
@@ -56,10 +56,10 @@ const DashboardAdmin = () => {
                     Blogs
                   </h5>
                 </a>
-                <p class="mb-3 font-normal text-textFunc">Jumlah : 10</p>
+                <p className="mb-3 font-normal text-textFunc">Jumlah : 10</p>
               </div>
             </div>
-            <div class="flex p-5 items-center justify-center gap-5 w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
+            <div className="flex p-5 items-center justify-center gap-5 w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
               <div>
                 <FaVideo className="w-20 h-20 text-textSec" />
               </div>
@@ -69,10 +69,10 @@ const DashboardAdmin = () => {
                     Videos
                   </h5>
                 </a>
-                <p class="mb-3 font-normal text-textFunc">Jumlah : 10</p>
+                <p className="mb-3 font-normal text-textFunc">Jumlah : 10</p>
               </div>
             </div>
-            <div class="flex p-5 items-center justify-center gap-5 w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
+            <div className="flex p-5 items-center justify-center gap-5 w-[300px] h-[150px] border  rounded-sm shadow-md bg-white">
               <div>
                 <FaUserMd className="w-20 h-20 text-textSec" />
               </div>
@@ -82,7 +82,7 @@ const DashboardAdmin = () => {
                     Konsultasi
                   </h5>
                 </a>
-                <p class="mb-3 font-normal text-textFunc">Jumlah : 10</p>
+                <p className="mb-3 font-normal text-textFunc">Jumlah : 10</p>
               </div>
             </div>
             
