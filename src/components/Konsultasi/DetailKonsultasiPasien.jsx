@@ -13,7 +13,7 @@ const DetailPayment = () => {
   const [riwayat, setRiwayat] = useState("");
   const [keluhan, setKeluhan] = useState("");
   const [psikologId, setPsikologId] = useState("");
-  const [psikologName, setPsikologName] = useState("");
+  // const [psikologName, setPsikologName] = useState("");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -29,8 +29,8 @@ const DetailPayment = () => {
         setRiwayat(konsulData.riwayat);
         setKeluhan(konsulData.keluhan);
         setViaKonsul(konsulData.via_konsul);
-        setPsikologId(konsulData.psikolog_id);
-        setPsikologName(konsulData.user_id.name);
+        setPsikologId(konsulData.psikolog_id.name);
+        // setPsikologName(konsulData.user_id.name);
         console.log(konsulData);
       } catch (error) {
         console.log(error);
@@ -154,7 +154,7 @@ const DetailPayment = () => {
                     />
                     <div className="flex flex-col justify-between p-4 leading-normal">
                       <h5 className="mb-2 text-2xl font-bold tracking-tight text-textSec dark:text-white">
-                        {psikologName}
+                        {psikologId}
                       </h5>
                       <p class="mb-3 font-normal text-textFunc">
                         Sudah lebih 3 tahun berpengalaman dalam konseling anak
