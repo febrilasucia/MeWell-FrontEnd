@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import PsiImg from "../../image/psikologimage.jpg";
 import { FaStarHalf, FaStar } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const DetailPayment = () => {
   const navigate = useNavigate();
@@ -30,9 +31,7 @@ const DetailPayment = () => {
     const fetchKonsul = async () => {
       console.log("fetch konsul running");
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/konsul/${id}`
-        );
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/konsul/${id}`);
         const konsulData = response.data.data;
         setNamaPasien(konsulData.nama_pasien);
         setNamaOrtu(konsulData.nama_ortu);
@@ -55,7 +54,27 @@ const DetailPayment = () => {
   }, [id]);
 
   const paymentDetail = () => {
-    navigate(`/konsultasi/${id}/upload-payment`)
+    // Show a SweetAlert confirmation dialog
+    Swal.fire({
+      title: "Pastikan Data Sudah Benar",
+      text: "Apakah Anda yakin data sudah benar?",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonText: "Cek Data Lagi",
+      confirmButtonText: "Sudah Benar",
+      reverseButtons: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Cek Data Lagi button was clicked, you can perform additional actions here if needed
+        // For example, show another dialog for rechecking data or take any appropriate action.
+        // If you want to perform some action before navigating, do it here and navigate afterwards.
+        navigate(`/konsultasi/${id}/upload-payment`);
+      } else {
+        // Sudah Benar button was clicked, navigate to the desired location
+      }
+    });
   };
 
   return (
@@ -67,12 +86,9 @@ const DetailPayment = () => {
       <div className="flex">
         <div className="w-[1000px] mx-auto mt-10 justify-center">
           <div className="text-center my-5">
-            <span className="text-[40px] text-textSec font-bold">
-              Detail Konsultasi
-            </span>
+            <span className="text-[40px] text-textSec font-bold">Detail Konsultasi</span>
             <p className="text-textSec">
-              Silahkan pilih salah satu psikolog yang di rekomendasikan sesuai
-              dengan yang kamu dibutuhkan.
+              Silahkan pilih salah satu psikolog yang di rekomendasikan sesuai dengan yang kamu dibutuhkan.
             </p>
           </div>
 
@@ -80,9 +96,7 @@ const DetailPayment = () => {
             <div className="">
               <form>
                 {/* 1. Tampilkan detail konsultasi  */}
-                <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">
-                  DATA PRIBADI
-                </h1>
+                <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">DATA PRIBADI</h1>
                 <div className="p-5">
                   <div className="relative z-0 w-full mb-6 group">
                     <input
@@ -218,9 +232,7 @@ const DetailPayment = () => {
                     </label>
                   </div>
                 </div>
-                <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">
-                  DATA KONSULTASI
-                </h1>
+                <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">DATA KONSULTASI</h1>
                 <div className="p-5">
                   <div className="relative z-0 w-full mb-6 group">
                     <select
@@ -232,15 +244,9 @@ const DetailPayment = () => {
                       disabled
                     >
                       <option value="">Pilih Kategori Pasien</option>
-                      <option value="Konsultasi Anak (5-11 tahun)">
-                        Konsultasi Anak (5-11 tahun)
-                      </option>
-                      <option value="Konsultasi Remaja (12-25 tahun)">
-                        Konsultasi Remaja (12-25 tahun)
-                      </option>
-                      <option value="Konsultasi Dewasa (26-45 tahun)">
-                        Konsultasi Dewasa (26-45 tahun)
-                      </option>
+                      <option value="Konsultasi Anak (5-11 tahun)">Konsultasi Anak (5-11 tahun)</option>
+                      <option value="Konsultasi Remaja (12-25 tahun)">Konsultasi Remaja (12-25 tahun)</option>
+                      <option value="Konsultasi Dewasa (26-45 tahun)">Konsultasi Dewasa (26-45 tahun)</option>
                     </select>
                     <label
                       htmlFor="kategori_pasien"
@@ -308,9 +314,7 @@ const DetailPayment = () => {
                 </div>
                 {/* 1. Tampilkan detail konsultasi  */}
                 {/* 2. Tampilkan detail Psikolog yang dipilih */}
-                <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">
-                  DATA PSIKOLOG
-                </h1>
+                <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">DATA PSIKOLOG</h1>
                 <div className="p-5">
                   <div class="flex flex-col mb-5 items-center md:flex-row md:max-w-4xl ">
                     <img
@@ -333,9 +337,7 @@ const DetailPayment = () => {
                           <FaStar />
                           <FaStarHalf />
                         </p>
-                        <p class="mb-3 font-normal text-green-500 dark:text-gray-400">
-                          Rp. 200.000
-                        </p>
+                        <p class="mb-3 font-normal text-green-500 dark:text-gray-400">Rp. 200.000</p>
                       </div>
                     </div>
                   </div>
@@ -343,14 +345,14 @@ const DetailPayment = () => {
                 {/* 2. Tampilkan detail Psikolog yang dipilih */}
               </form>
             </div>
-            <div className="text-center mt-4">
-              <button
-                onClick={paymentDetail}
-                className="bg-opt text-black py-2 px-4 rounded-md"
-              >
-                Detail Pembayaran
-              </button>
-            </div>
+          </div>
+          <div className="text-center flex mt-5 w-full justify-between items-center ">
+            <button onClick={handleGoBack} className=" text-textOpt py-3 px-4 rounded-md bg-gray-500 hover:bg-gray-400">
+              &laquo; Kembali Pilih Psikolog
+            </button>
+            <button onClick={paymentDetail} className=" text-textOpt py-3 px-4 rounded-md bg-bgOpt hover:bg-bgOpt2">
+              Upload Bukti Pembayaran &raquo;
+            </button>
           </div>
           {/* 1. Tampilkan detail konsultasi  */}
         </div>

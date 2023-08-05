@@ -10,7 +10,7 @@ const StatusPsikolog = () => {
   const authState = useSelector((state) => state.auth);
 
   // Cek apakah authState atau authState.user ada sebelum mengakses propertinya
-  const isPsikolog = authState?.user?.isPsikolog || "N/A";
+  const isPsikolog = authState?.user?.isPsikolog || "Kamu belum mendaftar menjadi psikolog";
 
   return (
     <>
@@ -20,9 +20,7 @@ const StatusPsikolog = () => {
         <div className="h-screen mx-auto pt-10">
           {/* judul */}
           <div>
-            <h1 className="text-sizeTri text-textSec font-bold">
-              Status Penerimaan
-            </h1>
+            <h1 className="text-sizeTri text-textSec font-bold">Status Penerimaan</h1>
             <p className="my-3 text-textFunc">Dashboard / Status</p>
           </div>
           {/* judul */}
