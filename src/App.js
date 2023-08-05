@@ -61,7 +61,12 @@ import EditPaymentAdminPage from './pages/Admin/paymentAdminPage/EditPaymentAdmi
 import DashboardPsikologPage from "./pages/Psikolog/DashboardPsikologPage";
 import StatusPsikologPage from "./components/Psikolog/StatusPsikolog";
 import SuccessForm from "./components/Konsultasi/SuccessForm";
+<<<<<<< HEAD
 import RegisterPsikolog from "./pages/RegisterPsikolog";
+=======
+import ListKonsulPsikologPage from "./pages/Psikolog/ListKonsulPsikologPage";
+import DetailKonsulPsikologPage from "./pages/Psikolog/DetailKonsulPsikologPage";
+>>>>>>> f0592b4ac9c6789572eb1acae3a1ba548315ad18
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -134,6 +139,8 @@ function App() {
           <Route path="/psikolog/dashboard" element={<DashboardPsikologPage />}/>
           <Route path="/psikolog/status" element={<StatusPsikologPage />} />
           <Route path="/psikolog/dashboard" element={<DashboardPsikologPage />} />
+          <Route path="/psikolog/konsul" element={<ListKonsulPsikologPage />} />
+          <Route path="/psikolog/konsul/:id/detail" element={<DetailKonsulPsikologPage />} />
 
           {/* psikolog router */}
         </Routes>
