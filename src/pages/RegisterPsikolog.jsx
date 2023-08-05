@@ -55,25 +55,6 @@ function RegisterPsikolog() {
     } catch (error) {
       console.log(error);
     }
-
-    // try {
-    //   const makeRequest = async () => {
-    //     try {
-    //       const response = await axios.request(config);
-    //       console.log(response.data);
-    //       console.log(JSON.stringify(response.data));
-
-    //       // Check if registration is successful with the specified message
-
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    //   makeRequest();
-    //   // setShowAlert(true);
-    // } catch (error) {
-    //   setMessage(error.response.data.message);
-    // }
   };
 
   useEffect(() => {
