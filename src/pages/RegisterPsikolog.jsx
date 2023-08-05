@@ -6,89 +6,113 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+import { data } from "autoprefixer";
 
 function RegisterPsikolog() {
-  const [message, setMessage] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confPassword: "",
-    dateOfBirth: "",
-    gender: "",
-    age: "",
-    work: "",
-    role: "",
-    isPsikolog: "Menunggu",
-    pendidikan: "",
-    univ: "",
-    ktpUrl: "",
-    ijazahUrl: "",
-    alasan: "",
-  });
-  // const [showAlert, setShowAlert] = useState(false);
+  const [setMessage, setSetMessage] = useState("");
+  const authState = useSelector((state) => state.auth);
+  const token = localStorage.getItem("token");
+  const [ijazah, setIjazah] = useState(null);
+  const [ktp, setKtp] = useState(null);
+  const [univ, setUniv] = useState("");
+
   const navigate = useNavigate();
-
-  console.log(formData);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Remove 'isPsikolog' from formData if the role is not 'psikolog'
-    const filteredFormData = { ...formData };
-    if (formData.role !== "psikolog") {
-      delete filteredFormData.isPsikolog;
-    }
+    let data = new FormData();
+    data.append("ijazah", ijazah);
+    data.append("ktp", ktp);
+    data.append("univ", univ);
 
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/auth/register`,
-      data: filteredFormData,
+      url: `${process.env.REACT_APP_BASE_URL}/auth/register/psikolog`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
     };
 
     try {
-      const makeRequest = async () => {
-        try {
-          const response = await axios.request(config);
-          console.log(response.data);
-          console.log(JSON.stringify(response.data));
-
-          // Check if registration is successful with the specified message
-          if (response.data.message === "Registration is successful, please verify email") {
-            // Show SweetAlert for successful registration
-            Swal.fire({
-              icon: "success",
-              title: "Registration Successful!",
-              text: "Please verify your email before logging in.",
-              confirmButtonText: "OK",
-            }).then(() => {
-              // Navigate to login page after user clicks "OK" button
-              navigate("/login");
-            });
-          }
-        } catch (error) {
-          console.log(error);
-          console.log(error.response.data.message);
-        }
-      };
-      makeRequest();
-      // setShowAlert(true);
+      const response = await axios.request(config);
+      console.log(JSON.stringify(response.data));
+      if (response.data.message === "Registration is successful, please wait for the admin to check") {
+        // Show SweetAlert for successful registration
+        Swal.fire({
+          icon: "success",
+          title: "Psikologs Registration Successful!",
+          text: "Please check the status in your dashboard.",
+          confirmButtonText: "OK",
+        }).then(() => {
+          // Navigate to login page after user clicks "OK" button
+          navigate("/");
+        });
+      }
     } catch (error) {
-      setMessage(error.response.data.message);
+      console.log(error);
     }
+
+    // try {
+    //   const makeRequest = async () => {
+    //     try {
+    //       const response = await axios.request(config);
+    //       console.log(response.data);
+    //       console.log(JSON.stringify(response.data));
+
+    //       // Check if registration is successful with the specified message
+
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    //   makeRequest();
+    //   // setShowAlert(true);
+    // } catch (error) {
+    //   setMessage(error.response.data.message);
+    // }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const passwordMatch = formData.password === formData.confPassword;
+  const handleIjazaheChange = (e) => {
+    const file = e.target.files[0];
+    const maxSize = 5 * 1024 * 1024; // 5MB
+
+    if (file.size > maxSize) {
+      Swal.fire({
+        title: "Ukuran Gambar Terlalu Besar",
+        text: "Ukuran gambar tidak boleh melebihi 5MB.",
+        icon: "error",
+      });
+      setIjazah(null); // Reset the selected thumbnail
+      return;
+    }
+
+    setIjazah(file);
+  };
+
+  const handleKtpChange = (e) => {
+    const file = e.target.files[0];
+    const maxSize = 2 * 1024 * 1024; // 2MB
+
+    if (file.size > maxSize) {
+      Swal.fire({
+        title: "Ukuran Gambar Terlalu Besar",
+        text: "Ukuran gambar tidak boleh melebihi 2MB.",
+        icon: "error",
+      });
+      setKtp(null); // Reset the selected thumbnail
+      return;
+    }
+
+    setKtp(file);
+  };
 
   return (
     <div>
@@ -109,26 +133,15 @@ function RegisterPsikolog() {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <h5 className="text-[54px] font-semibold text-textPri text-center">Registrasi Psikolog</h5>
               <p className="text-sm text-gray-500  text-center font-medium">Silahkan masukan data lengkap anda</p>
-
               <div className="">
-                <div>
-                  <input
-                    type="text"
-                    name="pendidikan"
-                    className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                    placeholder="Pendidikan Terakhir"
-                    value={formData.pendidikan}
-                    onChange={handleChange}
-                  />
-                </div>
                 <div>
                   <input
                     type="text"
                     name="univ"
                     className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5"
                     placeholder="Universitas Asal"
-                    value={formData.univ}
-                    onChange={handleChange}
+                    value={univ}
+                    onChange={(e) => setUniv(e.target.value)}
                   />
                 </div>
                 <div>
@@ -137,9 +150,7 @@ function RegisterPsikolog() {
                     type="file"
                     name="ktp"
                     className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                    placeholder="Link Gdrive KTP"
-                    value={formData.ktp}
-                    onChange={handleChange}
+                    onChange={handleKtpChange}
                   />
                 </div>
                 <div>
@@ -148,23 +159,9 @@ function RegisterPsikolog() {
                     type="file"
                     name="ijazah"
                     className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 "
-                    placeholder="Link Gdrive Ijazah"
-                    value={formData.ijazah}
-                    onChange={handleChange}
+                    onChange={handleIjazaheChange}
                   />
                 </div>
-                <div>
-                  <input
-                    type="text"
-                    name="alasan"
-                    className="bg-gray-50 h-[100px] border border-gray-300 text-sm rounded-lg focus:ring-1 focus:outline-none focus:ring-bgFunc3 focus:border-bgFunc3 block w-full p-2.5 mt-5 "
-                    placeholder="Alasan mendaftar Psikolog di Lentera Mandeh"
-                    required
-                    value={formData.alasan}
-                    onChange={handleChange}
-                  />
-                </div>
-
                 <p className="text-textSec text-sizeParagraph mt-5">
                   Nota : Apabila telah mendaftar silahkan menunggu dan mengecek secara berkala status akun Me-Well anda.
                 </p>
