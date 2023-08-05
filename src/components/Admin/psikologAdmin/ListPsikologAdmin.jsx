@@ -74,8 +74,8 @@ function ListPsikologAdmin() {
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>
-          <h1 className="text-sizeTri text-textSec font-bold">User</h1>
-          <p className="my-3 text-textFunc">Dashboard / User</p>
+          <h1 className="text-sizeTri text-textSec font-bold">Psikolog</h1>
+          <p className="my-3 text-textFunc">Dashboard / Psikolog</p>
         </div>
         {/* judul */}
         {/* content */}
@@ -142,14 +142,14 @@ function ListPsikologAdmin() {
                 <tbody>
                   {users.map((user, index) => {
                     return (
-                      <tr key={user._id} className="bg-white border-b ">
+                      <tr key={user._id} className="bg-white border-b text-center ">
                         <th scope="row" className="px-6 py-4 text-center">
                           {index + 1}
                         </th>
                         <td className="px-6 py-4">{user.user.name}</td>
                         <td className="px-6 py-4">{user.status}</td>
 
-                        <td className="px-6 py-4">
+                        {/* <td className="px-6 py-4">
                           <div
                             className={
                               user.status === "Menunggu"
@@ -163,12 +163,12 @@ function ListPsikologAdmin() {
                           >
                             {user.status}
                           </div>
-                        </td>
+                        </td> */}
 
-                        <td className="px-6 py-4 flex gap-3">
-                          <Link to={`/admin/user/${user._id}/detail`}>Detail </Link>
-                          <Link to={`/admin/user/${user._id}/edit`}>Edit </Link>
-                          <button onClick={() => deleteUser(user._id)}>Delete</button>
+                        <td className="px-6 py-4 flex gap-3 justify-center">
+                          <Link to={`/admin/psikolog/${user.psikolog_id}/detail`}>Detail </Link>
+                          <Link to={`/admin/psikolog/${user.psikolog_id}/edit`}>Edit </Link>
+                          <button onClick={() => deleteUser(user.psikolog_id)}>Delete</button>
                         </td>
                       </tr>
                     );

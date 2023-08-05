@@ -10,8 +10,6 @@ import { useSelector } from "react-redux";
 import { data } from "autoprefixer";
 
 function RegisterPsikolog() {
-  const [setMessage, setSetMessage] = useState("");
-  const authState = useSelector((state) => state.auth);
   const token = localStorage.getItem("token");
   const [ijazah, setIjazah] = useState(null);
   const [ktp, setKtp] = useState(null);

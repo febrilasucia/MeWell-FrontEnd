@@ -52,6 +52,7 @@ import DashboardUser from "./components/User/DashboardUser";
 import ListKonsulUser from "./components/User/ListKonsulUser";
 //psikolog
 import ListPsikologAdminPage from "./pages/Admin/psikologAdminPage/ListPsikologAdminPage";
+import EditPsikologAdminPage from "./pages/Admin/psikologAdminPage/EditPsikologAdminPage";
 //payment
 import ListPaymentAdminPage from './pages/Admin/paymentAdminPage/ListPaymentAdminPage'
 import DetailPaymentAdminPage from './pages/Admin/paymentAdminPage/DetailPaymentAdminPage'
@@ -124,6 +125,7 @@ function App() {
           <Route path="/admin/user/:id/edit" element={<EditUserAdminPage />} />
           <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
           <Route path="/admin/psikolog" element={<AdminDashboardGuard><ListPsikologAdminPage /></AdminDashboardGuard>}/>
+          <Route path="/admin/psikolog/:psikolog_id/edit" element={<AdminDashboardGuard><EditPsikologAdminPage /></AdminDashboardGuard>}/>
           {/* pembayaran */}
           <Route path="/admin/payment" element={<AdminDashboardGuard><ListPaymentAdminPage /></AdminDashboardGuard>}/>
           <Route path="/admin/payment/:id/edit" element={<AdminDashboardGuard><EditPaymentAdminPage /></AdminDashboardGuard>}/>
