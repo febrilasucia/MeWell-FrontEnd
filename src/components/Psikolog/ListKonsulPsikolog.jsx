@@ -11,17 +11,19 @@ function ListKonsulPsikolog() {
 
   useEffect(() => {
     fetchKonsuls();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchKonsuls = async () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/konsul/user`,
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/pembayaran-diterima`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
+
 
     try {
       const response = await axios.request(config);
