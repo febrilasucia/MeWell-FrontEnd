@@ -13,7 +13,6 @@ function Header() {
   const { user, isLogin } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [role, setRole] = useState("");
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -47,17 +46,19 @@ function Header() {
   }, []);
 
   let linkTo = "";
+  // const role = authState?.user?.role || "N/A";
 
-  if (role === "admin") {
+  if (user?.role === "admin") {
     linkTo = "/admin/dashboard";
-  } else if (role === "psikolog") {
+  } else if (user?.role === "psikolog") {
     linkTo = "/psikolog/dashboard";
-  } else if (role === "user") {
+  } else if (user?.role === "user") {
     linkTo = "/user/dashboard";
   } else {
     // Jika role tidak sesuai, Anda bisa mengatur linkTo ke halaman lain yang sesuai.
-    linkTo = "/user/dashboard";
+    linkTo = "/psikolog/dashboard";
   }
+  console.log(user?.role);
 
   return (
     <nav className="bg-bgSec shadow-xl z-10">

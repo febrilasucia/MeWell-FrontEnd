@@ -1,7 +1,7 @@
 import React from "react";
 import ListPsikologAdmin from "../../../components/Admin/psikologAdmin/ListPsikologAdmin";
 
-function UserPage() {
+function ListPsikologAdminPage() {
   return (
     <div>
       <ListPsikologAdmin />
@@ -9,4 +9,4 @@ function UserPage() {
   );
 }
 
-export default UserPage;
+export default ListPsikologAdminPage;

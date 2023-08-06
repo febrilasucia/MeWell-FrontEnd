@@ -7,13 +7,10 @@ import { FaStarHalf, FaStar } from "react-icons/fa";
 import axios from "axios";
 
 function ChoosePsikolog() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const [psikologId, setPsikologId] = useState("");
   const { id } = useParams();
-  const [psikolog, setpsikolog] = useState([]);
-
-  console.log(psikologId);
+  const [psikolog, setPsikolog] = useState([]);
 
   const fetchPsikolog = async () => {
     let config = {
@@ -28,7 +25,7 @@ function ChoosePsikolog() {
     async function makeRequest() {
       try {
         const response = await axios.request(config);
-        setpsikolog(response.data);
+        setPsikolog(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -41,9 +38,9 @@ function ChoosePsikolog() {
     fetchPsikolog();
   }, []);
 
-  const handleUpdate = async (psikologId) => {
+  const handleUpdate = async (psikolog_id) => {
     const data = {
-      psikologId,
+      psikolog_id,
     };
 
     let config = {
@@ -60,7 +57,7 @@ function ChoosePsikolog() {
     try {
       const response = await axios.request(config);
       console.log(JSON.stringify(response.data));
-      navigate(`/konsultasi/${id}/detail-konsul`)
+      navigate(`/konsultasi/${id}/detail-konsul`);
     } catch (error) {
       console.log(error);
     }
@@ -70,21 +67,16 @@ function ChoosePsikolog() {
     <div>
       <Header />
       <div className="text-center my-10">
-        <span className="text-[40px] text-textSec font-bold">
-          LIST PSIKOLOG
-        </span>
+        <span className="text-[40px] text-textSec font-bold">LIST PSIKOLOG</span>
         <p className="text-textSec">
-          Silahkan pilih salah satu psikolog yang di rekomendasikan sesuai
-          dengan yang kamu dibutuhkan.
+          Silahkan pilih salah satu psikolog yang di rekomendasikan sesuai dengan yang kamu dibutuhkan.
         </p>
       </div>
 
       <div className="bg-bgSec w-full mt-5 shadow-sm shadow-textFunc">
         <div className="my-10 mx-[150px]">
           <form>
-            <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">
-              DATA PRIBADI
-            </h1>
+            <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">DATA PRIBADI</h1>
             <div className="p-5">
               <div className=" my-[10px] flex flex-wrap justify-center">
                 {psikolog.map((psi, index) => (
@@ -97,11 +89,8 @@ function ChoosePsikolog() {
                       className="object-cover mx-2 w-full rounded-t-lg h-96 md:h-auto md:w-36 md:rounded-none md:rounded-l-lg"
                       src={PsiImg}
                     />
-                    <form onSubmit={handleUpdate}></form>
                     <div className="flex flex-col justify-between p-4 leading-normal">
-                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-textSec">
-                        {psi.name}
-                      </h5>
+                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-textSec">{psi.name}</h5>
                       <p className="mb-3 font-normal text-textFunc">
                         Sudah lebih 3 tahun berpengalaman dalam konseling anak
                       </p>
@@ -113,9 +102,7 @@ function ChoosePsikolog() {
                           <FaStar />
                           <FaStarHalf />
                         </p>
-                        <p className="mb-3 font-normal text-green-500">
-                          Rp. 200.000
-                        </p>
+                        <p className="mb-3 font-normal text-green-500">Rp. 200.000</p>
                       </div>
                     </div>
                   </Link>

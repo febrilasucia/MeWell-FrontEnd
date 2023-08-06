@@ -1,67 +1,35 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../Sidebar";
+import Sidebar from "./SidebarPsikolog";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { formatDate } from "../../../util/Helper";
 
-function ListKonsulAdmin() {
+function ListKonsulPsikolog() {
   const [activePage, setActivePage] = useState("Konsultasi");
   const [konsuls, setKonsuls] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     fetchKonsuls();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchKonsuls = async () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/konsul/`,
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/pembayaran-diterima`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
+
 
     try {
       const response = await axios.request(config);
-      setKonsuls(response.data.konsul);
+      setKonsuls(response.data.data);
       console.log(response);
       console.log(JSON.stringify(response.data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log(konsuls);
-
-  const deleteKonsul = async (_id) => {
-    console.log(_id);
-    try {
-      const config = {
-        method: "delete",
-        url: `${process.env.REACT_APP_BASE_URL}/konsul/${_id}`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "Cancel",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await axios.request(config);
-          setKonsuls((prevKonsuls) => prevKonsuls.filter((konsul) => konsul._id !== _id));
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire("Cancelled", "Your file is safe :)", "error");
-        }
-      });
     } catch (error) {
       console.log(error);
     }
@@ -132,13 +100,13 @@ function ListKonsulAdmin() {
                       Nama Pasien
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nama Psikolog
+                      Nomor Telepon
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Kategori
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Via Konsul
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Tanggal
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Aksi
@@ -151,20 +119,21 @@ function ListKonsulAdmin() {
                       <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4">{konsul.user_id.name}</td>
-                      <td className="px-6 py-4 text-center"> {konsul.psikolog_id}</td>
+                      <td className="px-6 py-4">{konsul.nama_pasien}</td>
+                      <td className="px-6 py-4 text-center hover:text-bgOpt">
+                        <a href={`https://wa.me/${konsul.no_wa}`}>{konsul.no_wa}</a>
+                      </td>
+                      <td className="px-6 py-4 text-center"> {konsul.kategori_pasien}</td>
                       <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
-                      <td className="px-6 py-4 text-center"> {formatDate(konsul.createdAt)}</td>
                       <td className="px-6 py-4 flex gap-3 ">
-                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>
+                        <Link className="hover:text-bgFunc3" to={`/psikolog/konsul/${konsul._id}/detail`}>
                           {" "}
                           Detail
                         </Link>
-                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/edit`}>
+                        <Link className="hover:text-bgFunc3" to={`/psikolog/${konsul._id}/chat`}>
                           {" "}
-                          Edit
+                          Chat
                         </Link>
-                        <button onClick={() => deleteKonsul(konsul._id)}>Delete</button>
                       </td>
                     </tr>
                   ))}
@@ -181,4 +150,4 @@ function ListKonsulAdmin() {
   );
 }
 
-export default ListKonsulAdmin;
+export default ListKonsulPsikolog;

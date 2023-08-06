@@ -16,6 +16,8 @@ const DetailUserAdmin = () => {
   const [age, setAge] = useState("");
   const [work, setWork] = useState("");
   const [isVerified, setIsVerified] = useState("");
+  const [isPsikolog, setIsPsikolog] = useState("");
+
   const [activePage, setActivePage] = useState("User");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -29,24 +31,22 @@ const DetailUserAdmin = () => {
     const fetchUser = async () => {
       console.log("fetch is running");
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/user/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const userData = response.data;
         setName(userData.name);
         setEmail(userData.email);
         setRole(userData.role);
-        setProfileUrl(userData.profileUrl);
-        setDateOfBirth(userData.dateOfBirth);
+        setProfileUrl(userData.profile);
+        setDateOfBirth(userData.date_birth);
         setGender(userData.gender);
         setAge(userData.age);
         setWork(userData.work);
         setIsVerified(userData.isVerified);
+        setIsPsikolog(userData.isPsikolog);
         console.log(userData);
       } catch (error) {
         console.log(error);
@@ -74,10 +74,7 @@ const DetailUserAdmin = () => {
                   <table className="w-full">
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="name"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="name" className="block text-textSec mb-1">
                           Nama
                         </label>
                       </td>
@@ -93,10 +90,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="email"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="email" className="block text-textSec mb-1">
                           Email
                         </label>
                       </td>
@@ -112,11 +106,8 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="profileUrl"
-                          className="block text-textSec mb-1"
-                        >
-                          : Profile Url
+                        <label htmlFor="profileUrl" className="block text-textSec mb-1">
+                          Profile Url
                         </label>
                       </td>
                       <td className="">
@@ -131,10 +122,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="videoLink" className="block text-textSec mb-1">
                           Tanggal Lahir
                         </label>
                       </td>
@@ -150,10 +138,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="gender"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="gender" className="block text-textSec mb-1">
                           Jenis Kelamin
                         </label>
                       </td>
@@ -169,48 +154,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
-                          Umur
-                        </label>
-                      </td>
-                      <td className="">
-                        <p
-                          type="text"
-                          id="age"
-                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        >
-                          : {age}
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="work"
-                          className="block text-textSec mb-1"
-                        >
-                          Pekerjaan
-                        </label>
-                      </td>
-                      <td className="">
-                        <p
-                          type="text"
-                          id="work"
-                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        >
-                          : {work}
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="role"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="role" className="block text-textSec mb-1">
                           Role
                         </label>
                       </td>
@@ -226,10 +170,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="isVerified"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="isVerified" className="block text-textSec mb-1">
                           isVerified
                         </label>
                       </td>

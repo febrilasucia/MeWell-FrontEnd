@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../Sidebar";
+import Sidebar from "./SidebarUser";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+import { formatDate } from "../../util/Helper";
 
-function ListPsikologAdmin() {
-  const [activePage, setActivePage] = useState("Psikolog");
-  const [users, setUsers] = useState([]);
+function ListKonsulUser() {
+  const [activePage, setActivePage] = useState("Konsultasi");
+  const [konsuls, setKonsuls] = useState([]);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetchPsikologRegister();
+    fetchKonsuls();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchPsikologRegister = async () => {
+  const fetchKonsuls = async () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/psikolog/registrasi`,
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/user`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -25,20 +28,18 @@ function ListPsikologAdmin() {
 
     try {
       const response = await axios.request(config);
-      setUsers(response.data);
+      setKonsuls(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log("ini data users", users);
-
-  const deleteUser = async (_id) => {
-    console.log("ini id", _id);
+  const deleteKonsul = async (_id) => {
+    console.log(_id);
     try {
       const config = {
         method: "delete",
-        url: `${process.env.REACT_APP_BASE_URL}/user/${_id}`,
+        url: `${process.env.REACT_APP_BASE_URL}/konsul/${_id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -56,7 +57,7 @@ function ListPsikologAdmin() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axios.request(config);
-          setUsers((prevUsers) => prevUsers.filter((user) => user._id !== _id));
+          setKonsuls((prevKonsuls) => prevKonsuls.filter((konsul) => konsul._id !== _id));
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Cancelled", "Your file is safe :)", "error");
@@ -74,8 +75,8 @@ function ListPsikologAdmin() {
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>
-          <h1 className="text-sizeTri text-textSec font-bold">Psikolog</h1>
-          <p className="my-3 text-textFunc">Dashboard / Psikolog</p>
+          <h1 className="text-sizeTri text-textSec font-bold">Konsultasi</h1>
+          <p className="my-3 text-textFunc">Dashboard / Konsultasi </p>
         </div>
         {/* judul */}
         {/* content */}
@@ -84,10 +85,10 @@ function ListPsikologAdmin() {
           <div className="flex items-center justify-between px-5 pt-5">
             <div>
               <Link
-                id="addUser"
+                id="addBlog"
                 className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 "
                 type="button"
-                to={"/admin/user/create-user"}
+                to={"/konsultasi/form-konsultasi"}
               >
                 Tambah
               </Link>
@@ -115,64 +116,57 @@ function ListPsikologAdmin() {
               <input
                 type="text"
                 id="table-search"
-                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
+                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search items"
               />
             </div>
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <table className="w-full text-sm text-left text-gray-500">
                 <thead className=" text-textOpt  bg-bgFunc3 text-center">
                   <tr>
                     <th scope="col" className="px-6 py-3">
                       No
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nama
+                      Nama Psikolog
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Status
+                      Tanggal
                     </th>
-                    <th scope="col ol-start-2" className="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
+                      Status Pembayaran
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Via Konsul
+                    </th>
+                    <th scope="col" className="px-6 py-3">
                       Aksi
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user, index) => {
-                    return (
-                      <tr key={user._id} className="bg-white border-b text-center ">
-                        <th scope="row" className="px-6 py-4 text-center">
-                          {index + 1}
-                        </th>
-                        <td className="px-6 py-4">{user.user.name}</td>
-                        <td className="px-6 py-4">{user.status}</td>
-
-                        {/* <td className="px-6 py-4">
-                          <div
-                            className={
-                              user.status === "Menunggu"
-                                ? "border h-10 text-white text-center shadow-sm py-2 bg-gray-500 rounded-md"
-                                : user.isPsikolog === "Diterima"
-                                ? "border h-10 text-white text-center shadow-sm py-2 bg-green-500 rounded-md"
-                                : user.isPsikolog === "Ditolak"
-                                ? "border h-10 text-white text-center shadow-sm py-2 bg-red-500 rounded-md"
-                                : "border h-10 text-white text-center shadow-sm py-2 bg-bgOpt2 rounded-md"
-                            }
-                          >
-                            {user.status}
-                          </div>
-                        </td> */}
-
-                        <td className="px-6 py-4 flex gap-3 justify-center">
-                          <Link to={`/admin/psikolog/${user.psikolog_id}/detail`}>Detail </Link>
-                          <Link to={`/admin/psikolog/${user.psikolog_id}/edit`}>Edit </Link>
-                          <button onClick={() => deleteUser(user.psikolog_id)}>Delete</button>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {konsuls.map((konsul, index) => (
+                    <tr key={index} className="bg-white border-b ">
+                      <td className="px-6 py-4 text-center whitespace-nowrap">{index + 1}</td>
+                      <td className="px-6 py-4 text-center">{konsul.psikolog.nama}</td>
+                      <td className="px-6 py-4 text-center">{formatDate(konsul.createdAt)}</td>
+                      <td className="px-6 py-4 text-center"> {konsul.payment.status}</td>
+                      <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
+                      <td className="px-6 py-4 flex gap-3 ">
+                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>
+                          {" "}
+                          Detail
+                        </Link>
+                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/edit`}>
+                          {" "}
+                          Edit
+                        </Link>
+                        <button onClick={() => deleteKonsul(konsul._id)}>Delete</button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -186,4 +180,4 @@ function ListPsikologAdmin() {
   );
 }
 
-export default ListPsikologAdmin;
+export default ListKonsulUser;
