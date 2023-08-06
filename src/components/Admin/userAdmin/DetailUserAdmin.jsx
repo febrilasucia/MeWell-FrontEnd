@@ -17,11 +17,6 @@ const DetailUserAdmin = () => {
   const [work, setWork] = useState("");
   const [isVerified, setIsVerified] = useState("");
   const [isPsikolog, setIsPsikolog] = useState("");
-  const [pendidikan, setPendidikan] = useState("");
-  const [univ, setUniv] = useState("");
-  const [ktpUrl, setKtpUrl] = useState("");
-  const [ijazahUrl, setIjazahUrl] = useState("");
-  const [alasan, setAlasan] = useState("");
 
   const [activePage, setActivePage] = useState("User");
   const navigate = useNavigate();
@@ -36,20 +31,17 @@ const DetailUserAdmin = () => {
     const fetchUser = async () => {
       console.log("fetch is running");
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/user/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const userData = response.data;
         setName(userData.name);
         setEmail(userData.email);
         setRole(userData.role);
-        setProfileUrl(userData.profileUrl);
-        setDateOfBirth(userData.dateOfBirth);
+        setProfileUrl(userData.profile);
+        setDateOfBirth(userData.date_birth);
         setGender(userData.gender);
         setAge(userData.age);
         setWork(userData.work);
@@ -82,10 +74,7 @@ const DetailUserAdmin = () => {
                   <table className="w-full">
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="name"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="name" className="block text-textSec mb-1">
                           Nama
                         </label>
                       </td>
@@ -101,10 +90,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="email"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="email" className="block text-textSec mb-1">
                           Email
                         </label>
                       </td>
@@ -120,10 +106,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="profileUrl"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="profileUrl" className="block text-textSec mb-1">
                           Profile Url
                         </label>
                       </td>
@@ -139,10 +122,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="videoLink" className="block text-textSec mb-1">
                           Tanggal Lahir
                         </label>
                       </td>
@@ -158,10 +138,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="gender"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="gender" className="block text-textSec mb-1">
                           Jenis Kelamin
                         </label>
                       </td>
@@ -177,48 +154,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
-                          Umur
-                        </label>
-                      </td>
-                      <td className="">
-                        <p
-                          type="text"
-                          id="age"
-                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        >
-                          : {age}
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="work"
-                          className="block text-textSec mb-1"
-                        >
-                          Pekerjaan
-                        </label>
-                      </td>
-                      <td className="">
-                        <p
-                          type="text"
-                          id="work"
-                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        >
-                          : {work}
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="role"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="role" className="block text-textSec mb-1">
                           Role
                         </label>
                       </td>
@@ -234,10 +170,7 @@ const DetailUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="isVerified"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="isVerified" className="block text-textSec mb-1">
                           isVerified
                         </label>
                       </td>
@@ -255,35 +188,6 @@ const DetailUserAdmin = () => {
                         </p>
                       </td>
                     </tr>
-                    {role === "psikolog" && (
-                      <tr>
-                        <td className="py-3">
-                          <label
-                            htmlFor="isVerified"
-                            className="block text-textSec mb-1"
-                          >
-                            Status Penerimaan
-                          </label>
-                        </td>
-                        <td>
-                          <p
-                            type="isPsikolog"
-                            id="isPsikolog"
-                            className={
-                              isPsikolog === "Menunggu"
-                                ? "border h-10 w-32 text-white text-center shadow-sm py-2 bg-gray-500 rounded-md"
-                                : isPsikolog === "Diterima"
-                                ? "border h-10 w-32 text-white text-center shadow-sm py-2 bg-green-500 rounded-md"
-                                : isPsikolog === "Ditolak"
-                                ? "border h-10 w-32 text-white text-center shadow-sm py-2 bg-red-500 rounded-md"
-                                : "border h-10 w-32 text-white text-center shadow-sm py-2 bg-bgOpt2 rounded-md"
-                            }
-                          >
-                            {isPsikolog}
-                          </p>
-                        </td>
-                      </tr>
-                    )}
                   </table>
                   <div
                     style={{

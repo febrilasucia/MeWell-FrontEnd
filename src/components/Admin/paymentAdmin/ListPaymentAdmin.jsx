@@ -3,6 +3,7 @@ import Sidebar from "../Sidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { formatDate } from "../../../util/Helper";
 
 function ListPaymentAdmin() {
   const [activePage, setActivePage] = useState("Pembayaran");
@@ -124,6 +125,9 @@ function ListPaymentAdmin() {
                       Status
                     </th>
                     <th scope="col" className="px-6 py-3">
+                      Tanggal
+                    </th>
+                    <th scope="col" className="px-6 py-3">
                       Aksi
                     </th>
                   </tr>
@@ -141,10 +145,11 @@ function ListPaymentAdmin() {
                         <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                           {index + 1}
                         </td>
-                        <td className="px-6 py-4">{payment.idKonsultasi}</td>
+                        <td className="px-6 py-4">{payment.konsultasi_id}</td>
                         <td className="px-6 py-4 text-center hover:text-bgOpt">
                           {payment.buktiPembayaran ? payment.status : <p>Menunggu Pembayaran</p>}
                         </td>
+                        <td className="px-6 py-4 text-center hover:text-bgOpt">{formatDate(payment.createdAt)}</td>
                         <td className="px-6 py-4 flex gap-3">
                           <Link className="hover:text-bgFunc3" to={`/admin/payment/${payment._id}/detail`}>
                             {" "}

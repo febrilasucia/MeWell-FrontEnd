@@ -12,8 +12,6 @@ const EditUserAdmin = () => {
   const [profileUrl, setProfileUrl] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [work, setWork] = useState("");
   const [isPsikolog, setIsPsikolog] = useState("");
   const [activePage, setActivePage] = useState("User");
   const navigate = useNavigate();
@@ -32,8 +30,6 @@ const EditUserAdmin = () => {
       email,
       dateOfBirth,
       gender,
-      age,
-      work,
       isPsikolog,
       role,
     };
@@ -48,15 +44,11 @@ const EditUserAdmin = () => {
       }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          const response = await axios.patch(
-            `${process.env.REACT_APP_BASE_URL}/user/${id}`,
-            data,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await axios.patch(`${process.env.REACT_APP_BASE_URL}/user/${id}`, data, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           console.log(response);
           navigate(`/admin/user`);
           Swal.fire("Saved!", "", "success");
@@ -71,23 +63,18 @@ const EditUserAdmin = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/user/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const userData = response.data;
         setName(userData.name);
         setEmail(userData.email);
         setRole(userData.role);
         setProfileUrl(userData.profileUrl);
-        setDateOfBirth(formatDate2(userData.dateOfBirth));
+        setDateOfBirth(formatDate2(userData.date_birth));
         setGender(userData.gender);
-        setAge(userData.age);
-        setWork(userData.work);
         setIsPsikolog(userData.isPsikolog);
       } catch (error) {
         console.log(error);
@@ -116,10 +103,7 @@ const EditUserAdmin = () => {
                   <table className="w-full">
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="title"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="title" className="block text-textSec mb-1">
                           Nama
                         </label>
                       </td>
@@ -135,10 +119,7 @@ const EditUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="author"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="author" className="block text-textSec mb-1">
                           Email
                         </label>
                       </td>
@@ -155,10 +136,7 @@ const EditUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="videoLink" className="block text-textSec mb-1">
                           Tanggal Lahir
                         </label>
                       </td>
@@ -174,10 +152,7 @@ const EditUserAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="gender"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="gender" className="block text-textSec mb-1">
                           Jenis Kelamin
                         </label>
                       </td>
@@ -193,68 +168,6 @@ const EditUserAdmin = () => {
                         </select>
                       </td>
                     </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
-                          Umur
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="text"
-                          id="age"
-                          value={age}
-                          onChange={(e) => setAge(e.target.value)}
-                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
-                          Pekerjaan
-                        </label>
-                      </td>
-                      <td className="">
-                        <input
-                          type="text"
-                          id="work"
-                          value={work}
-                          onChange={(e) => setWork(e.target.value)}
-                          className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                        />
-                      </td>
-                    </tr>
-                    {role === "psikolog" && (
-                      <tr>
-                        <td className="py-3">
-                          <label
-                            htmlFor="gender"
-                            className="block text-textSec mb-1"
-                          >
-                            Status Penerimaan
-                          </label>
-                        </td>
-                        <td className="">
-                          <select
-                            id="isPsikolog"
-                            value={isPsikolog}
-                            onChange={(e) => setIsPsikolog(e.target.value)}
-                            className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                          >
-                            <option value="Menunggu">Menunggu</option>
-                            <option value="Diterima">Diterima</option>
-                            <option value="Ditolak">Ditolak</option>
-                          </select>
-                        </td>
-                      </tr>
-                    )}
                   </table>
                   <div
                     style={{

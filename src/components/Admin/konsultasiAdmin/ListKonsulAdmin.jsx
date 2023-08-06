@@ -3,6 +3,7 @@ import Sidebar from "../Sidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { formatDate } from "../../../util/Helper";
 
 function ListKonsulAdmin() {
   const [activePage, setActivePage] = useState("Konsultasi");
@@ -131,13 +132,13 @@ function ListKonsulAdmin() {
                       Nama Pasien
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nomor Telepon
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Kategori
+                      Nama Psikolog
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Via Konsul
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Tanggal
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Aksi
@@ -150,12 +151,10 @@ function ListKonsulAdmin() {
                       <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4">{konsul.nama_pasien}</td>
-                      <td className="px-6 py-4 text-center hover:text-bgOpt">
-                        <a href={`https://wa.me/${konsul.no_wa}`}>{konsul.no_wa}</a>
-                      </td>
-                      <td className="px-6 py-4 text-center"> {konsul.kategori_pasien}</td>
+                      <td className="px-6 py-4">{konsul.user_id.name}</td>
+                      <td className="px-6 py-4 text-center"> {konsul.psikolog_id}</td>
                       <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
+                      <td className="px-6 py-4 text-center"> {formatDate(konsul.createdAt)}</td>
                       <td className="px-6 py-4 flex gap-3 ">
                         <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>
                           {" "}
