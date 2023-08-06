@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import jwt_decode from 'jwt-decode';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import jwt_decode from "jwt-decode";
 
 const initialState = {
   value: 0,
@@ -11,34 +11,33 @@ const initialState = {
 };
 
 // Membuat thunk untuk mengambil user
-export const fetchUser = createAsyncThunk(
-  'auth/fetchUser',
-  async (token, thunkAPI) => {
-    try {
-      const decodedToken = jwt_decode(token);
-      return decodedToken;
-    } catch (error) {
-      // Menggunakan rejectWithValue untuk mengirim error ke action payload
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const fetchUser = createAsyncThunk("auth/fetchUser", async (token, thunkAPI) => {
   try {
-    localStorage.removeItem('token');
+    const decodedToken = jwt_decode(token);
+    return decodedToken;
+  } catch (error) {
+    // Menggunakan rejectWithValue untuk mengirim error ke action payload
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    localStorage.removeItem("token");
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
-      localStorage.setItem('token', action.payload);
+      // localStorage.setItem("user_id", action.payload.user_id);
+      // localStorage.setItem("user_role", action.payload.role);
+      localStorage.setItem("token", action.payload);
     },
     setUser: (state, action) => {
       state.user = action.payload;

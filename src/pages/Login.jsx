@@ -38,19 +38,21 @@ const Login = () => {
     try {
       const response = await axios.request(config);
       const token = response.data.token;
-
+      console.log(token);
       dispatch(setToken(token));
+
+      // dispatch(setToken(payload));
 
       const actionResult = await dispatch(fetchUser(token));
       const role = actionResult.payload.role;
+      const user_id = actionResult.payload._id;
+      localStorage.setItem("user_id", user_id);
+      console.log(role, user_id);
       redirectToRolePage(role);
     } catch (error) {
       console.log(error);
       if (error.response) {
-        if (
-          error.response.data.message ===
-          "Email is not verified, please verify it before logging in"
-        ) {
+        if (error.response.data.message === "Email is not verified, please verify it before logging in") {
           Swal.fire({
             icon: "error",
             title: "Email Not Verified",
@@ -99,12 +101,8 @@ const Login = () => {
       <div className="flex flex-col h-screen justify-center">
         <div className="m-auto bg-bgSec w-full max-w-sm p-4 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <h5 className="text-[54px] font-semibold text-textPri text-center">
-              Login
-            </h5>
-            <p className="text-sm text-gray-500  text-center font-medium">
-              Silahkan masukan email dan password
-            </p>
+            <h5 className="text-[54px] font-semibold text-textPri text-center">Login</h5>
+            <p className="text-sm text-gray-500  text-center font-medium">Silahkan masukan email dan password</p>
             <div>
               <input
                 type="email"
@@ -117,9 +115,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               {error && error === "Email is not registered" && (
-                <span className="text-red-500 text-xs mt-1">
-                  *Email yang dimasukkan belum terdaftar.
-                </span>
+                <span className="text-red-500 text-xs mt-1">*Email yang dimasukkan belum terdaftar.</span>
               )}
             </div>
 
@@ -135,9 +131,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {error && error === "Password is not correct" && (
-                <span className="text-red-500 text-xs mt-1">
-                  *Password yang dimasukkan salah.
-                </span>
+                <span className="text-red-500 text-xs mt-1">*Password yang dimasukkan salah.</span>
               )}
             </div>
 

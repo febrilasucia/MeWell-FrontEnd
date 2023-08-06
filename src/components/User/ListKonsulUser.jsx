@@ -163,7 +163,10 @@ function ListKonsulUser() {
                           {" "}
                           Edit
                         </Link>
-                        <button onClick={() => deleteKonsul(konsul._id)}>Delete</button>
+                        <Link className="hover:text-bgFunc3" to={`/user/konsul/${konsul._id}/chat`}>
+                          {" "}
+                          Chat
+                        </Link>
                       </td>
                     </tr>
                   ))}

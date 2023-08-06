@@ -68,6 +68,7 @@ import DetailKonsulPsikologPage from "./pages/Psikolog/DetailKonsulPsikologPage"
 import StatusPenerimaan from "./components/User/StatusPenerimaan";
 import DetailPsikologAdmin from "./components/Admin/psikologAdmin/DetailPsikologAdmin";
 import ChatPasienPsikologPage from "./pages/Psikolog/ChatPasienPsikologPage";
+import ChatPasienUser from "./components/User/ChatPasienUser";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -95,6 +96,8 @@ function App() {
 
           <Route path="/user/dashboard" element={<DashboardUser />} />
           <Route path="/user/konsul" element={<ListKonsulUser />} />
+          <Route path="/user/konsul/:id/chat" element={<ChatPasienUser />} />
+          
           <Route path="/user/status" element={<StatusPenerimaan />} />
           <Route
             path="/profile"
@@ -254,7 +257,7 @@ function App() {
             }
           />
           <Route
-            path="/admin/payment/:id/detail"
+            path="/admin/payment/:id/detail" 
             element={
               <AdminDashboardGuard>
                 <DetailPaymentAdminPage />
@@ -269,7 +272,7 @@ function App() {
           <Route path="/psikolog/dashboard" element={<DashboardPsikologPage />} />
           <Route path="/psikolog/status" element={<StatusPsikologPage />} />
           <Route path="/psikolog/dashboard" element={<DashboardPsikologPage />} />
-          <Route path="/psikolog/chat" element={<ChatPasienPsikologPage />} />
+          <Route path="/psikolog/konsul/:id/chat" element={<ChatPasienPsikologPage />} />
           <Route path="/psikolog/konsul" element={<ListKonsulPsikologPage />} />
           <Route path="/psikolog/konsul/:id/detail" element={<DetailKonsulPsikologPage />} />
 

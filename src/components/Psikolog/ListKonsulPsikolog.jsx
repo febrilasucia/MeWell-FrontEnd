@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./SidebarPsikolog";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2";
+import { formatDate } from "../../util/Helper";
 
 function ListKonsulPsikolog() {
   const [activePage, setActivePage] = useState("Konsultasi");
@@ -11,7 +11,7 @@ function ListKonsulPsikolog() {
 
   useEffect(() => {
     fetchKonsuls();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchKonsuls = async () => {
@@ -23,7 +23,6 @@ function ListKonsulPsikolog() {
         Authorization: `Bearer ${token}`,
       },
     };
-
 
     try {
       const response = await axios.request(config);
@@ -50,16 +49,7 @@ function ListKonsulPsikolog() {
 
         <div className="w-[1000px] bg-bgTri mx-auto mt-5 justify-center rounded-md shadow-sm shadow-textFunc">
           <div className="flex items-center justify-between px-5 pt-5">
-            <div>
-              <Link
-                id="addBlog"
-                className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 "
-                type="button"
-                to={"/konsultasi/form-konsultasi"}
-              >
-                Tambah
-              </Link>
-            </div>
+            <div></div>
             <label htmlFor="table-search" className="sr-only">
               Search
             </label>
@@ -100,10 +90,7 @@ function ListKonsulPsikolog() {
                       Nama Pasien
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nomor Telepon
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Kategori
+                      Tanggal
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Via Konsul
@@ -119,18 +106,15 @@ function ListKonsulPsikolog() {
                       <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4">{konsul.nama_pasien}</td>
-                      <td className="px-6 py-4 text-center hover:text-bgOpt">
-                        <a href={`https://wa.me/${konsul.no_wa}`}>{konsul.no_wa}</a>
-                      </td>
-                      <td className="px-6 py-4 text-center"> {konsul.kategori_pasien}</td>
+                      <td className="px-6 py-4">{konsul.user_id}</td>
+                      <td className="px-6 py-4 text-center"> {formatDate(konsul.createdAt)}</td>
                       <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
                       <td className="px-6 py-4 flex gap-3 ">
                         <Link className="hover:text-bgFunc3" to={`/psikolog/konsul/${konsul._id}/detail`}>
                           {" "}
                           Detail
                         </Link>
-                        <Link className="hover:text-bgFunc3" to={`/psikolog/${konsul._id}/chat`}>
+                        <Link className="hover:text-bgFunc3" to={`/psikolog/konsul/${konsul._id}/chat`}>
                           {" "}
                           Chat
                         </Link>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "./SidebarPsikolog";
+import Sidebar from "./SidebarUser";
 import { FaUserCircle } from "react-icons/fa";
 import io from "socket.io-client";
 import { useParams } from "react-router-dom";
 const socket = io.connect("http://localhost:5000");
 
-const ChatPasienPasikolog = () => {
+const ChatPasienUser = () => {
   const [activePage, setActivePage] = useState("Chat Pasien");
   const [message, setMessage] = useState([]);
   const [send, setSend] = useState("");
@@ -120,4 +120,4 @@ const ChatPasienPasikolog = () => {
   );
 };
 
-export default ChatPasienPasikolog;
+export default ChatPasienUser;
