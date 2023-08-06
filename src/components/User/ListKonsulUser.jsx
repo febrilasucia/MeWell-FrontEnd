@@ -4,35 +4,35 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
+import { formatDate } from "../../util/Helper";
 
 function ListKonsulUser() {
   const [activePage, setActivePage] = useState("Konsultasi");
   const [konsuls, setKonsuls] = useState([]);
   const token = localStorage.getItem("token");
-  const authState = useSelector((state) => state.auth);
 
   useEffect(() => {
     fetchKonsuls();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchKonsuls = async () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/konsul/`,
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/user`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
 
     try {
       const response = await axios.request(config);
-      setKonsuls(response.data.konsul);
-      console.log(response);
-      console.log(JSON.stringify(response.data));
+      setKonsuls(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(konsuls);
 
   const deleteKonsul = async (_id) => {
     console.log(_id);
@@ -130,13 +130,13 @@ function ListKonsulUser() {
                       No
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nama Pasien
-                    </th>
-                    <th scope="col" className="px-6 py-3">
                       Nama Psikolog
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Pembayaran
+                      Tanggal
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Status Pembayaran
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Via Konsul
@@ -148,15 +148,11 @@ function ListKonsulUser() {
                 </thead>
                 <tbody>
                   {konsuls.map((konsul, index) => (
-                    <tr key={konsul._id} className="bg-white border-b ">
-                      <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
-                        {index + 1}
-                      </td>
-                      <td className="px-6 py-4">{konsul._id}</td>
-                      <td className="px-6 py-4 text-center hover:text-bgOpt">
-                        <a href={`https://wa.me/${konsul.no_wa}`}>{konsul.psikolog_id}</a>
-                      </td>
-                      <td className="px-6 py-4 text-center"> {konsul.status}</td>
+                    <tr key={index} className="bg-white border-b ">
+                      <td className="px-6 py-4 text-center whitespace-nowrap">{index + 1}</td>
+                      <td className="px-6 py-4 text-center">{konsul.psikolog.nama}</td>
+                      <td className="px-6 py-4 text-center">{formatDate(konsul.createdAt)}</td>
+                      <td className="px-6 py-4 text-center"> {konsul.payment.status}</td>
                       <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
                       <td className="px-6 py-4 flex gap-3 ">
                         <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>
