@@ -18,20 +18,16 @@ function ListPaymentAdmin() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/payment/`,
+      url: `${process.env.REACT_APP_BASE_URL}/payment`,
     };
 
     try {
       const response = await axios.request(config);
       setPayments(response.data);
-      console.log("ini respont", response);
-      console.log(JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log("ini payments", payments);
 
   const deletePayment = async (_id) => {
     // console.log(_id);

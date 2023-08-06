@@ -37,27 +37,35 @@ const EditPaymentAdmin = () => {
 
   useEffect(() => {
     fetchPayment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateStatus = async (status) => {
+    let data = JSON.stringify({
+      status,
+    });
+
+    console.log("ini idnya", id);
+    console.log("ini statusnya", status);
+
     let config = {
       method: "patch",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}}/payment/${id}`,
+      url: `${process.env.REACT_APP_BASE_URL}/payment/${id}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      data,
     };
 
     try {
-      await axios.request(config);
-      navigate("/admin/payment");
+      const response = await axios.request(config);
+      console.log("iniresponnyadwi", JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
     }
   };
-
   const handleStatusPayment = async (e) => {
     e.preventDefault();
     Swal.fire({
@@ -65,18 +73,20 @@ const EditPaymentAdmin = () => {
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Diterima",
-      denyButtonText: `Ditolak`,
+      denyButtonText: "Ditolak",
       cancelButtonText: "Batal",
       confirmButtonClass: "bg-green-500 hover:bg-purple-600 text-white font-semibold",
       denyButtonClass: "bg-red-500 hover:bg-red-600 text-white font-semibold",
-    }).then((result) => {
+    }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        updateStatus("Pembayaran Diterima");
+        await updateStatus("Pembayaran Diterima");
         Swal.fire("Diterima!", "", "success");
+        navigate("/admin/payment");
       } else if (result.isDenied) {
-        updateStatus("Pembayaran Ditolak");
+        await updateStatus("Pembayaran Ditolak");
         Swal.fire("Tidak Diterima", "", "info");
+        navigate("/admin/payment");
       }
     });
   };
