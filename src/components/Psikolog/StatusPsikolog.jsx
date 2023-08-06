@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import Sidebar from "./SidebarPsikolog";
-import { FaUsers, FaBookOpen, FaUserMd, FaVideo } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const StatusPsikolog = () => {
-  const [activePage, setActivePage] = useState("Status Psikolog");
-  // const [isPsikolog, setIsPsikolog] = useState("");
-  // const token = localStorage.getItem("token");
+  const [activePage, setActivePage] = useState("Status Penerimaan");
   const authState = useSelector((state) => state.auth);
-
-  // Cek apakah authState atau authState.user ada sebelum mengakses propertinya
-  const isPsikolog = authState?.user?.isPsikolog || "Kamu belum mendaftar menjadi psikolog";
+  const status = authState?.user?.psikologStatus || "n/a";
 
   return (
     <>
@@ -26,7 +21,7 @@ const StatusPsikolog = () => {
           {/* judul */}
           {/* content */}
           <div className="flex flex-wrap gap-5  w-[980px] p-5 bg-bgTri rounded-md shadow-sm shadow-textFunc">
-            <p>{isPsikolog}</p>
+            <p>{status}</p>
           </div>
           {/* content */}
         </div>

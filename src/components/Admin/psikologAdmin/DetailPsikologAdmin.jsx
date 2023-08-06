@@ -5,7 +5,7 @@ import Sidebar from "../Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const EditPsikologAdmin = () => {
+const DetailPsikologAdmin = () => {
   const [activePage, setActivePage] = useState("Psikolog");
   const navigate = useNavigate();
   const { psikolog_id } = useParams();
@@ -163,12 +163,6 @@ const EditPsikologAdmin = () => {
                 >
                   Kembali
                 </button>
-                <button
-                  className="w-[300px] px-4 py-2  text-white rounded-md bg-bgOpt hover:bg-bgOpt2 focus:outline-none focus:ring focus:ring-gray-300"
-                  type="submit"
-                >
-                  Ubah Status Penerimaan
-                </button>
               </div>
             </form>
           </div>
@@ -179,4 +173,4 @@ const EditPsikologAdmin = () => {
   );
 };
 
-export default EditPsikologAdmin;
+export default DetailPsikologAdmin;
