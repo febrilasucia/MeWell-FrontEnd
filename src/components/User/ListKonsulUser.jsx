@@ -133,10 +133,10 @@ function ListKonsulUser() {
                       Nama Pasien
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Nomor Telepon
+                      Nama Psikolog
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Kategori
+                      Pembayaran
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Via Konsul
@@ -152,11 +152,11 @@ function ListKonsulUser() {
                       <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4">{konsul.nama_pasien}</td>
+                      <td className="px-6 py-4">{konsul._id}</td>
                       <td className="px-6 py-4 text-center hover:text-bgOpt">
-                        <a href={`https://wa.me/${konsul.no_wa}`}>{konsul.no_wa}</a>
+                        <a href={`https://wa.me/${konsul.no_wa}`}>{konsul.psikolog_id}</a>
                       </td>
-                      <td className="px-6 py-4 text-center"> {konsul.kategori_pasien}</td>
+                      <td className="px-6 py-4 text-center"> {konsul.status}</td>
                       <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
                       <td className="px-6 py-4 flex gap-3 ">
                         <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>

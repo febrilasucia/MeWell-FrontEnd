@@ -17,7 +17,7 @@ function ListKonsulPsikolog() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/konsul/pembayaran-diterima`,
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/user`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

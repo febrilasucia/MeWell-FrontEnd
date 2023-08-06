@@ -65,6 +65,8 @@ import SuccessForm from "./components/Konsultasi/SuccessForm";
 import RegisterPsikolog from "./pages/RegisterPsikolog";
 import ListKonsulPsikologPage from "./pages/Psikolog/ListKonsulPsikologPage";
 import DetailKonsulPsikologPage from "./pages/Psikolog/DetailKonsulPsikologPage";
+import StatusPenerimaan from "./components/User/StatusPenerimaan";
+import DetailPsikologAdmin from "./components/Admin/psikologAdmin/DetailPsikologAdmin";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -92,6 +94,7 @@ function App() {
 
           <Route path="/user/dashboard" element={<DashboardUser />} />
           <Route path="/user/konsul" element={<ListKonsulUser />} />
+          <Route path="/user/status" element={<StatusPenerimaan />} />
           <Route path="/profile" element={<LoginGuard><ProfilePage /></LoginGuard>}/>
           <Route path="/blog" element={<ListBlogPage />} />
           <Route path="/blog/:id" element={<DetailBlogPage />} />
@@ -126,6 +129,7 @@ function App() {
           <Route path="/admin/user/:id/detail" element={<DetailUserAdminPage />} />
           <Route path="/admin/psikolog" element={<AdminDashboardGuard><ListPsikologAdminPage /></AdminDashboardGuard>}/>
           <Route path="/admin/psikolog/:psikolog_id/edit" element={<AdminDashboardGuard><EditPsikologAdminPage /></AdminDashboardGuard>}/>
+          <Route path="/admin/psikolog/:psikolog_id/detail" element={<AdminDashboardGuard><DetailPsikologAdmin /></AdminDashboardGuard>}/>
           {/* pembayaran */}
           <Route path="/admin/payment" element={<AdminDashboardGuard><ListPaymentAdminPage /></AdminDashboardGuard>}/>
           <Route path="/admin/payment/:id/edit" element={<AdminDashboardGuard><EditPaymentAdminPage /></AdminDashboardGuard>}/>

@@ -12,7 +12,6 @@ function Profile() {
   const userName = authState?.user?.name || "Guest";
   const dateOfBirth = authState?.user?.date_birth || "N/A";
   const gender = authState?.user?.gender || "N/A";
-  const work = authState?.user?.work || "N/A";
   const email = authState?.user?.email || "N/A";
   const role = authState?.user?.role || "N/A";
   const isVerified = authState?.user?.is_verified || false;
@@ -58,11 +57,6 @@ function Profile() {
                         <td className="p-3">Jenis Kelamin</td>
                         <td className="p-3">:</td>
                         <td className="p-3">{gender}</td>
-                      </tr>
-                      <tr>
-                        <td className="p-3">Pekerjaan</td>
-                        <td className="p-3">:</td>
-                        <td className="p-3">{work}</td>
                       </tr>
                     </thead>
                   </table>
