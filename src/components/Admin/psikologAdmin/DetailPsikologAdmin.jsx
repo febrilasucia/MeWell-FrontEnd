@@ -42,7 +42,6 @@ const DetailPsikologAdmin = () => {
 
   useEffect(() => {
     fetchPsikolog();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateStatus = async (status) => {
@@ -70,29 +69,6 @@ const DetailPsikologAdmin = () => {
     }
   };
 
-  const handleStatusPsikolog = async (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: "Ubah Status Psikolog?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Diterima",
-      denyButtonText: `Ditolak`,
-      cancelButtonText: "Batal",
-      confirmButtonClass: "bg-green-500 hover:bg-purple-600 text-white font-semibold",
-      denyButtonClass: "bg-red-500 hover:bg-red-600 text-white font-semibold",
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        updateStatus("Diterima");
-        Swal.fire("Diterima!", "", "success");
-      } else if (result.isDenied) {
-        updateStatus("Ditolak");
-        Swal.fire("Tidak Diterima", "", "info");
-      }
-    });
-  };
-
   return (
     <div className="flex">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
@@ -106,7 +82,7 @@ const DetailPsikologAdmin = () => {
         {/* content */}
         <div className="bg-bgSec w-full mt-5 shadow-sm shadow-textFunc">
           <div className="">
-            <form onSubmit={handleStatusPsikolog}>
+            <form>
               <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">DATA CALON PSIKOLOG</h1>
               <div className="p-5">
                 <table>

@@ -147,7 +147,7 @@ function ListPaymentAdmin() {
                         </td>
                         <td className="px-6 py-4">{payment.konsultasi_id}</td>
                         <td className="px-6 py-4 text-center hover:text-bgOpt">
-                          {payment.buktiPembayaran ? payment.status : <p>Menunggu Pembayaran</p>}
+                          {payment.bukti_pembayaran ? payment.status : <p>Menunggu Pembayaran</p>}
                         </td>
                         <td className="px-6 py-4 text-center hover:text-bgOpt">{formatDate(payment.createdAt)}</td>
                         <td className="px-6 py-4 flex gap-3">
