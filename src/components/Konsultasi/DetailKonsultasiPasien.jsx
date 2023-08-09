@@ -9,7 +9,6 @@ const DetailPayment = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const token = localStorage.getItem("token");
-  const [viaKonsul, setViaKonsul] = useState("");
   const [riwayat, setRiwayat] = useState("");
   const [keluhan, setKeluhan] = useState("");
   const [psikologId, setPsikologId] = useState("");
@@ -28,7 +27,6 @@ const DetailPayment = () => {
         const konsulData = response.data.data;
         setRiwayat(konsulData.riwayat);
         setKeluhan(konsulData.keluhan);
-        setViaKonsul(konsulData.via_konsul);
         setPsikologId(konsulData.psikolog_id.name);
         // setPsikologName(konsulData.user_id.name);
         console.log(konsulData);
@@ -89,14 +87,11 @@ const DetailPayment = () => {
                     <select
                       name="via_konsul"
                       id="via_konsul"
-                      value={viaKonsul}
                       placeholder=" "
                       className="cursor-not-allowed block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-bgFunc3 peer"
                       disabled
                     >
-                      <option value="">Pilih Via Konsul</option>
                       <option value="Via Online">Via Online</option>
-                      <option value="Via Offline">Via Offline</option>
                     </select>
                     <label
                       htmlFor="via_konsul"

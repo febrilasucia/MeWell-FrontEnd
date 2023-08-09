@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./SidebarUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { formatDate } from "../../util/Helper";
 function ListKonsulUser() {
   const [activePage, setActivePage] = useState("Konsultasi");
   const [konsuls, setKonsuls] = useState([]);
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -34,38 +35,17 @@ function ListKonsulUser() {
     }
   };
 
-  const deleteKonsul = async (_id) => {
-    console.log(_id);
-    try {
-      const config = {
-        method: "delete",
-        url: `${process.env.REACT_APP_BASE_URL}/konsul/${_id}`,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
+  const handleChatClick = (status, _id) => {
+    console.log(status);
+    if (status !== "Pembayaran Sukses") {
       Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "Cancel",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await axios.request(config);
-          setKonsuls((prevKonsuls) => prevKonsuls.filter((konsul) => konsul._id !== _id));
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          Swal.fire("Cancelled", "Your file is safe :)", "error");
-        }
+        icon: "error",
+        title: "Belum bisa konsultasi",
+        text: "Mohon menunggu sampai admin menyelesaikan status pembayaran kamu",
       });
-    } catch (error) {
-      console.log(error);
+      return;
     }
+    navigate(`/user/konsul/${_id}/chat`);
   };
 
   return (
@@ -139,9 +119,6 @@ function ListKonsulUser() {
                       Status Pembayaran
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Via Konsul
-                    </th>
-                    <th scope="col" className="px-6 py-3">
                       Aksi
                     </th>
                   </tr>
@@ -153,7 +130,6 @@ function ListKonsulUser() {
                       <td className="px-6 py-4 text-center">{konsul.psikolog.nama}</td>
                       <td className="px-6 py-4 text-center">{formatDate(konsul.createdAt)}</td>
                       <td className="px-6 py-4 text-center"> {konsul.payment.status}</td>
-                      <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
                       <td className="px-6 py-4 flex gap-3 ">
                         <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>
                           {" "}
@@ -163,10 +139,13 @@ function ListKonsulUser() {
                           {" "}
                           Edit
                         </Link>
-                        <Link className="hover:text-bgFunc3" to={`/user/konsul/${konsul._id}/chat`}>
+                        <button
+                          className="hover:text-bgFunc3"
+                          onClick={() => handleChatClick(konsul.payment.status, konsul._id)}
+                        >
                           {" "}
                           Chat
-                        </Link>
+                        </button>
                       </td>
                     </tr>
                   ))}

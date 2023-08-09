@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 
 function FormKonsultasi() {
   const navigate = useNavigate();
-  const [viaKonsul, setViaKonsul] = useState("");
   const [riwayat, setRiwayat] = useState("");
   const [keluhan, setKeluhan] = useState("");
   const token = localStorage.getItem("token");
@@ -13,7 +12,6 @@ function FormKonsultasi() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = JSON.stringify({
-      via_konsul: viaKonsul,
       riwayat,
       keluhan,
     });
@@ -54,9 +52,6 @@ function FormKonsultasi() {
     navigate(-1);
   };
 
-  const handleViaKonsulChange = (e) => {
-    setViaKonsul(e.target.value);
-  };
 
   return (
     <div className="my-10 mx-[150px]">
@@ -71,27 +66,6 @@ function FormKonsultasi() {
           <form onSubmit={handleSubmit}>
             <h1 className="p-3 font-bold bg-bgFunc3 text-textOpt rounded-sm rounded-t-md">DATA KONSULTASI</h1>
             <div className="p-5">
-              <div className="relative z-0 w-full mb-6 group">
-                <select
-                  name="via_konsul"
-                  id="via_konsul"
-                  value={viaKonsul}
-                  onChange={handleViaKonsulChange}
-                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-bgFunc3 peer"
-                  placeholder=" "
-                  required
-                >
-                  <option value="">Pilih Via Konsul</option>
-                  <option value="Via Online">Via Online</option>
-                  <option value="Via Offline">Via Offline</option>
-                </select>
-                <label
-                  htmlFor="kategori_pasien"
-                  className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-bgFunc3 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                >
-                  Kategori Pasien
-                </label>
-              </div>
               <div className="relative z-0 w-full mb-6 group">
                 <input
                   type="text"

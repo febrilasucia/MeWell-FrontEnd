@@ -72,7 +72,7 @@ const EditPaymentAdmin = () => {
       title: "Ubah Status Pembayaran?",
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: "Diterima",
+      confirmButtonText: "Sukses",
       denyButtonText: "Ditolak",
       cancelButtonText: "Batal",
       confirmButtonClass: "bg-green-500 hover:bg-purple-600 text-white font-semibold",
@@ -80,8 +80,8 @@ const EditPaymentAdmin = () => {
     }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        await updateStatus("Pembayaran Diterima");
-        Swal.fire("Diterima!", "", "success");
+        await updateStatus("Pembayaran Sukses");
+        Swal.fire("Sukses!", "", "success");
         navigate("/admin/payment");
       } else if (result.isDenied) {
         await updateStatus("Pembayaran Ditolak");

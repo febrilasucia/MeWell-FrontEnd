@@ -17,7 +17,6 @@ const Sidebar = ({ activePage, setActivePage }) => {
   const Menus = [
     { title: "Dashboard", icon: <FaHome />, link: "/user/dashboard" },
     { title: "Pesanan Konsultasi ", icon: <FaUserMd />, link: "/user/konsul" },
-    { title: "Chat Pasien", icon: <FaComments />, link: "/user/chat" },
     { title: "Status Penerimaan", icon: <FaComments />, link: "/user/status" },
   ];
 

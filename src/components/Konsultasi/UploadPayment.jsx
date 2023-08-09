@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 function UploadPayment() {
   const token = localStorage.getItem("token");
   const { id } = useParams();
-  const [status] = useState("Pembayaran Sukses");
+  const [status] = useState("Pembayaran Diterima");
   const [buktiPembayaran, setBuktiPembayaran] = useState(null);
   const navigate = useNavigate();
 
