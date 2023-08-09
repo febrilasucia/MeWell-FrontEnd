@@ -78,7 +78,6 @@ const ChatPasienUser = () => {
           <div className="w-11/12">
             <div className="bg-bgFunc3 flex items-center gap-3 text-white font-bold py-2 pl-8 rounded-xl">
               <FaUserCircle className="text-xl" />
-              {/* <span className="font-normal  text-lg ">Dr. Username, A.Md.Kom</span> */}
               <span className="font-normal  text-lg ">{user?.psikolog_id?.name}</span>
             </div>
             <div className="bg-bgTri h-[80vh] overflow-scroll">
