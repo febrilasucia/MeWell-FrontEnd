@@ -18,7 +18,7 @@ function ListKonsulPsikolog() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/konsul/pembayaran-diterima`,
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/pembayaran-sukses`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -93,9 +93,6 @@ function ListKonsulPsikolog() {
                       Tanggal
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Via Konsul
-                    </th>
-                    <th scope="col" className="px-6 py-3">
                       Aksi
                     </th>
                   </tr>
@@ -108,7 +105,6 @@ function ListKonsulPsikolog() {
                       </td>
                       <td className="px-6 py-4">{konsul.user_id}</td>
                       <td className="px-6 py-4 text-center"> {formatDate(konsul.createdAt)}</td>
-                      <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
                       <td className="px-6 py-4 flex gap-3 ">
                         <Link className="hover:text-bgFunc3" to={`/psikolog/konsul/${konsul._id}/detail`}>
                           {" "}
