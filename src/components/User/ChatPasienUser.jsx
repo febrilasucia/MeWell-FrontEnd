@@ -3,6 +3,8 @@ import Sidebar from "./SidebarUser";
 import { FaUserCircle } from "react-icons/fa";
 import io from "socket.io-client";
 import { useParams } from "react-router-dom";
+import { formatTime } from "../../util/Helper";
+import axios from "axios";
 const socket = io.connect("http://localhost:5000");
 
 const ChatPasienUser = () => {
@@ -12,15 +14,45 @@ const ChatPasienUser = () => {
   const params = useParams();
   const userId = localStorage.getItem("user_id");
   const konsulId = params.id;
+  const [user, setUser] = useState("");
+  const token = localStorage.getItem("token");
+
+  const fetchUsers = async () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_BASE_URL}/konsul/${konsulId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios.request(config);
+      setUser(response.data.data);
+      console.log("ini respons", response);
+      console.log("ini json data", JSON.stringify(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
+    fetchUsers();
     socket.on("receive_message", (data) => {
       console.log(data);
       setMessage((prev) => {
-        return [...prev, { message: data.message, sender: data.sender, konsulId: data.konsulId }];
+        return [
+          ...prev,
+          { message: data.message, sender: data.sender, konsulId: data.konsulId, timestamp: data.timestamp },
+        ];
       });
     });
     socket.emit("join_room", { konsulId });
+    socket.emit("previous_chat", { konsulId });
+    socket.on("get_previous_chat", (data) => {
+      setMessage(data);
+    });
     return () => {
       socket.off("reply_function");
     };
@@ -33,7 +65,7 @@ const ChatPasienUser = () => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    socket.emit("send_message_to", { message: send, sender: userId, konsulId: konsulId });
+    socket.emit("send_message_to", { message: send, sender: userId, konsulId: konsulId, timestamp: new Date() });
     setSend("");
   };
 
@@ -47,7 +79,7 @@ const ChatPasienUser = () => {
             <div className="bg-bgFunc3 flex items-center gap-3 text-white font-bold py-2 pl-8 rounded-xl">
               <FaUserCircle className="text-xl" />
               {/* <span className="font-normal  text-lg ">Dr. Username, A.Md.Kom</span> */}
-              <span className="font-normal  text-lg ">Nama User</span>
+              <span className="font-normal  text-lg ">{user?.psikolog_id?.name}</span>
             </div>
             <div className="bg-bgTri h-[80vh] overflow-scroll">
               {message.map((data, i) => {
@@ -56,7 +88,7 @@ const ChatPasienUser = () => {
                     <div className="flex justify-end" key={i}>
                       <div className="bg-textFunc text-white rounded-xl max-w-[50%] m-5 px-4 pt-4 pb-2 relative before:w-0 after:h-0 after:border-l-transparent after:border-r-transparent after:border-t-transparent after:border-b-textFunc after:border-[10px] after:absolute after:right-[-10px] after:bottom-0">
                         <p className="text-[14px]">{data.message}</p>
-                        <small className="block mt-2 text-left text-xxs">10:32</small>
+                        <small className="block mt-2 text-left text-xxs">{formatTime(data.timestamp)}</small>
                       </div>
                     </div>
                   );
@@ -65,7 +97,7 @@ const ChatPasienUser = () => {
                   <div className="flex justify-start" key={i}>
                     <div className="bg-bgOpt text-white rounded-xl max-w-[50%] m-5 px-4 pt-4 pb-2 relative before:w-0 before:h-0 before:border-l-transparent before:border-r-transparent before:border-t-transparent before:border-b-bgOpt before:border-[10px] before:absolute before:left-[-10px] before:bottom-0">
                       <p className="text-[14px]">{data.message}</p>
-                      <small className="block mt-2 text-right text-xxs">10:32</small>
+                      <small className="block mt-2 text-right text-xxs">{formatTime(data.timestamp)}</small>
                     </div>
                   </div>
                 );
