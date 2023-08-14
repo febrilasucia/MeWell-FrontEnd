@@ -135,9 +135,6 @@ function ListKonsulAdmin() {
                       Nama Psikolog
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Via Konsul
-                    </th>
-                    <th scope="col" className="px-6 py-3">
                       Tanggal
                     </th>
                     <th scope="col" className="px-6 py-3">
@@ -152,8 +149,7 @@ function ListKonsulAdmin() {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4">{konsul.user_id.name}</td>
-                      <td className="px-6 py-4 text-center"> {konsul.psikolog_id}</td>
-                      <td className="px-6 py-4 text-center"> {konsul.via_konsul}</td>
+                      <td className="px-6 py-4 text-center"> {konsul.psikolog_id.name}</td>
                       <td className="px-6 py-4 text-center"> {formatDate(konsul.createdAt)}</td>
                       <td className="px-6 py-4 flex gap-3 ">
                         <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>

@@ -20,7 +20,7 @@ const StatusPsikolog = () => {
           </div>
           {/* judul */}
           {/* content */}
-          <div className="flex flex-wrap gap-5  w-[980px] p-5 bg-bgTri rounded-md shadow-sm shadow-textFunc">
+          <div className="flex flex-wrap gap-5  w-[980px] p-5 bg-bgTri rounded-md shadow-sm shadow-textFunc text-textFunc">
             <p>{status}</p>
           </div>
           {/* content */}

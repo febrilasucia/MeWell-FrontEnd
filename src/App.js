@@ -69,6 +69,7 @@ import StatusPenerimaan from "./components/User/StatusPenerimaan";
 import DetailPsikologAdmin from "./components/Admin/psikologAdmin/DetailPsikologAdmin";
 import ChatPasienPsikologPage from "./pages/Psikolog/ChatPasienPsikologPage";
 import ChatPasienUser from "./components/User/ChatPasienUser";
+import DetailKonsulUser from "./components/User/DetailKonsulUser";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -97,6 +98,14 @@ function App() {
           <Route path="/user/dashboard" element={<DashboardUser />} />
           <Route path="/user/konsul" element={<ListKonsulUser />} />
           <Route path="/user/konsul/:id/chat" element={<ChatPasienUser />} />
+          <Route
+            path="/user/konsul/:id/detail"
+            element={
+              <UserDashboardGuard>
+                <DetailKonsulUser />
+              </UserDashboardGuard>
+            }
+          />
           
           <Route path="/user/status" element={<StatusPenerimaan />} />
           <Route
@@ -196,7 +205,7 @@ function App() {
             }
           />
           <Route
-            path="/admin/video/create-video"
+            path="/admin/video/create-video" 
             element={
               <AdminDashboardGuard>
                 <CreateVideoAdminPage />

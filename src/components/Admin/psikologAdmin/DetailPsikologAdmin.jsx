@@ -44,31 +44,6 @@ const DetailPsikologAdmin = () => {
     fetchPsikolog();
   }, []);
 
-  const updateStatus = async (status) => {
-    let data = JSON.stringify({
-      user_id: userId,
-      status: status,
-    });
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/auth/status/psikolog`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      data,
-    };
-
-    try {
-      await axios.request(config);
-      navigate("/admin/psikolog");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="flex">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />

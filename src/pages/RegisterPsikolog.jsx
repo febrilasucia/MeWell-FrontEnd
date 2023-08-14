@@ -46,8 +46,10 @@ function RegisterPsikolog() {
           text: "Please check the status in your dashboard.",
           confirmButtonText: "OK",
         }).then(() => {
+          setTimeout(() => {
+            navigate("/");
+          }, 3000);
           // Navigate to login page after user clicks "OK" button
-          navigate("/");
         });
       }
     } catch (error) {

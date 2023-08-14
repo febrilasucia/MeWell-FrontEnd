@@ -115,7 +115,7 @@ function ListPaymentAdmin() {
                       No
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Id Konsultasi
+                      Nama Pasien
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Status
@@ -141,7 +141,7 @@ function ListPaymentAdmin() {
                         <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                           {index + 1}
                         </td>
-                        <td className="px-6 py-4">{payment.konsultasi_id}</td>
+                        <td className="px-6 py-4">{payment.user_id}</td>
                         <td className="px-6 py-4 text-center hover:text-bgOpt">
                           {payment.bukti_pembayaran ? payment.status : <p>Menunggu Pembayaran</p>}
                         </td>

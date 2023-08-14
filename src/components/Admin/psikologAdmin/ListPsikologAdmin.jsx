@@ -142,7 +142,7 @@ function ListPsikologAdmin() {
                 <tbody>
                   {users.map((user, index) => {
                     return (
-                      <tr key={user._id} className="bg-white border-b text-center ">
+                      <tr key={index} className="bg-white border-b text-center ">
                         <th scope="row" className="px-6 py-4 text-center">
                           {index + 1}
                         </th>

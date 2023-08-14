@@ -131,13 +131,8 @@ function ListKonsulUser() {
                       <td className="px-6 py-4 text-center">{formatDate(konsul.createdAt)}</td>
                       <td className="px-6 py-4 text-center"> {konsul.payment.status}</td>
                       <td className="px-6 py-4 flex gap-3 ">
-                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/detail`}>
-                          {" "}
+                        <Link className="hover:text-bgFunc3" to={`/user/konsul/${konsul._id}/detail`}>
                           Detail
-                        </Link>
-                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/edit`}>
-                          {" "}
-                          Edit
                         </Link>
                         <button
                           className="hover:text-bgFunc3"

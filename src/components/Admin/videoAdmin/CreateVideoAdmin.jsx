@@ -22,18 +22,20 @@ const CreateVideoAdmin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let data = new FormData();
-    data.append("title", title);
-    data.append("videoLink", videoLink);
-    data.append("description", description);
-    data.append("author", author);
-    data.append("content", content);
+    let data = JSON.stringify({
+      title: title,
+      videoLink: videoLink,
+      description: description,
+      author: author,
+      content: content,
+    });
 
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/video`,
+      url: `${process.env.REACT_APP_BASE_URL}/video/`,
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       data: data,
@@ -43,28 +45,22 @@ const CreateVideoAdmin = () => {
       try {
         const response = await axios.request(config);
         console.log(JSON.stringify(response.data));
+        Swal.fire({
+          title: "Berhasil!",
+          text: "Data berhasil disimpan.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+
+        setTimeout(() => {
+          navigate("/admin/video");
+        }, 3000);
       } catch (error) {
         console.log(error);
       }
     }
 
     makeRequest();
-    navigate("/admin/video");
-
-    try {
-      Swal.fire({
-        title: "Berhasil!",
-        text: "Data berhasil disimpan.",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-
-      setTimeout(() => {
-        navigate("/admin/video");
-      }, 3000);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -86,10 +82,7 @@ const CreateVideoAdmin = () => {
                   <table className="w-full">
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="title"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="title" className="block text-textSec mb-1">
                           Judul Video
                         </label>
                       </td>
@@ -106,10 +99,7 @@ const CreateVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="description"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="description" className="block text-textSec mb-1">
                           Deskripsi Singkat
                         </label>
                       </td>
@@ -125,10 +115,7 @@ const CreateVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="author"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="author" className="block text-textSec mb-1">
                           Link Video
                         </label>
                       </td>
@@ -144,10 +131,7 @@ const CreateVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="description"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="description" className="block text-textSec mb-1">
                           Author
                         </label>
                       </td>
@@ -163,10 +147,7 @@ const CreateVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="content"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="content" className="block text-textSec mb-1">
                           Konten
                         </label>
                       </td>

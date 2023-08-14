@@ -1,60 +1,46 @@
 export const questions = [
   {
-    introvertText:
-      "Saya lebih memilih bekerja sendiri daripada bekerja dalam kelompok",
-    ekstrovertText:
-      "Saya lebih memilih bekerja dalam kelompok daripada bekerja sendiri",
+    introvertText: "Menghabiskan waktu luang sendiri",
+    ekstrovertText: "Minat terhadap banyak kegiatan",
   },
   {
-    introvertText:
-      "Saya lebih suka menghabiskan waktu sendiri daripada bersama orang lain",
-    ekstrovertText:
-      "Saya lebih suka menghabiskan waktu bersama orang lain daripada sendiri",
+    introvertText: "Jauh dari suatu komunitas",
+    ekstrovertText: "Menyukai Petualangan",
   },
   {
-    introvertText:
-      "Saya merasa lelah setelah menghabiskan waktu dengan banyak orang",
-    ekstrovertText:
-      "Saya merasa bersemangat setelah menghabiskan waktu dengan banyak orang",
+    introvertText: "Memegang teguh prinsip",
+    ekstrovertText: "Menyukai hal-hal baru",
   },
   {
-    introvertText:
-      "Saya lebih suka berbicara dengan orang yang saya kenal daripada orang yang baru dikenal",
-    ekstrovertText:
-      "Saya lebih suka berbicara dengan orang yang baru dikenal daripada orang yang saya kenal",
+    introvertText: "Konsisten dalam kebiasaan",
+    ekstrovertText: "Tegas mengambil keputusan",
   },
   {
-    introvertText: "Saya lebih suka menghindari kerumunan besar",
-    ekstrovertText: "Saya merasa nyaman berada di kerumunan besar",
+    introvertText: "Berpikir jauh kedepan",
+    ekstrovertText: "Peka terhadap lingkungan sekitar",
   },
   {
-    introvertText:
-      "Saya merasa energi saya terkuras setelah berada dalam keramaian sosial yang ramai.",
-    ekstrovertText:
-      "Saya merasa antusias dan bersemangat ketika berada dalam keramaian sosial yang ramai.",
+    introvertText: "Tertarik terhadap suatu ide",
+    ekstrovertText: "Perhatian mudah dialihkan.",
   },
   {
-    introvertText:
-      "Saya lebih suka berpikir secara mendalam sebelum berbicara.",
-    ekstrovertText:
-      "Saya suka berbicara dan berpikir secara spontan tanpa banyak pertimbangan.",
+    introvertText: "Menyelesaikan tugas tepat waktu",
+    ekstrovertText: "Menunda-nunda pekerjaan",
   },
   {
-    introvertText:
-      "Saya merasa terisi energi setelah menghabiskan waktu sendiri untuk merenung dan memikirkan hal-hal.",
-    ekstrovertText:
-      "Saya merasa terisi energi setelah menghabiskan waktu dengan teman-teman dan terlibat dalam percakapan aktif.",
+    introvertText: "Tidak pernah terlambat memenuhi janji",
+    ekstrovertText: "Mengabaikan janji.",
   },
   {
-    introvertText:
-      "Saya lebih suka memiliki hubungan yang dalam dengan beberapa orang daripada memiliki banyak kenalan yang dangkal.",
-    ekstrovertText:
-      "Saya menikmati memiliki banyak kenalan dan senang berinteraksi dengan berbagai orang.",
+    introvertText: "Tidak nyaman berada ditengah banyak orang",
+    ekstrovertText: "Terlibat aktif dalam kegiatan",
   },
   {
-    introvertText:
-      "Saya cenderung memikirkan segala kemungkinan sebelum mengambil tindakan.",
-    ekstrovertText:
-      "Saya cenderung mengambil tindakan tanpa terlalu banyak memikirkan kemungkinan-kemungkinan yang ada.",
+    introvertText: "Menghindari keramaian",
+    ekstrovertText: "Nyaman berbicara di depan orang banyak",
+  },
+  {
+    introvertText: "Mudah terhanyut perasaan",
+    ekstrovertText: "Mudah marah",
   },
 ];

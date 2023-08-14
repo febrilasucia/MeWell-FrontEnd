@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import ReactQuill, { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import Sidebar from '../Sidebar';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import ImageCompress from 'quill-image-compress';
+import React, { useState } from "react";
+import axios from "axios";
+import ReactQuill, { Quill } from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import Sidebar from "../Sidebar";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import ImageCompress from "quill-image-compress";
 
-Quill.register('modules/imageCompress', ImageCompress);
+Quill.register("modules/imageCompress", ImageCompress);
 
 const CreateBlogAdmin = () => {
-  const [activePage, setActivePage] = useState('Blog');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [author, setAuthor] = useState('');
+  const [activePage, setActivePage] = useState("Blog");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [thumbnailPreview, setThumbnailPreview] = useState(null);
 
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const handleGoBack = () => {
     navigate(-1);
@@ -34,29 +34,14 @@ const CreateBlogAdmin = () => {
     // console.log(thumbnail);
 
     let data = new FormData();
-    data.append('title', title);
-    data.append('description', description);
-    data.append('author', author);
-    data.append('content', content);
-    data.append('thumbnail', thumbnail);
-
-    try {
-      Swal.fire({
-        title: 'Berhasil!',
-        text: 'Data berhasil disimpan.',
-        icon: 'success',
-        confirmButtonText: 'OK',
-      });
-
-      setTimeout(() => {
-        navigate('/admin/blog');
-      }, 3000);
-    } catch (error) {
-      console.log(error);
-    }
+    data.append("title", title);
+    data.append("description", description);
+    data.append("author", author);
+    data.append("content", content);
+    data.append("thumbnail", thumbnail);
 
     let config = {
-      method: 'post',
+      method: "post",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/blog`,
       headers: {
@@ -69,13 +54,21 @@ const CreateBlogAdmin = () => {
       try {
         const response = await axios.request(config);
         console.log(JSON.stringify(response.data));
+        Swal.fire({
+          title: "Berhasil!",
+          text: "Data berhasil disimpan.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+
+        setTimeout(() => {
+          navigate("/admin/blog");
+        }, 3000);
       } catch (error) {
         console.log(error);
       }
     }
     makeRequest();
-
-    navigate('/admin/blog');
   };
 
   const handleThumbnailChange = (e) => {
@@ -84,9 +77,9 @@ const CreateBlogAdmin = () => {
 
     if (file.size > maxSize) {
       Swal.fire({
-        title: 'Ukuran Gambar Terlalu Besar',
-        text: 'Ukuran gambar tidak boleh melebihi 2MB.',
-        icon: 'error',
+        title: "Ukuran Gambar Terlalu Besar",
+        text: "Ukuran gambar tidak boleh melebihi 2MB.",
+        icon: "error",
       });
       setThumbnail(null); // Reset the selected thumbnail
       setThumbnailPreview(null); // Reset the thumbnail preview
@@ -110,9 +103,9 @@ const CreateBlogAdmin = () => {
       const height = img.height;
       if (width !== 1080 || height !== 716) {
         Swal.fire({
-          title: 'Ukuran Gambar Salah',
-          text: 'Ukuran gambar harus 1080x716 pixel.',
-          icon: 'error',
+          title: "Ukuran Gambar Salah",
+          text: "Ukuran gambar harus 1080x716 pixel.",
+          icon: "error",
         });
         setThumbnail(null); // Reset the selected thumbnail
         setThumbnailPreview(null); // Reset the thumbnail preview
@@ -139,10 +132,7 @@ const CreateBlogAdmin = () => {
                   <table className="w-full">
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="title"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="title" className="block text-textSec mb-1">
                           Judul Blog
                         </label>
                       </td>
@@ -158,10 +148,7 @@ const CreateBlogAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="description"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="description" className="block text-textSec mb-1">
                           Deskripsi Singkat
                         </label>
                       </td>
@@ -178,10 +165,7 @@ const CreateBlogAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="description"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="description" className="block text-textSec mb-1">
                           Author
                         </label>
                       </td>
@@ -197,10 +181,7 @@ const CreateBlogAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="thumbnail"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="thumbnail" className="block text-textSec mb-1">
                           Thumbnail Gambar (JPG/PNG format, maksimum 2MB)
                         </label>
                       </td>
@@ -222,25 +203,17 @@ const CreateBlogAdmin = () => {
                             />
                           </div>
                         )}
-                        {thumbnail && (
-                          <p className="text-textFunc mt-2">
-                            Gambar terpilih: {thumbnail.name}
-                          </p>
-                        )}
+                        {thumbnail && <p className="text-textFunc mt-2">Gambar terpilih: {thumbnail.name}</p>}
                         {!thumbnail && (
                           <p className="text-textFunc mt-2">
-                            Silakan pilih gambar dengan format JPG atau PNG,
-                            ukuran 1080x716 pixel, dan maksimum 2MB.
+                            Silakan pilih gambar dengan format JPG atau PNG, ukuran 1080x716 pixel, dan maksimum 2MB.
                           </p>
                         )}
                       </td>
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="content"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="content" className="block text-textSec mb-1">
                           Konten
                         </label>
                       </td>
@@ -251,38 +224,38 @@ const CreateBlogAdmin = () => {
                           modules={{
                             toolbar: [
                               [{ header: [1, 2, false] }],
-                              ['bold', 'italic', 'underline', 'strike'],
-                              ['link', 'image'],
-                              [{ list: 'ordered' }, { list: 'bullet' }],
-                              ['blockquote', 'code-block'],
+                              ["bold", "italic", "underline", "strike"],
+                              ["link", "image"],
+                              [{ list: "ordered" }, { list: "bullet" }],
+                              ["blockquote", "code-block"],
                               [{ align: [] }],
-                              [{ indent: '-1' }, { indent: '+1' }],
-                              [{ direction: 'rtl' }],
-                              ['clean'],
+                              [{ indent: "-1" }, { indent: "+1" }],
+                              [{ direction: "rtl" }],
+                              ["clean"],
                             ],
                             imageCompress: {
                               quality: 0.7, // default
                               maxWidth: 1000, // default
                               maxHeight: 1000, // default
-                              imageType: 'image/jpeg', // default
+                              imageType: "image/jpeg", // default
                               debug: true, // default
                             },
                           }}
                           formats={[
-                            'header',
-                            'bold',
-                            'italic',
-                            'underline',
-                            'strike',
-                            'link',
-                            'image',
-                            'list',
-                            'bullet',
-                            'blockquote',
-                            'code-block',
-                            'align',
-                            'indent',
-                            'direction',
+                            "header",
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strike",
+                            "link",
+                            "image",
+                            "list",
+                            "bullet",
+                            "blockquote",
+                            "code-block",
+                            "align",
+                            "indent",
+                            "direction",
                           ]}
                           className="h-[200px] border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                         />
@@ -291,9 +264,9 @@ const CreateBlogAdmin = () => {
                   </table>
                   <div
                     style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      position: 'relative',
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      position: "relative",
                     }}
                     className="p-5 flex flex-wrap gap-2"
                   >

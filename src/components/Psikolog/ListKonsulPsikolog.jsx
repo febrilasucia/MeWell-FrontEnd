@@ -103,9 +103,9 @@ function ListKonsulPsikolog() {
                       <td scope="row" className="px-6 py-4 text-center whitespace-nowrap">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4">{konsul.user_id}</td>
+                      <td className="px-6 py-4">{konsul.user_name}</td>
                       <td className="px-6 py-4 text-center"> {formatDate(konsul.createdAt)}</td>
-                      <td className="px-6 py-4 flex gap-3 ">
+                      <td className="px-6 py-4 flex gap-3 justify-center ">
                         <Link className="hover:text-bgFunc3" to={`/psikolog/konsul/${konsul._id}/detail`}>
                           {" "}
                           Detail

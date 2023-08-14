@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../Sidebar";
+import Sidebar from "./SidebarUser";
 import { useNavigate, useParams } from "react-router-dom";
-import PsiImg from "../../../image/psikologimage.jpg";
+import PsiImg from "../../image/psikologimage.jpg";
 import { FaStarHalf, FaStar } from "react-icons/fa";
 import axios from "axios";
 
-function DetailKonsulAdmin() {
+function DetailKonsulUser() {
   const [activePage, setActivePage] = useState("Konsultasi");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -154,4 +154,4 @@ function DetailKonsulAdmin() {
   );
 }
 
-export default DetailKonsulAdmin;
+export default DetailKonsulUser;

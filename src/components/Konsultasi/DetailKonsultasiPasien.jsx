@@ -148,21 +148,19 @@ const DetailPayment = () => {
                       src={PsiImg}
                     />
                     <div className="flex flex-col justify-between p-4 leading-normal">
-                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-textSec dark:text-white">
-                        {psikologId}
-                      </h5>
+                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-textSec ">{psikologId}</h5>
                       <p class="mb-3 font-normal text-textFunc">
                         Sudah lebih 3 tahun berpengalaman dalam konseling anak
                       </p>
                       <div className="flex justify-between items-center">
-                        <p class="mb-3 flex font-normal text-yellow-500 dark:text-gray-400">
+                        <p class="mb-3 flex font-normal text-yellow-500 ">
                           <FaStar />
                           <FaStar />
                           <FaStar />
                           <FaStar />
                           <FaStarHalf />
                         </p>
-                        <p class="mb-3 font-normal text-green-500 dark:text-gray-400">Rp. 200.000</p>
+                        <p class="mb-3 font-normal text-green-500 ">Rp. 200.000</p>
                       </div>
                     </div>
                   </div>
