@@ -8,20 +8,45 @@ import Principal from "../image/7(1).png";
 import Child from "../image2/25.png";
 import Train from "../image2/24.png";
 import RegisPsikolog from "../image/daftarpsikolog.png";
-
+import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
   const token = useSelector((state) => state.auth.token);
   console.log("ini token di halaman home", token);
-
+  const authState = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleRegisPsikolog = async () => {
+    if (authState.isLogin === false) {
+      try {
+        // Tampilkan pesan kesalahan menggunakan SweetAlert atau cara lain sesuai preferensi Anda
+        const result = await Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You need to login first!",
+          showCancelButton: true,
+          cancelButtonText: "Cancel",
+          confirmButtonText: "Go to login",
+        });
+
+        if (result.isConfirmed) {
+          navigate("/login"); // Navigasi ke halaman login jika pengguna memilih "Go to login"
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      navigate("/register/psikolog");
+    }
+  };
   return (
     <div>
       <Header />
@@ -110,7 +135,7 @@ function Home() {
           </p>
           <div className="mt-7">
             <Link
-              to={"/register/psikolog"}
+              onClick={handleRegisPsikolog}
               className="h-10 bg-bgOpt hover:bg-bgOpt2 text-textOpt p-3 font-bold rounded-md"
             >
               DAFTAR SEKARANG

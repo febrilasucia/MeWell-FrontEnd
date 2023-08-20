@@ -102,15 +102,6 @@ const ChatPasienPasikolog = () => {
                 );
               })}
             </div>
-            {/* <div className="bg-bgTri h-[80vh] overflow-scroll">
-              
-              <div className="flex justify-end">
-                <div className="bg-textFunc text-white rounded-xl max-w-[50%] m-5 px-4 pt-4 pb-2 relative before:w-0 after:h-0 after:border-l-transparent after:border-r-transparent after:border-t-transparent after:border-b-textFunc after:border-[10px] after:absolute after:right-[-10px] after:bottom-0">
-                  <p className="text-[14px]">Hallo Selamat siang1</p>
-                  <small className="block mt-2 text-left text-xxs">10:32</small>
-                </div>
-              </div>
-            </div> */}
             <div className="bg-bgFunc3 text-white font-bold py-1 rounded-xl text-[14px]">
               <form
                 className="flex mx-2"

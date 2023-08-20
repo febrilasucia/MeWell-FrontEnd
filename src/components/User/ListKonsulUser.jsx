@@ -73,7 +73,7 @@ function ListKonsulUser() {
                 Tambah
               </Link>
             </div>
-            <label htmlFor="table-search" className="sr-only">
+            {/* <label htmlFor="table-search" className="sr-only">
               Search
             </label>
             <div className="relative">
@@ -99,7 +99,7 @@ function ListKonsulUser() {
                 className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search items"
               />
-            </div>
+            </div> */}
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">

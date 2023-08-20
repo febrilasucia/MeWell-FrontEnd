@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import HeaderBlog from '../../image/list-blog.png';
-import HeaderBlog2 from '../../image/list-blog2.png';
-import ListBlog1 from '../../image2/26.png';
-import axios from 'axios';
-import { FaSearch } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
-import 'dayjs/locale/id';
+import React, { useEffect, useState } from "react";
+import HeaderBlog from "../../image/list-blog.png";
+import HeaderBlog2 from "../../image/list-blog2.png";
+import ListBlog1 from "../../image2/26.png";
+import axios from "axios";
+import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import "dayjs/locale/id";
 
 function ListBlog() {
   const navigate = useNavigate();
-  const [searching, setSearching] = useState('');
+  const [searching, setSearching] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
 
@@ -21,9 +21,7 @@ function ListBlog() {
 
   const getBlogs = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/blog`
-      );
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/blog`);
       setBlogs(response.data);
     } catch (error) {
       console.log(error);
@@ -40,12 +38,8 @@ function ListBlog() {
       {/* Header List Blog */}
       <div className="absolute w-[300px] md:w-[700px] text-white mt-[150px] mx-[30px] md:mx-[200px] md:mt-[200px]">
         <span className="text-sizeSec font-bold">BlogTime</span>
-        <p className="text-[16px] mt-3">
-          Ayo cari bacaan sesuai dengan perasaan kamu hari ini
-        </p>
-        <p className="text-[16px]">
-          Masalah, solusi dan tips dan trik untuk masalah hati kamu.
-        </p>
+        <p className="text-[16px] mt-3">Ayo cari bacaan sesuai dengan perasaan kamu hari ini</p>
+        <p className="text-[16px]">Masalah, solusi dan tips dan trik untuk masalah hati kamu.</p>
       </div>
 
       {/* Search List Blog */}
@@ -77,16 +71,8 @@ function ListBlog() {
       {/* Search List Blog */}
 
       <div>
-        <img
-          className="w-full h-auto md:hidden"
-          src={HeaderBlog}
-          alt="Header for small screens"
-        />
-        <img
-          className="w-full h-auto hidden md:block"
-          src={HeaderBlog2}
-          alt="Header for medium and large screens"
-        />
+        <img className="w-full h-auto md:hidden" src={HeaderBlog} alt="Header for small screens" />
+        <img className="w-full h-auto hidden md:block" src={HeaderBlog2} alt="Header for medium and large screens" />
       </div>
 
       {/* Header List Blog */}
@@ -101,20 +87,14 @@ function ListBlog() {
           >
             <img
               className="rounded-t-lg"
-              src={
-                blog.thumbnail
-                  ? `${process.env.REACT_APP_BASE_URL}${blog.thumbnail}`
-                  : ListBlog1
-              }
+              src={blog.thumbnail ? `${process.env.REACT_APP_BASE_URL}${blog.thumbnail}` : ListBlog1}
               alt=""
             />
             <div className="rounded p-6">
               <h1 className="text-xl font-bold text-textSec">{blog.title}</h1>
               <p className="text-gray-500 text-sizeParagraph"></p>
               <p className="text-gray-500 text-sizeParagraph">
-                {dayjs(blog.UpdatedAt)
-                  .locale('id')
-                  .format('dddd, DD MMMM YYYY')}
+                {dayjs(blog.UpdatedAt).locale("id").format("dddd, DD MMMM YYYY")}
               </p>
               <div className="max-w-xs text-sizeParagraph text-textFunc">
                 <p className="truncate overflow-hidden">{blog.description}</p>
@@ -122,9 +102,7 @@ function ListBlog() {
 
               <div className="flex items-center justify-between mt-2">
                 <p className="text-gray-500 text-sizeParagraph"></p>
-                <p className="text-gray-500 text-sizeParagraph">
-                  {blog.author}
-                </p>
+                <p className="text-gray-500 text-sizeParagraph">{blog.author}</p>
               </div>
             </div>
           </div>

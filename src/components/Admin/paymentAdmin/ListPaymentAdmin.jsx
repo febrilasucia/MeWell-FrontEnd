@@ -78,7 +78,7 @@ function ListPaymentAdmin() {
 
         <div className="w-[1000px] bg-bgTri mx-auto mt-5 justify-center rounded-md shadow-sm shadow-textFunc">
           <div className="flex items-center justify-between px-5 pt-5">
-            <label htmlFor="table-search" className="sr-only">
+            {/* <label htmlFor="table-search" className="sr-only">
               Search
             </label>
             <div className="relative">
@@ -104,7 +104,7 @@ function ListPaymentAdmin() {
                 className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search items"
               />
-            </div>
+            </div> */}
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">
@@ -147,10 +147,10 @@ function ListPaymentAdmin() {
                         </td>
                         <td className="px-6 py-4 text-center hover:text-bgOpt">{formatDate(payment.createdAt)}</td>
                         <td className="px-6 py-4 flex gap-3">
-                          <Link className="hover:text-bgFunc3" to={`/admin/payment/${payment._id}/detail`}>
+                          {/* <Link className="hover:text-bgFunc3" to={`/admin/payment/${payment._id}/detail`}>
                             {" "}
                             Detail
-                          </Link>
+                          </Link> */}
                           <Link className="hover:text-bgFunc3" to={`/admin/payment/${payment._id}/edit`}>
                             {" "}
                             Edit

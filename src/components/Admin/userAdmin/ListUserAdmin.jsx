@@ -26,7 +26,7 @@ function ListUserAdmin() {
     try {
       const response = await axios.request(config);
       setUsers(response.data);
-      console.log("ini respons",response);
+      console.log("ini respons", response);
       console.log("ini json data", JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
@@ -89,12 +89,12 @@ function ListUserAdmin() {
                 id="addUser"
                 className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 "
                 type="button"
-                to={"/admin/user/create-user"}
+                to={"/register"}
               >
                 Tambah
               </Link>
             </div>
-            <label htmlFor="table-search" className="sr-only">
+            {/* <label htmlFor="table-search" className="sr-only">
               Search
             </label>
             <div className="relative">
@@ -120,7 +120,7 @@ function ListUserAdmin() {
                 className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="Search items"
               />
-            </div>
+            </div> */}
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">
@@ -152,9 +152,7 @@ function ListUserAdmin() {
                       <td className="px-6 py-4 flex gap-3">
                         <Link to={`/admin/user/${user._id}/detail`}>Detail </Link>
                         <Link to={`/admin/user/${user._id}/edit`}>Edit </Link>
-                        <button onClick={() => deleteUser(user._id)}>
-                          Delete
-                        </button>
+                        <button onClick={() => deleteUser(user._id)}>Delete</button>
                       </td>
                     </tr>
                   ))}

@@ -114,7 +114,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {error && error === "Email is not registered" && (
+              {error && error === "Cannot read properties of null (reading '_id')" && (
                 <span className="text-red-500 text-xs mt-1">*Email yang dimasukkan belum terdaftar.</span>
               )}
             </div>
