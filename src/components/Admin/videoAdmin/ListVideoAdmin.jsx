@@ -30,7 +30,7 @@ function ListVideoAdmin() {
     }
   };
 
-  console.log("ini data video",videos);
+  console.log("ini data video", videos);
 
   const deleteVideo = async (_id) => {
     console.log(_id);
@@ -55,9 +55,7 @@ function ListVideoAdmin() {
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axios.request(config);
-          setVideos((prevVideos) =>
-            prevVideos.filter((video) => video._id !== _id)
-          );
+          setVideos((prevVideos) => prevVideos.filter((video) => video._id !== _id));
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire("Cancelled", "Your file is safe :)", "error");
@@ -93,7 +91,7 @@ function ListVideoAdmin() {
                 Tambah
               </Link>
             </div>
-            <label htmlFor="table-search" className="sr-only">
+            {/* <label htmlFor="table-search" className="sr-only">
               Search
             </label>
             <div className="relative">
@@ -119,7 +117,7 @@ function ListVideoAdmin() {
                 className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="Search items"
               />
-            </div>
+            </div> */}
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">
@@ -150,9 +148,7 @@ function ListVideoAdmin() {
                       <td className="px-6 py-4">{video.description}</td>
                       <td className="px-6 py-4 flex gap-3">
                         <Link to={`/admin/video/${video._id}/edit`}>Edit </Link>
-                        <button onClick={() => deleteVideo(video._id)}>
-                          Delete
-                        </button>
+                        <button onClick={() => deleteVideo(video._id)}>Delete</button>
                       </td>
                     </tr>
                   ))}

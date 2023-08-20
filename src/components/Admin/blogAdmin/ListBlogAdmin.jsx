@@ -86,7 +86,7 @@ function ListBlogAdmin() {
                 Tambah
               </Link>
             </div>
-            <label htmlFor="table-search" className="sr-only">
+            {/* <label htmlFor="table-search" className="sr-only">
               Search
             </label>
             <div className="relative">
@@ -112,7 +112,7 @@ function ListBlogAdmin() {
                 className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search items"
               />
-            </div>
+            </div> */}
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">
@@ -143,9 +143,7 @@ function ListBlogAdmin() {
                       <td className="px-6 py-4">{blog.description}</td>
                       <td className="px-6 py-4 flex gap-3">
                         <Link to={`/admin/blog/${blog._id}/edit`}>Edit</Link>
-                        <button onClick={() => deleteBlog(blog._id)}>
-                          Delete
-                        </button>
+                        <button onClick={() => deleteBlog(blog._id)}>Delete</button>
                       </td>
                     </tr>
                   ))}

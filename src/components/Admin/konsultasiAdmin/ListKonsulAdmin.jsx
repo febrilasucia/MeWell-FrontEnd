@@ -92,7 +92,7 @@ function ListKonsulAdmin() {
                 Tambah
               </Link>
             </div>
-            <label htmlFor="table-search" className="sr-only">
+            {/* <label htmlFor="table-search" className="sr-only">
               Search
             </label>
             <div className="relative">
@@ -118,7 +118,7 @@ function ListKonsulAdmin() {
                 className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search items"
               />
-            </div>
+            </div> */}
           </div>
           <div className="">
             <div className="relative overflow-x-auto p-5">
@@ -156,10 +156,10 @@ function ListKonsulAdmin() {
                           {" "}
                           Detail
                         </Link>
-                        <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/edit`}>
+                        {/* <Link className="hover:text-bgFunc3" to={`/admin/konsul/${konsul._id}/edit`}>
                           {" "}
                           Edit
-                        </Link>
+                        </Link> */}
                         <button onClick={() => deleteKonsul(konsul._id)}>Delete</button>
                       </td>
                     </tr>

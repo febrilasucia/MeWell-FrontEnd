@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
-import {
-  FaPhoneAlt,
-  FaEnvelope,
-  FaInstagram,
-  FaHandHoldingHeart,
-} from 'react-icons/fa';
-import Konsultan from '../../image2/32.png';
-import Online from '../../image2/33.png';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
+import React, { useEffect } from "react";
+import { FaPhoneAlt, FaEnvelope, FaInstagram, FaHandHoldingHeart } from "react-icons/fa";
+import Konsultan from "../../image2/32.png";
+import Online from "../../image2/35.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 function KonsultasiComponent() {
   const navigate = useNavigate();
@@ -24,22 +19,22 @@ function KonsultasiComponent() {
       try {
         // Tampilkan pesan kesalahan menggunakan SweetAlert atau cara lain sesuai preferensi Anda
         const result = await Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'You need to login first!',
+          icon: "error",
+          title: "Oops...",
+          text: "You need to login first!",
           showCancelButton: true,
-          cancelButtonText: 'Cancel',
-          confirmButtonText: 'Go to login',
+          cancelButtonText: "Cancel",
+          confirmButtonText: "Go to login",
         });
 
         if (result.isConfirmed) {
-          navigate('/login'); // Navigasi ke halaman login jika pengguna memilih "Go to login"
+          navigate("/login"); // Navigasi ke halaman login jika pengguna memilih "Go to login"
         }
       } catch (error) {
         console.error(error);
       }
     } else {
-      navigate('/konsultasi/form-konsultasi'); // Navigasi ke halaman konsultasi jika pengguna sudah login
+      navigate("/konsultasi/form-konsultasi"); // Navigasi ke halaman konsultasi jika pengguna sudah login
     }
   };
   return (
@@ -53,16 +48,14 @@ function KonsultasiComponent() {
               <FaHandHoldingHeart className="h-10 w-10" />
               <p className="text-[24px]">Konsultasi Area</p>
             </div>
-            <p className="text-sizePri font-bold leading-7 mb-4">
-              Penyelesaian secara online dan tatap muka
-            </p>
+            <p className="text-sizePri font-bold leading-7 mb-4">Penyelesaian secara online dan cepat</p>
             <p className="text-sizeParagraph leading-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
             </p>
             {/* ingat untuk konsultasi harus mempunyai akun, jikalau tidak maka di alihkan ke halaman login dan dengan alert anda harus login terlebih dahulu */}
             <button
               onClick={handleKonsultasi}
-              className="inline-block mt-5 mb-10 bg-bgOpt2 hover:bg-bgOpt font-bold py-2 px-4 rounded-xl"
+              className="inline-block mt-5 mb-10 bg-bgOpt hover:bg-bgOpt2 font-bold py-2 px-4 rounded-xl"
             >
               Konsultasi Sekarang
             </button>
