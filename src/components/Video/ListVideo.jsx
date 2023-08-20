@@ -16,10 +16,12 @@ function ListVideo() {
   useEffect(() => {
     window.scrollTo(0, 0);
     getVideos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     getVideos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searching]);
 
   const getVideos = async () => {
