@@ -7,6 +7,31 @@ function StatusPenerimaan() {
   const authState = useSelector((state) => state.auth);
   const status = authState?.user?.psikologStatus || "Maaf anda tidak mendaftar menjadi psikolog";
 
+  // const token = localStorage.getItem("token");
+  // const [status, setStatus] = useState("Maaf anda tidak mendaftar menjadi psikolog");
+
+  // useEffect(() => {
+  //   fetchStatus();
+  // }, []);
+
+  // const fetchStatus = async () => {
+  //   let config = {
+  //     method: "get",
+  //     maxBodyLength: Infinity,
+  //     url: "http://localhost:5000/psikolog/status",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   };
+
+  //   try {
+  //     const response = await axios.request(config);
+  //     setStatus(response.data.status);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <div className="flex">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
