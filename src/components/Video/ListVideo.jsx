@@ -18,11 +18,18 @@ function ListVideo() {
     getVideos();
   }, []);
 
+  useEffect(() => {
+    getVideos();
+  }, [searching]);
+
   const getVideos = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/video`
-      );
+      let endpoint = `${process.env.REACT_APP_BASE_URL}/video`;
+
+      if (searching) {
+        endpoint = `${process.env.REACT_APP_BASE_URL}/video?title=${searching}`;
+      }
+      const response = await axios.get(endpoint);
       setVideos(response.data.video);
     } catch (error) {
       console.log(error);
@@ -36,23 +43,17 @@ function ListVideo() {
 
   const searchVideo = (e) => {
     e.preventDefault();
-    axios(`${import.meta.env.VITE_BASE_URL}/video?title=${searching}`).then(
-      (res) => {
-        setVideos(res.data);
-      }
-    );
+    axios(`${import.meta.env.VITE_BASE_URL}/video?title=${searching}`).then((res) => {
+      setVideos(res.data);
+    });
   };
   return (
     <div className="bg-bgSec">
       {/* Header List Video */}
       <div className="absolute w-[300px] md:w-[700px] text-white mt-[150px] mx-[30px] md:mx-[200px] md:mt-[200px]">
         <span className="text-sizeSec font-bold">VideoTime</span>
-        <p className="text-[16px] mt-3">
-          Ayo cari tontonan menarik sesuai dengan perasaan kamu hari ini
-        </p>
-        <p className="text-[16px]">
-          Masalah, solusi dan tips dan trik untuk masalah hati kamu.
-        </p>
+        <p className="text-[16px] mt-3">Ayo cari tontonan menarik sesuai dengan perasaan kamu hari ini</p>
+        <p className="text-[16px]">Masalah, solusi dan tips dan trik untuk masalah hati kamu.</p>
       </div>
       {/* Header List Video */}
 
@@ -84,16 +85,8 @@ function ListVideo() {
       {/* Search List Video */}
 
       <div>
-        <img
-          className="w-full h-auto md:hidden"
-          src={HeaderVideo}
-          alt="Header for small screens"
-        />
-        <img
-          className="w-full h-auto hidden md:block"
-          src={HeaderVideo2}
-          alt="Header for medium and large screens"
-        />
+        <img className="w-full h-auto md:hidden" src={HeaderVideo} alt="Header for small screens" />
+        <img className="w-full h-auto hidden md:block" src={HeaderVideo2} alt="Header for medium and large screens" />
       </div>
 
       {/* Card List Video */}
@@ -116,9 +109,7 @@ function ListVideo() {
               <h1 className="text-xl font-bold text-textSec">{video.title}</h1>
               <p className="text-gray-500 text-sizeParagraph"></p>
               <p className="text-gray-500 text-sizeParagraph">
-                {dayjs(video.UpdatedAt)
-                  .locale("id")
-                  .format("dddd, DD MMMM YYYY")}
+                {dayjs(video.UpdatedAt).locale("id").format("dddd, DD MMMM YYYY")}
               </p>
               <div className="max-w-xs text-sizeParagraph text-textFunc">
                 <p className="truncate overflow-hidden">{video.description}</p>
@@ -126,9 +117,7 @@ function ListVideo() {
 
               <div className="flex items-center justify-between mt-2">
                 <p className="text-gray-500 text-sizeParagraph"></p>
-                <p className="text-gray-500 text-sizeParagraph">
-                  {video.author}
-                </p>
+                <p className="text-gray-500 text-sizeParagraph">{video.author}</p>
               </div>
             </div>
           </div>
