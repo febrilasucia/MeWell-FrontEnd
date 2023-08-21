@@ -17,7 +17,7 @@ function ListFaqAdmin() {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/faq`,
+      url: `${process.env.REACT_APP_BASE_URL}/faq/`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -25,7 +25,7 @@ function ListFaqAdmin() {
 
     try {
       const response = await axios.request(config);
-      setFaqs(response.data.faq);
+      setFaqs(response.data.faqs);
       console.log(response);
       console.log(JSON.stringify(response.data));
     } catch (error) {
@@ -127,10 +127,10 @@ function ListFaqAdmin() {
                       <td className="px-6 py-4 text-center"> {faq.no}</td>
                       <td className="px-6 py-4 text-center"> {faq.pesan}</td>
                       <td className="px-6 py-4 flex gap-3 ">
-                        <Link className="hover:text-bgFunc3" to={`/admin/faq/${faq._id}/detail`}>
+                        {/* <Link className="hover:text-bgFunc3" to={`/admin/faq/${faq._id}/detail`}>
                           {" "}
                           Detail
-                        </Link>
+                        </Link> */}
                         <Link className="hover:text-bgFunc3" to={`/admin/faq/${faq._id}/edit`}>
                           {" "}
                           Edit
