@@ -26,7 +26,6 @@ function ListFaqAdmin() {
     try {
       const response = await axios.request(config);
       setFaqs(response.data.faq);
-      console.log(response);
       console.log(JSON.stringify(response.data));
     } catch (error) {
       console.log(error);
