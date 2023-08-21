@@ -65,31 +65,20 @@ function Header() {
       <div className="flex flex-col lg:flex-row">
         <div className="flex justify-between items-center border-b lg:border-b-0">
           <div className="p-2">
-            <button
-              onClick={toggleMenu}
-              className="focus:outline bgOpt font-bold block lg:hidden"
-            >
+            <button onClick={toggleMenu} className="focus:outline bgOpt font-bold block lg:hidden">
               <div className="">
                 <div className="w-[470px] p-2 flex flex-wrap items-center justify-around">
                   <div className="">
                     <Link to={"/"}>
                       <div>
-                        <img
-                          className="h-[30px]"
-                          src={LogoMandeh}
-                          alt="LogoMandeh"
-                        />
+                        <img className="h-[30px]" src={LogoMandeh} alt="LogoMandeh" />
                       </div>
                     </Link>
                   </div>
                   <div className="">
                     <Link to={"/"}>
                       <div>
-                        <img
-                          className="h-[30px]"
-                          src={LogoTulisanMandeh}
-                          alt="LogoTulisanMandeh"
-                        />
+                        <img className="h-[30px]" src={LogoTulisanMandeh} alt="LogoTulisanMandeh" />
                       </div>
                     </Link>
                   </div>
@@ -144,6 +133,9 @@ function Header() {
             <Link to={"/konsultasi"} className=" hover:font-bold">
               Konsultasi
             </Link>
+            <Link to={"/faq"} className=" hover:font-bold">
+              FAQ
+            </Link>
           </div>
           <div className={!isOpen ? "block" : "hidden"}>
             <img className="h-[30px]" src={LogoHori} alt="LogoHori" />
@@ -163,19 +155,13 @@ function Header() {
                     <ul className="dropdown-menu text-textSec w-48 py-2 mt-2 ml-4 text-base text-left rounded-lg shadow-lg min-w-max items-center  bg-bgPri float-left  list-none   m-0 bg-clip-padding border-none dropdown-menu fixed right-5">
                       {/* {user.role === "admin" && ( */}
                       <li>
-                        <Link
-                          className="px-4 flex gap-2 items-center py-2 hover:bg-gray-200"
-                          to={linkTo}
-                        >
+                        <Link className="px-4 flex gap-2 items-center py-2 hover:bg-gray-200" to={linkTo}>
                           <RiAdminLine /> Dashboard
                         </Link>
                       </li>
                       {/* // )} */}
                       <li>
-                        <Link
-                          className="flex  gap-2 px-4 py-2  hover:bg-gray-200"
-                          to="/profile"
-                        >
+                        <Link className="flex  gap-2 px-4 py-2  hover:bg-gray-200" to="/profile">
                           <RiProfileLine />
                           Profile
                         </Link>
@@ -195,16 +181,10 @@ function Header() {
               </div>
             ) : (
               <div className="mr-8 my-3 flex gap-3 flex-col items-baseline lg:flex-row">
-                <Link
-                  className="px-9 py-1 bg-bgOpt2 hover:bg-bgOpt text-white rounded-2xl"
-                  to="/login"
-                >
+                <Link className="px-9 py-1 bg-bgOpt2 hover:bg-bgOpt text-white rounded-2xl" to="/login">
                   Masuk
                 </Link>
-                <Link
-                  className="px-9 py-1 bg-bgFunc hover:bg-bgFunc3 text-white rounded-2xl"
-                  to="/register"
-                >
+                <Link className="px-9 py-1 bg-bgFunc hover:bg-bgFunc3 text-white rounded-2xl" to="/register">
                   Daftar
                 </Link>
               </div>

@@ -70,6 +70,8 @@ import DetailPsikologAdmin from "./components/Admin/psikologAdmin/DetailPsikolog
 import ChatPasienPsikologPage from "./pages/Psikolog/ChatPasienPsikologPage";
 import ChatPasienUser from "./components/User/ChatPasienUser";
 import DetailKonsulUser from "./components/User/DetailKonsulUser";
+import FaqPage from "./pages/FaqPage/FaqPage";
+import ListFaqAdmin from "./components/Admin/faqAdmin/ListFaqAdmin";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -93,6 +95,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/register/psikolog" element={<RegisterPsikolog />} />
           <Route path="/" element={<Home />} />
+          <Route path="/faq" element={<FaqPage />}/>
           {/* user router*/}
 
           <Route path="/user/dashboard" element={<DashboardUser />} />
@@ -274,6 +277,8 @@ function App() {
             }
           />
 
+            <Route path="/admin/faq" element={<ListFaqAdmin />}/>
+            {/* <Route path="/admin/faq/:id/edit" element={<UpdateFaqAdmin />}/> */}
           {/* admin router*/}
 
           {/* psikolog router */}

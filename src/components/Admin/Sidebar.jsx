@@ -22,6 +22,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
     { title: "Video", icon: <FaVideo />, link: "/admin/video" },
     { title: "Konsultasi ", icon: <FaComment />, link: "/admin/konsul" },
     { title: "Pembayaran ", icon: <FaMoneyBill />, link: "/admin/payment" },
+    { title: "Feedback ", icon: <FaComment />, link: "/admin/faq" },
   ];
 
   const handleMenuClick = (title) => {
