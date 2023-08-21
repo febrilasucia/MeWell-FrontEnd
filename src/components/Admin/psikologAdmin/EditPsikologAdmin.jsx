@@ -99,8 +99,8 @@ const EditPsikologAdmin = () => {
       <div className="w-[1000px] mx-auto mt-10 justify-center">
         {/* judul */}
         <div>
-          <h1 className="text-sizeTri text-textSec font-bold">Detail Konsultasi</h1>
-          <p className="my-3 text-textFunc">Dashboard / Konsultasi / Edit</p>
+          <h1 className="text-sizeTri text-textSec font-bold">Detail Psikolog</h1>
+          <p className="my-3 text-textFunc">Dashboard / Psikolog / Detail</p>
         </div>
         {/* judul */}
         {/* content */}

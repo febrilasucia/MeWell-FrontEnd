@@ -134,12 +134,12 @@ function Home() {
             dampak positif pada kehidupan dan kesejahteraan mental.{" "}
           </p>
           <div className="mt-7">
-            <Link
+            <button
               onClick={handleRegisPsikolog}
               className="h-10 bg-bgOpt hover:bg-bgOpt2 text-textOpt p-3 font-bold rounded-md"
             >
               DAFTAR SEKARANG
-            </Link>
+            </button>
           </div>
         </div>
         <div></div>

@@ -82,7 +82,7 @@ function ListPsikologAdmin() {
 
         <div className="w-[1000px] bg-bgTri mx-auto mt-5 justify-center rounded-md shadow-sm shadow-textFunc">
           <div className="flex items-center justify-between px-5 pt-5">
-            <div>
+            {/* <div>
               <Link
                 id="addUser"
                 className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2 "
@@ -91,7 +91,7 @@ function ListPsikologAdmin() {
               >
                 Tambah
               </Link>
-            </div>
+            </div> */}
             {/* <label htmlFor="table-search" className="sr-only">
               Search
             </label>

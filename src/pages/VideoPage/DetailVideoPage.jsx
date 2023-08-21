@@ -28,9 +28,7 @@ function DetailVideoPage() {
   }, []);
 
   const getVideosById = async (id) => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/video/${id}`
-    );
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/video/${id}`);
 
     setVideo(response.data.data);
     setName(response.data.data.createdBy.name);
@@ -73,21 +71,12 @@ function DetailVideoPage() {
             ></iframe>
           </div>
 
-          <h1 className=" text-2xl sm:text-4xl font-bold text-textSec text-center">
-            {video.title}
-          </h1>
-          <p className="font-semibold text-lg text-[#71717a] text-center">
-            Author: {video.author}
-          </p>
+          <h1 className=" text-2xl sm:text-4xl font-bold text-textSec text-center">{video.title}</h1>
+          <p className="font-semibold text-lg text-[#71717a] text-center">Author: {video.author}</p>
           <p className="justify font-semibold text-lg text-[#71717a] text-center">
-            Updated at:{" "}
-            {dayjs(video.UpdatedAt).locale("id").format("dddd, DD MMMM YYYY")}
+            Updated at: {dayjs(video.UpdatedAt).locale("id").format("dddd, DD MMMM YYYY")}
           </p>
-          <ReactQuill
-            value={replacedContent}
-            readOnly={true}
-            theme={"bubble"}
-          />
+          <ReactQuill value={replacedContent} readOnly={true} theme={"bubble"} />
           <style>
             {`
             .prose img {
