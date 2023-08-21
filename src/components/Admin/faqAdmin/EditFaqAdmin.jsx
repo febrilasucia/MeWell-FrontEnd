@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -15,12 +15,11 @@ function EditFaqAdmin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let data = JSON.stringify({
-      nama: nama,
+    const data = {
+      nama,
       nomor_handphone: no,
-      pesan: pesan,
-    });
+      pesan,
+    };
 
     let config = {
       method: "patch",
@@ -56,6 +55,22 @@ function EditFaqAdmin() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const fetchFaq = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/faq/${id}`, {});
+        const faqData = response.data;
+        setNama(faqData.nama);
+        setNo(faqData.nomor_handphone);
+        setPesan(faqData.pesan);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchFaq();
+  }, [id]);
 
   const handleGoBack = () => {
     navigate(-1);
