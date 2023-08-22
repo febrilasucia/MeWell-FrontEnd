@@ -133,9 +133,9 @@ function Header() {
             <Link to={"/konsultasi"} className=" hover:font-bold">
               Konsultasi
             </Link>
-            <Link to={"/faq"} className=" hover:font-bold">
+            {/* <Link to={"/faq"} className=" hover:font-bold">
               FAQ
-            </Link>
+            </Link> */}
           </div>
           <div className={!isOpen ? "block" : "hidden"}>
             <img className="h-[30px]" src={LogoHori} alt="LogoHori" />
