@@ -72,6 +72,7 @@ import ChatPasienUser from "./components/User/ChatPasienUser";
 import DetailKonsulUser from "./components/User/DetailKonsulUser";
 import FaqPage from "./pages/FaqPage/FaqPage";
 import ListFaqAdmin from "./components/Admin/faqAdmin/ListFaqAdmin";
+import EditFaqAdmin from "./components/Admin/faqAdmin/EditFaqAdmin";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -278,7 +279,7 @@ function App() {
           />
 
             <Route path="/admin/faq" element={<ListFaqAdmin />}/>
-            {/* <Route path="/admin/faq/:id/edit" element={<UpdateFaqAdmin />}/> */}
+            <Route path="/admin/faq/:id/edit" element={<EditFaqAdmin />}/>
           {/* admin router*/}
 
           {/* psikolog router */}

@@ -14,7 +14,6 @@ function ListKonsulUser() {
 
   useEffect(() => {
     fetchKonsuls();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchKonsuls = async () => {
