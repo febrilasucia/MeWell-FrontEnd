@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import { useParams } from "react-router-dom";
 import { formatTime } from "../../util/Helper";
 import axios from "axios";
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect(`${process.env.REACT_APP_BASE_URL}`);
 
 const ChatPasienUser = () => {
   const [activePage, setActivePage] = useState("Chat Pasien");
