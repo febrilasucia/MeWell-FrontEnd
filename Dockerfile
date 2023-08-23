@@ -1,21 +1,25 @@
-# Menggunakan image Node.js sebagai base
-FROM node:14 AS build
+# Stage 1: Build the React.js application
+FROM node:14 as build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json dan package-lock.json untuk menginstall dependensi
 COPY package*.json ./
+
 RUN npm install
 
-# Copy seluruh proyek ke dalam container
 COPY . .
 
-# Build aplikasi React
 RUN npm run build
 
-# Stage kedua, menggunakan Nginx untuk production
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Stage 2: Serve the built application using a lightweight HTTP server
+FROM node:14-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/build /app/build
+
+RUN npm install -g serve
+
+EXPOSE 8080
+
+CMD ["serve", "-s", "build", "-l", "8080"]
