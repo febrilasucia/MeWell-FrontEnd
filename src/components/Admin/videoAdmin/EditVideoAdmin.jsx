@@ -23,26 +23,27 @@ const EditVideoAdmin = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    let data = new FormData();
-    data.append("title", title);
-    data.append("videoLink", videoLink);
-    data.append("description", description);
-    data.append("author", author);
-    data.append("content", content);
-
+    let data = {
+      title,
+      videoLink,
+      description,
+      author,
+      content,
+    };
+    console.log("ini data yang mau di update", data);
     let config = {
       method: "patch",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_BASE_URL}/video/${id}`,
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       data: data,
     };
 
     try {
-      const response = await axios.request(config);
-      console.log(JSON.stringify(response.data));
+      // Navigasi ke halaman detail blog setelah berhasil update
 
       Swal.fire({
         title: "Do you want to save the changes?",
@@ -50,9 +51,11 @@ const EditVideoAdmin = () => {
         showCancelButton: true,
         confirmButtonText: "Save",
         denyButtonText: `Don't save`,
-      }).then((result) => {
+      }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+          const response = await axios.request(config);
+          console.log(JSON.stringify(response.data));
           navigate(`/admin/video`);
           Swal.fire("Saved!", "", "success");
         } else if (result.isDenied) {
@@ -68,16 +71,13 @@ const EditVideoAdmin = () => {
     const fetchVideo = async () => {
       console.log("fetch is running");
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/video/${id}`
-        );
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/video/${id}`);
         const videoData = response.data.data;
         setTitle(videoData.title);
         setVideoLink(videoData.videoLink);
         setDescription(videoData.description);
         setAuthor(videoData.author);
         setContent(videoData.content);
-        console.log(videoData);
       } catch (error) {
         console.log(error);
       }
@@ -114,10 +114,7 @@ const EditVideoAdmin = () => {
                   <table className="w-full">
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="title"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="title" className="block text-textSec mb-1">
                           Judul Video
                         </label>
                       </td>
@@ -133,10 +130,7 @@ const EditVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="author"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="author" className="block text-textSec mb-1">
                           Author
                         </label>
                       </td>
@@ -152,10 +146,7 @@ const EditVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="videoLink"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="videoLink" className="block text-textSec mb-1">
                           Link Video
                         </label>
                       </td>
@@ -171,10 +162,7 @@ const EditVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="description"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="description" className="block text-textSec mb-1">
                           Deskripsi Singkat
                         </label>
                       </td>
@@ -190,10 +178,7 @@ const EditVideoAdmin = () => {
                     </tr>
                     <tr>
                       <td className="py-3">
-                        <label
-                          htmlFor="content"
-                          className="block text-textSec mb-1"
-                        >
+                        <label htmlFor="content" className="block text-textSec mb-1">
                           Konten
                         </label>
                       </td>
