@@ -28,27 +28,8 @@ const EditBlogAdmin = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    let data = new FormData();
-    data.append("title", title);
-    data.append("description", description);
-    data.append("author", author);
-    data.append("content", content);
-    console.log('ini thumbnail woy', thumbnail);
-    data.append("thumbnail", thumbnail);
-
-    let config = {
-      method: "patch",
-      maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_BASE_URL}/blog/${id}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: data,
-    };
 
     try {
-      const response = await axios.request(config);
-      console.log(JSON.stringify(response.data));
       // Navigasi ke halaman detail blog setelah berhasil update
 
       Swal.fire({
@@ -57,9 +38,28 @@ const EditBlogAdmin = () => {
         showCancelButton: true,
         confirmButtonText: "Save",
         denyButtonText: `Don't save`,
-      }).then((result) => {
+      }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+          let data = new FormData();
+          data.append("title", title);
+          data.append("description", description);
+          data.append("author", author);
+          data.append("content", content);
+          console.log("ini thumbnail woy", thumbnail);
+          data.append("thumbnail", thumbnail);
+
+          let config = {
+            method: "patch",
+            maxBodyLength: Infinity,
+            url: `${process.env.REACT_APP_BASE_URL}/blog/${id}`,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            data: data,
+          };
+          const response = await axios.request(config);
+          console.log(JSON.stringify(response.data));
           navigate(`/admin/blog`);
           Swal.fire("Saved!", "", "success");
         } else if (result.isDenied) {
